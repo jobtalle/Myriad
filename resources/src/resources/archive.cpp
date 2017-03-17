@@ -2,6 +2,7 @@
 #include <resources/formatter.h>
 #include <xxhash/xxhash.h>
 
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 
@@ -13,6 +14,11 @@ Archive::entry Archive::createEntry(const std::string file) const
 	entry.path = file;
 	
 	return entry;
+}
+
+std::string Archive::getObjPath(const Archive::entry entry, const std::string dir) const
+{
+	return dir + entry.name + ".obj";
 }
 
 void Archive::writeObject(
@@ -36,21 +42,22 @@ Archive::Archive(const std::vector<std::string> fileNames, const uint8_t flags)
 {
 	for(const auto &file : fileNames)
 		entries.push_back(createEntry(file));
+
+	std::sort(entries.begin(), entries.end());
 }
 
-void Archive::writeObjects(const std::string directory) const
+void Archive::writeObjects(const std::string objects) const
 {
 	for(const auto &entry : entries)
 	{
 		const std::string extension = entry.path.substr(entry.path.length() - 3, 3);
-		const std::string object = directory + entry.name + ".obj";
 		std::ifstream sourceIn(entry.path, std::ios::binary);
 		std::vector<char> file((std::istreambuf_iterator<char>(sourceIn)), (std::istreambuf_iterator<char>()));
 		sourceIn.close();
 
 		uint32_t hash = XXH32(file.data(), file.size(), 0);
 
-		std::ifstream objectIn(object, std::ios::binary);
+		std::ifstream objectIn(getObjPath(entry, objects), std::ios::binary);
 		if(objectIn.is_open())
 		{
 			uint32_t storedHash;
@@ -59,14 +66,14 @@ void Archive::writeObjects(const std::string directory) const
 			objectIn.close();
 
 			if(storedHash != hash)
-				writeObject(object, file, extension, hash);
+				writeObject(getObjPath(entry, objects), file, extension, hash);
 		}
 		else
-			writeObject(object, file, extension, hash);
+			writeObject(getObjPath(entry, objects), file, extension, hash);
 	}
 }
 
-void Archive::compile(const std::string file) const
+void Archive::compile(const std::string objects, const std::string file) const
 {
 
 }

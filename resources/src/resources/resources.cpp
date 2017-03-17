@@ -46,5 +46,5 @@ void resources::compile(int argc, char **argv)
 
 	const Archive archive = Archive(fileNames, 0);
 	archive.writeObjects(argv[ARGUMENT_OBJECTS]);
-	archive.compile(argv[ARGUMENT_OUTPUT]);
+	archive.compile(argv[ARGUMENT_OBJECTS], argv[ARGUMENT_OUTPUT]);
 }
