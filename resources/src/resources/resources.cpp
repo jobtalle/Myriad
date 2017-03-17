@@ -10,8 +10,6 @@ static void readDirectory(std::vector<std::string> &fileNames, const char *dir)
 	HANDLE foundHandle = NULL;
 	char fileName[resources::FILE_NAME_MAX_LENGTH];
 
-	std::cout << "Reading " << dir << std::endl;
-
 	sprintf(fileName, "%s\\*.*", dir);
 
 	if((foundHandle = FindFirstFile(fileName, &foundFile)) == INVALID_HANDLE_VALUE)
@@ -21,7 +19,7 @@ static void readDirectory(std::vector<std::string> &fileNames, const char *dir)
 	{
 		if(strcmp(foundFile.cFileName, ".") != 0 && strcmp(foundFile.cFileName, "..") != 0)
 		{
-			sprintf(fileName, "%s\\%s", dir, foundFile.cFileName);
+			sprintf(fileName, "%s%s", dir, foundFile.cFileName);
 
 			if(foundFile.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 				readDirectory(fileNames, fileName);
