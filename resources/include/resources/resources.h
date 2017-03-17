@@ -4,6 +4,8 @@ namespace resources {
 	enum requiredArguments {
 		ARGUMENT_PATH,
 		ARGUMENT_TARGET,
+		ARGUMENT_OBJECTS,
+		ARGUMENT_OUTPUT,
 		ARGUMENT_COUNT
 	};
 

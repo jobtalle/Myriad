@@ -70,9 +70,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\resources\archive.cpp" />
     <ClCompile Include="src\resources\resources.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\resources\archive.h" />
     <ClInclude Include="include\resources\resources.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

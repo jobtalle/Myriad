@@ -3,6 +3,7 @@
 #include <vector>
 
 #include <resources/resources.h>
+#include <resources/archive.h>
 
 static void readDirectory(std::vector<std::string> &fileNames, const char *dir)
 {
@@ -24,7 +25,7 @@ static void readDirectory(std::vector<std::string> &fileNames, const char *dir)
 			if(foundFile.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 				readDirectory(fileNames, fileName);
 			else
-				std::cout << fileName << std::endl;
+				fileNames.push_back(fileName);
 		}
 	}
 	while(FindNextFile(foundHandle, &foundFile));
@@ -40,4 +41,8 @@ void resources::compile(int argc, char **argv)
 	std::vector<std::string> fileNames;
 
 	readDirectory(fileNames, argv[ARGUMENT_TARGET]);
+
+	const Archive archive = Archive(fileNames, 0);
+	archive.writeObjects(argv[ARGUMENT_OBJECTS]);
+	archive.compile(argv[ARGUMENT_OUTPUT]);
 }
