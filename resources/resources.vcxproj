@@ -72,12 +72,16 @@
     <ClCompile Include="src\lodepng\lodepng.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\resources\archive.cpp" />
+    <ClCompile Include="src\resources\formatter.cpp" />
     <ClCompile Include="src\resources\resources.cpp" />
+    <ClCompile Include="src\xxhash\xxhash.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\lodepng\lodepng.h" />
     <ClInclude Include="include\resources\archive.h" />
+    <ClInclude Include="include\resources\formatter.h" />
     <ClInclude Include="include\resources\resources.h" />
+    <ClInclude Include="include\xxhash\xxhash.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

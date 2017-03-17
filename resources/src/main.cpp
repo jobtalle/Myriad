@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <resources/resources.h>
+#include <resources/archive.h>
 
 int main(int argc, char **argv)
 {
@@ -17,6 +18,15 @@ int main(int argc, char **argv)
 			break;
 		case resources::FAILURE_DIR_NOT_FOUND:
 			std::cout << "Directory could not be read" << std::endl;
+			break;
+		}
+	}
+	catch(enum Archive::failure &failure)
+	{
+		switch(failure)
+		{
+		case Archive::FAILURE_NAME_COLLISION:
+			std::cout << "Name collision" << std::endl;
 			break;
 		}
 	}
