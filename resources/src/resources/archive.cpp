@@ -75,5 +75,16 @@ void Archive::writeObjects(const std::string objects) const
 
 void Archive::compile(const std::string objects, const std::string file) const
 {
+	std::ofstream out(file, std::ios::binary);
 
+	for(const entry &entry : entries)
+	{
+		std::ifstream sourceIn(getObjPath(entry, objects), std::ios::binary);
+		std::vector<char> file((std::istreambuf_iterator<char>(sourceIn)), (std::istreambuf_iterator<char>()));
+		sourceIn.close();
+
+		out.write(file.data() + sizeof(uint32_t), file.size() - sizeof(uint32_t));
+	}
+
+	out.close();
 }
