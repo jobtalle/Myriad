@@ -1,22 +1,22 @@
 #include <iostream>
 
-#include <resources/resources.h>
-#include <resources/archive.h>
+#include <archive/archiver.h>
+#include <archive/archive.h>
 
 int main(int argc, char **argv)
 {
 	try
 	{
-		resources::compile(argc, argv);
+		archiver::compile(argc, argv);
 	}
-	catch(enum resources::failure &failure)
+	catch(enum archiver::failure &failure)
 	{
 		switch(failure)
 		{
-		case resources::FAILURE_ARGUMENT_COUNT:
+		case archiver::FAILURE_ARGUMENT_COUNT:
 			std::cout << "Wrong number of arguments supplied" << std::endl;
 			break;
-		case resources::FAILURE_DIR_NOT_FOUND:
+		case archiver::FAILURE_DIR_NOT_FOUND:
 			std::cout << "Directory could not be read" << std::endl;
 			break;
 		}

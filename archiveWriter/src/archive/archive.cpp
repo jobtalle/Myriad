@@ -1,5 +1,5 @@
-#include <resources/archive.h>
-#include <resources/formatter.h>
+#include <archive/archive.h>
+#include <archive/formatter.h>
 #include <xxhash/xxhash.h>
 #include <miniz/miniz.h>
 

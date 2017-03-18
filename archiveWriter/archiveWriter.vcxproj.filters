@@ -15,13 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\resources\resources.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\resources\archive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\lodepng\lodepng.cpp">
@@ -30,27 +24,33 @@
     <ClCompile Include="src\xxhash\xxhash.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\resources\formatter.cpp">
+    <ClCompile Include="src\archive\archive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\archive\formatter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\archive\archiver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\resources\resources.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\resources\archive.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\lodepng\lodepng.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\xxhash\xxhash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\resources\formatter.h">
+    <ClInclude Include="include\miniz\miniz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\miniz\miniz.h">
+    <ClInclude Include="include\archive\archive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\archive\formatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\archive\archiver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

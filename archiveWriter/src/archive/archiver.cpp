@@ -2,8 +2,8 @@
 #include <iostream>
 #include <vector>
 
-#include <resources/resources.h>
-#include <resources/archive.h>
+#include <archive/archiver.h>
+#include <archive/archive.h>
 
 static void readDirectory(std::vector<std::string> &fileNames, const std::string dir)
 {
@@ -14,7 +14,7 @@ static void readDirectory(std::vector<std::string> &fileNames, const std::string
 	fileName = dir + "\\*.*";
 
 	if((foundHandle = FindFirstFile(fileName.data(), &foundFile)) == INVALID_HANDLE_VALUE)
-		throw resources::FAILURE_DIR_NOT_FOUND;
+		throw archiver::FAILURE_DIR_NOT_FOUND;
 	
 	do
 	{
@@ -33,10 +33,10 @@ static void readDirectory(std::vector<std::string> &fileNames, const std::string
 	FindClose(foundHandle);
 }
 
-void resources::compile(int argc, char **argv)
+void archiver::compile(int argc, char **argv)
 {
-	if(argc < resources::ARGUMENT_COUNT)
-		throw resources::FAILURE_ARGUMENT_COUNT;
+	if(argc < archiver::ARGUMENT_COUNT)
+		throw archiver::FAILURE_ARGUMENT_COUNT;
 
 	CreateDirectory(argv[ARGUMENT_OBJECTS], NULL);
 

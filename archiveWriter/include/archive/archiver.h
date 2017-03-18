@@ -1,6 +1,6 @@
 #pragma once
 
-namespace resources {
+namespace archiver {
 	enum requiredArguments {
 		ARGUMENT_PATH,
 		ARGUMENT_TARGET,
