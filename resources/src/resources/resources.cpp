@@ -44,7 +44,7 @@ void resources::compile(int argc, char **argv)
 
 	readDirectory(fileNames, argv[ARGUMENT_TARGET]);
 
-	Archive archive = Archive(fileNames, Archive::ARCHIVE_FLAG_BATCH | Archive::ARCHIVE_FLAG_CLEAN);
+	Archive archive = Archive(fileNames, Archive::ARCHIVE_FLAG_CLEAN);
 	if(archive.writeObjects(argv[ARGUMENT_OBJECTS]))
 		archive.compile(argv[ARGUMENT_OBJECTS], argv[ARGUMENT_OUTPUT]);
 }

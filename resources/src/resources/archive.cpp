@@ -38,7 +38,13 @@ void Archive::writeObject(
 		out.write((const char*)formatted.data(), formatted.size());
 	else
 	{
+		mz_ulong compressedSize;
+		char *compressed = new char[mz_compressBound(formatted.size())];
 
+		mz_compress2((unsigned char*)compressed, &compressedSize, (unsigned char*)formatted.data(), formatted.size(), 10);
+		out.write(compressed, compressedSize);
+
+		delete compressed;
 	}
 	
 	out.close();
@@ -152,6 +158,16 @@ void Archive::compile(const std::string objects, const std::string file) const
 	}
 	else
 	{
+		std::vector<char> stringTab = writeStringTab();
+		char *compressedStringTab = new char[mz_compressBound(stringTab.size())];
+		mz_ulong compressedSize;
+
+		mz_compress2((unsigned char*)compressedStringTab, &compressedSize, (unsigned char*)stringTab.data(), stringTab.size(), 10);
+		out.write((const char*)&compressedSize, sizeof(uint64_t));
+		out.write(compressedStringTab, compressedSize);
+
+		delete compressedStringTab;
+
 		for(const entry &entry : entries)
 		{
 			std::ifstream sourceIn(getObjPath(entry, objects), std::ios::binary);
