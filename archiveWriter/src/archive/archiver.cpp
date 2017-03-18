@@ -40,11 +40,20 @@ void archiver::compile(int argc, char **argv)
 
 	CreateDirectory(argv[ARGUMENT_OBJECTS], NULL);
 
-	std::vector<std::string> fileNames;
+	uint8_t flags = 0;
 
+	for(size_t i = archiver::ARGUMENT_COUNT; i < argc; ++i)
+	{
+		if(strcmp(argv[i], "batch") == 0)
+			flags |= Archive::ARCHIVE_FLAG_BATCH;
+		else if(strcmp(argv[i], "clean") == 0)
+			flags |= Archive::ARCHIVE_FLAG_CLEAN;
+	}
+
+	std::vector<std::string> fileNames;
 	readDirectory(fileNames, argv[ARGUMENT_TARGET]);
 
-	Archive archive = Archive(fileNames, Archive::ARCHIVE_FLAG_BATCH | Archive::ARCHIVE_FLAG_CLEAN);
+	Archive archive = Archive(fileNames, flags);
 	if(archive.writeObjects(argv[ARGUMENT_OBJECTS]))
 		archive.compile(argv[ARGUMENT_OBJECTS], argv[ARGUMENT_OUTPUT]);
 }
