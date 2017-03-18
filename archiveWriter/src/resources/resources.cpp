@@ -35,7 +35,7 @@ static void readDirectory(std::vector<std::string> &fileNames, const std::string
 
 void resources::compile(int argc, char **argv)
 {
-	if(argc != resources::ARGUMENT_COUNT)
+	if(argc < resources::ARGUMENT_COUNT)
 		throw resources::FAILURE_ARGUMENT_COUNT;
 
 	CreateDirectory(argv[ARGUMENT_OBJECTS], NULL);
@@ -44,7 +44,7 @@ void resources::compile(int argc, char **argv)
 
 	readDirectory(fileNames, argv[ARGUMENT_TARGET]);
 
-	Archive archive = Archive(fileNames, Archive::ARCHIVE_FLAG_CLEAN);
+	Archive archive = Archive(fileNames, Archive::ARCHIVE_FLAG_BATCH | Archive::ARCHIVE_FLAG_CLEAN);
 	if(archive.writeObjects(argv[ARGUMENT_OBJECTS]))
 		archive.compile(argv[ARGUMENT_OBJECTS], argv[ARGUMENT_OUTPUT]);
 }

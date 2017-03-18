@@ -38,10 +38,10 @@ void Archive::writeObject(
 		out.write((const char*)formatted.data(), formatted.size());
 	else
 	{
-		mz_ulong compressedSize;
-		char *compressed = new char[mz_compressBound(formatted.size())];
+		mz_ulong compressedSize = mz_compressBound((mz_ulong)formatted.size());
+		char *compressed = new char[compressedSize];
 
-		mz_compress2((unsigned char*)compressed, &compressedSize, (unsigned char*)formatted.data(), formatted.size(), 10);
+		mz_compress2((unsigned char*)compressed, &compressedSize, (unsigned char*)formatted.data(), (mz_ulong)formatted.size(), 10);
 		out.write(compressed, compressedSize);
 
 		delete compressed;
@@ -146,12 +146,13 @@ void Archive::compile(const std::string objects, const std::string file) const
 			archive.insert(archive.end(), file.begin(), file.end());
 		}
 
-		char *compressed = new char[mz_compressBound(archive.size())];
-		mz_ulong compressedSize;
-
-		mz_compress2((unsigned char*)compressed, &compressedSize, (unsigned char*)archive.data(), archive.size(), 10);
+		mz_ulong compressedSize = mz_compressBound((mz_ulong)archive.size());
+		char *compressed = new char[compressedSize];
+		
+		mz_compress2((unsigned char*)compressed, &compressedSize, (unsigned char*)archive.data(), (mz_ulong)archive.size(), 10);
+		out.write((const char*)&compressedSize, sizeof(uint64_t));
 		out.write(compressed, compressedSize);
-
+		
 		std::cout << "Wrote batch with " << ((float)archive.size() / compressedSize) * 100 << "% compression" << std::endl;
 
 		delete compressed;
@@ -159,10 +160,10 @@ void Archive::compile(const std::string objects, const std::string file) const
 	else
 	{
 		std::vector<char> stringTab = writeStringTab();
-		char *compressedStringTab = new char[mz_compressBound(stringTab.size())];
-		mz_ulong compressedSize;
+		mz_ulong compressedSize = mz_compressBound((mz_ulong)stringTab.size());
+		char *compressedStringTab = new char[compressedSize];
 
-		mz_compress2((unsigned char*)compressedStringTab, &compressedSize, (unsigned char*)stringTab.data(), stringTab.size(), 10);
+		mz_compress2((unsigned char*)compressedStringTab, &compressedSize, (unsigned char*)stringTab.data(), (mz_ulong)stringTab.size(), 10);
 		out.write((const char*)&compressedSize, sizeof(uint64_t));
 		out.write(compressedStringTab, compressedSize);
 
@@ -176,6 +177,8 @@ void Archive::compile(const std::string objects, const std::string file) const
 
 			out.write(file.data() + sizeof(uint32_t), file.size() - sizeof(uint32_t));
 		}
+
+		std::cout << "Wrote archive" << std::endl;
 	}
 
 	out.close();
