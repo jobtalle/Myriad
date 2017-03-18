@@ -41,3 +41,5 @@
 *.user
 *.userosscache
 *.sln.docstates
+
+*.tlog
