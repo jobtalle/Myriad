@@ -41,6 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -78,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\lodepng\lodepng.h" />
+    <ClInclude Include="include\miniz\miniz.h" />
     <ClInclude Include="include\resources\archive.h" />
     <ClInclude Include="include\resources\formatter.h" />
     <ClInclude Include="include\resources\resources.h" />

@@ -50,5 +50,8 @@
     <ClInclude Include="include\resources\formatter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\miniz\miniz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

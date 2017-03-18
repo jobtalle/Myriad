@@ -1,6 +1,7 @@
 #include <resources/archive.h>
 #include <resources/formatter.h>
 #include <xxhash/xxhash.h>
+#include <miniz/miniz.h>
 
 #include <algorithm>
 #include <iostream>
@@ -24,17 +25,44 @@ std::string Archive::getObjPath(const Archive::entry entry, const std::string di
 void Archive::writeObject(
 	const std::string object,
 	const std::vector<char> file,
-	const std::string extension,
+	entry &entry,
 	const uint32_t hash) const
 {
-	std::vector<char> formatted = formatter::format(file, extension);
+	const std::string extension = entry.path.substr(entry.path.length() - 3, 3);
+	const std::vector<char> formatted = formatter::format(file, extension);
 
 	std::ofstream out(object, std::ios::binary);
 	out.write((const char*)&hash, sizeof(uint32_t));
-	out.write((const char*)formatted.data(), formatted.size());
+	
+	if(flags & ARCHIVE_FLAG_BATCH)
+		out.write((const char*)formatted.data(), formatted.size());
+	else
+	{
+
+	}
+	
 	out.close();
 
-	std::cout << "Updating " + object << std::endl;
+	entry.size = formatted.size();
+
+	std::cout << "Updated " << object << std::endl;
+}
+
+std::vector<char> Archive::writeStringTab() const
+{
+	std::vector<char> result;
+	uint64_t offset = 0;
+
+	for(const entry entry:entries)
+	{
+		result.insert(result.end(), entry.name.begin(), entry.name.end());
+		result.push_back('\0');
+		result.insert(result.end(), (const char*)&offset, (const char*)&offset + sizeof(offset));
+
+		offset += entry.size;
+	}
+
+	return result;
 }
 
 Archive::Archive(const std::vector<std::string> fileNames, const uint8_t flags)
@@ -46,44 +74,92 @@ Archive::Archive(const std::vector<std::string> fileNames, const uint8_t flags)
 	std::sort(entries.begin(), entries.end());
 }
 
-void Archive::writeObjects(const std::string objects) const
+bool Archive::writeObjects(const std::string objects)
 {
-	for(const auto &entry : entries)
+	bool changed = false;
+
+	for(auto &entry : entries)
 	{
-		const std::string extension = entry.path.substr(entry.path.length() - 3, 3);
 		std::ifstream sourceIn(entry.path, std::ios::binary);
 		std::vector<char> file((std::istreambuf_iterator<char>(sourceIn)), (std::istreambuf_iterator<char>()));
 		sourceIn.close();
 
 		uint32_t hash = XXH32(file.data(), file.size(), 0);
 
-		std::ifstream objectIn(getObjPath(entry, objects), std::ios::binary);
-		if(objectIn.is_open())
+		if(flags & ARCHIVE_FLAG_CLEAN)
 		{
-			uint32_t storedHash;
+			writeObject(getObjPath(entry, objects), file, entry, hash);
 
-			objectIn.read((char*)&storedHash, sizeof(uint32_t));
-			objectIn.close();
-
-			if(storedHash != hash)
-				writeObject(getObjPath(entry, objects), file, extension, hash);
+			changed = true;
 		}
 		else
-			writeObject(getObjPath(entry, objects), file, extension, hash);
+		{
+			std::ifstream objectIn(getObjPath(entry, objects), std::ios::binary);
+			if(objectIn.is_open())
+			{
+				uint32_t storedHash;
+
+				objectIn.read((char*)&storedHash, sizeof(uint32_t));
+				objectIn.close();
+
+				if(storedHash != hash)
+				{
+					writeObject(getObjPath(entry, objects), file, entry, hash);
+
+					changed = true;
+				}
+			}
+			else
+			{
+				writeObject(getObjPath(entry, objects), file, entry, hash);
+
+				changed = true;
+			}
+		}
 	}
+
+	return changed;
 }
 
 void Archive::compile(const std::string objects, const std::string file) const
 {
 	std::ofstream out(file, std::ios::binary);
 
-	for(const entry &entry : entries)
+	out.write((const char*)&flags, sizeof(flags));
+	
+	if(flags & ARCHIVE_FLAG_BATCH)
 	{
-		std::ifstream sourceIn(getObjPath(entry, objects), std::ios::binary);
-		std::vector<char> file((std::istreambuf_iterator<char>(sourceIn)), (std::istreambuf_iterator<char>()));
-		sourceIn.close();
+		std::vector<char> archive = writeStringTab();
 
-		out.write(file.data() + sizeof(uint32_t), file.size() - sizeof(uint32_t));
+		for(const entry &entry : entries)
+		{
+			std::ifstream sourceIn(getObjPath(entry, objects), std::ios::binary);
+			std::vector<char> file((std::istreambuf_iterator<char>(sourceIn)), (std::istreambuf_iterator<char>()));
+			sourceIn.close();
+
+			archive.insert(archive.end(), file.begin(), file.end());
+		}
+
+		char *compressed = new char[mz_compressBound(archive.size())];
+		mz_ulong compressedSize;
+
+		mz_compress2((unsigned char*)compressed, &compressedSize, (unsigned char*)archive.data(), archive.size(), 10);
+		out.write(compressed, compressedSize);
+
+		std::cout << "Wrote batch with " << ((float)archive.size() / compressedSize) * 100 << "% compression" << std::endl;
+
+		delete compressed;
+	}
+	else
+	{
+		for(const entry &entry : entries)
+		{
+			std::ifstream sourceIn(getObjPath(entry, objects), std::ios::binary);
+			std::vector<char> file((std::istreambuf_iterator<char>(sourceIn)), (std::istreambuf_iterator<char>()));
+			sourceIn.close();
+
+			out.write(file.data() + sizeof(uint32_t), file.size() - sizeof(uint32_t));
+		}
 	}
 
 	out.close();
