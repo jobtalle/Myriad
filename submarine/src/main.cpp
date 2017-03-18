@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	GLFWwindow *window = glfwCreateWindow(1024, 768, "Submarine", NULL, NULL);
 	glfwMakeContextCurrent(window);
 
-	myr::Renderer renderer = myr::Renderer(myr::Color(0.5f, 0.3f, 0.7f));
+	myr::Renderer renderer = myr::Renderer(myr::Color(0.4f, 0.4f, 0.8f));
 
 	while(!glfwWindowShouldClose(window))
 	{
