@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 	glfwMakeContextCurrent(window);
 
 	myr::Renderer renderer = myr::Renderer(myr::Color(0.4f, 0.4f, 0.8f));
-
+	
 	while(!glfwWindowShouldClose(window))
 	{
 		renderer.render();
