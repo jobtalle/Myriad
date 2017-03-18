@@ -19,4 +19,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\glfw3.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\glfw\glfw3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glfw\glfw3native.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

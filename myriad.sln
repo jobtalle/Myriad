@@ -8,6 +8,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "myriad", "myriad\myriad.vcxproj", "{1924DEDD-A24E-49E1-A5B3-4076D8CB97D9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "submarine", "submarine\submarine.vcxproj", "{153D9B28-838F-462C-A565-C50C1745A0F4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{283B655E-FC68-40CE-BC2F-00EC2CFCC192} = {283B655E-FC68-40CE-BC2F-00EC2CFCC192}
+		{1924DEDD-A24E-49E1-A5B3-4076D8CB97D9} = {1924DEDD-A24E-49E1-A5B3-4076D8CB97D9}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "archiveReader", "archiveReader\archiveReader.vcxproj", "{283B655E-FC68-40CE-BC2F-00EC2CFCC192}"
 EndProject
@@ -49,12 +53,14 @@ Global
 		{153D9B28-838F-462C-A565-C50C1745A0F4}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{153D9B28-838F-462C-A565-C50C1745A0F4}.Debug|Win32.ActiveCfg = Debug|Win32
 		{153D9B28-838F-462C-A565-C50C1745A0F4}.Debug|Win32.Build.0 = Debug|Win32
-		{153D9B28-838F-462C-A565-C50C1745A0F4}.Debug|x64.ActiveCfg = Debug|Win32
+		{153D9B28-838F-462C-A565-C50C1745A0F4}.Debug|x64.ActiveCfg = Debug|x64
+		{153D9B28-838F-462C-A565-C50C1745A0F4}.Debug|x64.Build.0 = Debug|x64
 		{153D9B28-838F-462C-A565-C50C1745A0F4}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{153D9B28-838F-462C-A565-C50C1745A0F4}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{153D9B28-838F-462C-A565-C50C1745A0F4}.Release|Win32.ActiveCfg = Release|Win32
 		{153D9B28-838F-462C-A565-C50C1745A0F4}.Release|Win32.Build.0 = Release|Win32
-		{153D9B28-838F-462C-A565-C50C1745A0F4}.Release|x64.ActiveCfg = Release|Win32
+		{153D9B28-838F-462C-A565-C50C1745A0F4}.Release|x64.ActiveCfg = Release|x64
+		{153D9B28-838F-462C-A565-C50C1745A0F4}.Release|x64.Build.0 = Release|x64
 		{283B655E-FC68-40CE-BC2F-00EC2CFCC192}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{283B655E-FC68-40CE-BC2F-00EC2CFCC192}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{283B655E-FC68-40CE-BC2F-00EC2CFCC192}.Debug|Win32.ActiveCfg = Debug|Win32

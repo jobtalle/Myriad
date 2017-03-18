@@ -15,8 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\myriad.h">
+    <ClInclude Include="include\myriad\myrRenderTarget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\myriad\myr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\myriad\myrRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\myriad\myrColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opengl\opengl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\myriad\myrRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\myriad\myrRenderTarget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\myriad\myrColor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\opengl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
