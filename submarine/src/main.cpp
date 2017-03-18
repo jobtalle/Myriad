@@ -3,7 +3,9 @@
 #include <iostream>
 #include <myr.h>
 
-//#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+#ifndef _DEBUG
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+#endif
 
 int main(int argc, char **argv)
 {
