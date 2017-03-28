@@ -1,5 +1,12 @@
 #include <myriad/myrDefaultRenderTarget.h>
 
+#include <iostream>
+#include <cassert>
+
+namespace {
+	static myr::DefaultRenderTarget *current = nullptr;
+}
+
 myr::DefaultRenderTarget::DefaultRenderTarget(const Color clearColor, const Rect rect)
 	:fbo(0), flags(0), rect(rect), clearColor(clearColor)
 {
@@ -17,23 +24,39 @@ myr::Rect myr::DefaultRenderTarget::getRect() const
 
 void myr::DefaultRenderTarget::bind()
 {
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+	if(current)
+		current->unbind();
+	current = this;
+
+	if(flags & BOUND)
+		return;
 
 	flags |= BOUND;
+
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
 }
 
 void myr::DefaultRenderTarget::unbind()
 {
 	if(!(flags & BOUND))
-	{
-		render();
+		return;
 
-		flags &= ~BOUND;
-	}
+	render();
+
+	flags &= ~BOUND;
+}
+
+void myr::DefaultRenderTarget::clear() const
+{
+#ifdef _DEBUG
+	assert(flags & BOUND);
+#endif
+
+	glClearColor(clearColor.getRed(), clearColor.getGreen(), clearColor.getBlue(), 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void myr::DefaultRenderTarget::render()
 {
-	glClearColor(clearColor.getRed(), clearColor.getGreen(), clearColor.getBlue(), 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
 }

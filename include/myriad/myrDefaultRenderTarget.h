@@ -8,16 +8,20 @@
 namespace myr {
 	class DefaultRenderTarget
 	{
+		friend class Renderer;
+
 	public:
 		DefaultRenderTarget(const Color clearColor, const Rect rect);
-		void setRect(const Rect rect);
 		Rect getRect() const;
 		void bind();
 		void unbind();
-
+		void clear() const;
+		
 	protected:
 		Rect rect;
 		GLuint fbo;
+
+		void setRect(const Rect rect);
 
 	private:
 		Color clearColor;

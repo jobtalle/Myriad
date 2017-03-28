@@ -7,6 +7,7 @@ namespace myr {
 	{
 	public:
 		RenderTarget(const Color clearColor, const Rect rect);
+		using DefaultRenderTarget::setRect;
 
 	private:
 		void generateFBO();

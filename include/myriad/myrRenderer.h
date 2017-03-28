@@ -11,6 +11,7 @@ namespace myr {
 		Renderer(const Color clearColor, const Rect size);
 		~Renderer();
 		void render();
+		DefaultRenderTarget &getRenderTarget();
 
 	private:
 		DefaultRenderTarget renderTarget;
