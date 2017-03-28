@@ -3,17 +3,25 @@
 
 #include <iostream>
 
-myr::Renderer::Renderer(const Color clearColor, const Rect size)
-	:renderTarget(clearColor, size)
+myr::Renderer::Renderer(const Color clearColor, const Rect rect)
+	:renderTarget(clearColor, rect)
 {
 	ogl_LoadFunctions();
-
-	renderTarget.setRect(size);
 }
 
 myr::Renderer::~Renderer()
 {
 	
+}
+
+void myr::Renderer::setRect(const Rect rect)
+{
+	renderTarget.setRect(rect);
+}
+
+myr::Rect myr::Renderer::getRect() const
+{
+	return renderTarget.getRect();
 }
 
 myr::DefaultRenderTarget &myr::Renderer::getRenderTarget()
