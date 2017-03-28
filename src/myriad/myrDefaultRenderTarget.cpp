@@ -1,9 +1,8 @@
 #include <myriad/myrDefaultRenderTarget.h>
 
 myr::DefaultRenderTarget::DefaultRenderTarget(const Color clearColor, const Rect rect)
-	:fbo(0), rect(rect), clearColor(clearColor)
+	:fbo(0), flags(0), rect(rect), clearColor(clearColor)
 {
-	
 }
 
 void myr::DefaultRenderTarget::setRect(const Rect rect)
@@ -16,22 +15,25 @@ myr::Rect myr::DefaultRenderTarget::getRect() const
 	return rect;
 }
 
-GLuint *myr::DefaultRenderTarget::getFbo()
+void myr::DefaultRenderTarget::bind()
 {
-	return &fbo;
-}
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
 
-GLuint myr::DefaultRenderTarget::getFbo() const
-{
-	return fbo;
-}
-
-void myr::DefaultRenderTarget::bind() const
-{
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, getFbo());
+	flags |= BOUND;
 }
 
 void myr::DefaultRenderTarget::unbind()
 {
-	// Render batches
+	if(!(flags & BOUND))
+	{
+		render();
+
+		flags &= ~BOUND;
+	}
+}
+
+void myr::DefaultRenderTarget::render()
+{
+	glClearColor(clearColor.getRed(), clearColor.getGreen(), clearColor.getBlue(), 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

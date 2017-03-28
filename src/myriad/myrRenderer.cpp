@@ -14,7 +14,7 @@ myr::Renderer::~Renderer()
 	
 }
 
-void myr::Renderer::render() const
+void myr::Renderer::render()
 {
-
+	renderTarget.unbind();
 }

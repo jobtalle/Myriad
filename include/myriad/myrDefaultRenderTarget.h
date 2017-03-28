@@ -12,17 +12,21 @@ namespace myr {
 		DefaultRenderTarget(const Color clearColor, const Rect rect);
 		void setRect(const Rect rect);
 		Rect getRect() const;
-		void bind() const;
+		void bind();
 		void unbind();
 
 	protected:
 		Rect rect;
-
-		GLuint *getFbo();
-		GLuint getFbo() const;
+		GLuint fbo;
 
 	private:
 		Color clearColor;
-		GLuint fbo;
+		unsigned char flags;
+
+		void render();
+
+		enum flags {
+			BOUND = 0x01
+		};
 	};
 }

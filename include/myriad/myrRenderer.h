@@ -10,7 +10,7 @@ namespace myr {
 	public:
 		Renderer(const Color clearColor, const Rect size);
 		~Renderer();
-		void render() const;
+		void render();
 
 	private:
 		DefaultRenderTarget renderTarget;
