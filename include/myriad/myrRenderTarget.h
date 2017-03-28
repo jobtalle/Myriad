@@ -1,7 +1,15 @@
 #pragma once
 
-namespace myr {
-	class RenderTarget {
+#include "myrDefaultRenderTarget.h"
 
+namespace myr {
+	class RenderTarget : public DefaultRenderTarget
+	{
+	public:
+		RenderTarget(const Rect rect);
+
+	private:
+		void generateFBO();
+		void deleteFBO();
 	};
 }

@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-myr::Renderer::Renderer(const Color clearColor)
-:clearColor(clearColor)
+myr::Renderer::Renderer(const Color clearColor, const Rect size)
+	:clearColor(clearColor), renderTarget(size)
 {
 	ogl_LoadFunctions();
 }
