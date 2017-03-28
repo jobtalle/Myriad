@@ -1,7 +1,7 @@
 #include <myriad/myrDefaultRenderTarget.h>
 
-myr::DefaultRenderTarget::DefaultRenderTarget(const Rect rect)
-	:fbo(0), rect(rect)
+myr::DefaultRenderTarget::DefaultRenderTarget(const Color clearColor, const Rect rect)
+	:fbo(0), rect(rect), clearColor(clearColor)
 {
 	
 }

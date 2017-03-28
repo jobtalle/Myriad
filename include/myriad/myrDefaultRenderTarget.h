@@ -3,13 +3,13 @@
 #include <opengl/opengl.h>
 
 #include "myrRect.h"
+#include "myrColor.h"
 
 namespace myr {
 	class DefaultRenderTarget
 	{
 	public:
-		DefaultRenderTarget();
-		DefaultRenderTarget(const Rect rect);
+		DefaultRenderTarget(const Color clearColor, const Rect rect);
 		void setRect(const Rect rect);
 		Rect getRect() const;
 		void bind() const;
@@ -22,6 +22,7 @@ namespace myr {
 		GLuint getFbo() const;
 
 	private:
+		Color clearColor;
 		GLuint fbo;
 	};
 }

@@ -2,6 +2,7 @@
 
 #include "myrColor.h"
 #include "myrRect.h"
+
 #include "myrDefaultRenderTarget.h"
 
 namespace myr {
@@ -13,6 +14,5 @@ namespace myr {
 
 	private:
 		DefaultRenderTarget renderTarget;
-		Color clearColor;
 	};
 }

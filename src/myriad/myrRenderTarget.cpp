@@ -1,8 +1,9 @@
 #include <myriad/myrRenderTarget.h>
 
-myr::RenderTarget::RenderTarget(const Rect rect)
+myr::RenderTarget::RenderTarget(const Color clearColor, const Rect rect)
+	:DefaultRenderTarget(clearColor, rect)
 {
-	setRect(rect);
+
 }
 
 void myr::RenderTarget::generateFBO()
