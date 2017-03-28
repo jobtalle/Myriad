@@ -19,11 +19,6 @@ void myr::Renderer::setRect(const Rect rect)
 	renderTarget.setRect(rect);
 }
 
-myr::Rect myr::Renderer::getRect() const
-{
-	return renderTarget.getRect();
-}
-
 myr::DefaultRenderTarget &myr::Renderer::getRenderTarget()
 {
 	return renderTarget;

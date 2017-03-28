@@ -2,7 +2,6 @@
 
 #include "myrColor.h"
 #include "myrRect.h"
-
 #include "myrDefaultRenderTarget.h"
 
 namespace myr {
@@ -12,7 +11,6 @@ namespace myr {
 		~Renderer();
 		void render();
 		void setRect(const Rect rect);
-		Rect getRect() const;
 		DefaultRenderTarget &getRenderTarget();
 
 	private:
