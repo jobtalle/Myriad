@@ -3,10 +3,18 @@
 
 #include <iostream>
 
+namespace {
+	static bool initializedGL;
+}
+
 myr::Renderer::Renderer(const Color clearColor, const Rect rect)
 	:renderTarget(clearColor, rect)
 {
-	ogl_LoadFunctions();
+	if(!initializedGL)
+	{
+		ogl_LoadFunctions();
+		initializedGL = true;
+	}
 }
 
 myr::Renderer::~Renderer()
