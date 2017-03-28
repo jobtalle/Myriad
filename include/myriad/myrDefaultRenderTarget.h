@@ -14,7 +14,6 @@ namespace myr {
 		DefaultRenderTarget(const Color clearColor, const Rect rect);
 		Rect getRect() const;
 		void bind();
-		void unbind();
 		void clear() const;
 		
 	protected:
@@ -22,6 +21,7 @@ namespace myr {
 		GLuint fbo;
 
 		void setRect(const Rect rect);
+		void unbind();
 
 	private:
 		Color clearColor;
