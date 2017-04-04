@@ -6,7 +6,7 @@ namespace myr {
 	class RenderTarget : public DefaultRenderTarget
 	{
 	public:
-		RenderTarget(const Color clearColor, const Rect rect);
+		RenderTarget(const Color clearColor, const Rect rect, Renderer *renderer);
 		using DefaultRenderTarget::setRect;
 
 	private:

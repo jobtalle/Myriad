@@ -1,14 +1,19 @@
 #include <myriad/myrDefaultRenderTarget.h>
+#include <myriad/myrRenderer.h>
 
-#include <iostream>
 #include <cassert>
 
 namespace {
-	static myr::DefaultRenderTarget *current = nullptr;
+	myr::DefaultRenderTarget *current = nullptr;
 }
 
-myr::DefaultRenderTarget::DefaultRenderTarget(const Color clearColor, const Rect rect)
-	:fbo(0), flags(0), rect(rect), clearColor(clearColor)
+myr::DefaultRenderTarget *myr::DefaultRenderTarget::getCurrent()
+{
+	return current;
+}
+
+myr::DefaultRenderTarget::DefaultRenderTarget(const Color clearColor, const Rect rect, Renderer *renderer)
+	:fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer)
 {
 }
 
@@ -22,12 +27,17 @@ myr::Rect myr::DefaultRenderTarget::getRect() const
 	return rect;
 }
 
+myr::Renderer *myr::DefaultRenderTarget::getRenderer() const
+{
+	return renderer;
+}
+
 void myr::DefaultRenderTarget::bind()
 {
 	if(current)
 		current->unbind();
 	current = this;
-
+	
 	if(flags & BOUND)
 		return;
 

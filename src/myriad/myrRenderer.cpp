@@ -4,11 +4,11 @@
 #include <iostream>
 
 namespace {
-	static bool initializedGL;
+	bool initializedGL;
 }
 
 myr::Renderer::Renderer(const Color clearColor, const Rect rect)
-	:renderTarget(clearColor, rect)
+	:renderTarget(clearColor, rect, this)
 {
 	if(!initializedGL)
 	{

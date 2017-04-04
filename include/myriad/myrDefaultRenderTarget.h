@@ -6,13 +6,16 @@
 #include "myrColor.h"
 
 namespace myr {
+	class Renderer;
+
 	class DefaultRenderTarget
 	{
 		friend class Renderer;
 
 	public:
-		DefaultRenderTarget(const Color clearColor, const Rect rect);
+		DefaultRenderTarget(const Color clearColor, const Rect rect, Renderer *renderer);
 		Rect getRect() const;
+		Renderer *getRenderer() const;
 		void bind();
 		void clear() const;
 		
@@ -22,8 +25,10 @@ namespace myr {
 
 		void setRect(const Rect rect);
 		void unbind();
+		static DefaultRenderTarget *getCurrent();
 
 	private:
+		Renderer *renderer;
 		Color clearColor;
 		unsigned char flags;
 
