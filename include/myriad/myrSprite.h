@@ -1,22 +1,26 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
+#include <archive/archive.h>
 
 #include "myrRect.h"
 
 namespace myr {
 	class Sprite {
 	public:
-		Sprite(const Rect size, const char *image);
+		Sprite(Archive *archive, const std::string name);
 		~Sprite();
+		void draw();
 
 	private:
 		uint8_t flags;
-		const Rect size;
 		char *pixels;
 
+		void load();
+
 		enum flags {
-			UPLOADED = 0x01
+			LOADED = 0x01
 		};
 	};
 }

@@ -12,11 +12,13 @@ namespace myr {
 		~Renderer();
 		void render();
 		void setRect(const Rect rect);
-		DefaultRenderTarget &getRenderTarget();
+		Rect getRect() const;
+		DefaultRenderTarget &getDefaultRenderTarget();
 		Shader &getDefaultShader();
 
 	private:
 		DefaultRenderTarget renderTarget;
 		Shader defaultShader;
+		Rect rect;
 	};
 }

@@ -11,11 +11,11 @@ namespace myr {
 	class DefaultRenderTarget
 	{
 		friend class Renderer;
+		friend class Sprite;
 
 	public:
 		DefaultRenderTarget(const Color clearColor, const Rect rect, Renderer *renderer);
 		Rect getRect() const;
-		Renderer *getRenderer() const;
 		void bind();
 		void clear() const;
 		
@@ -25,6 +25,7 @@ namespace myr {
 
 		void setRect(const Rect rect);
 		void unbind();
+		Renderer *getRenderer() const;
 		static DefaultRenderTarget *getCurrent();
 
 	private:

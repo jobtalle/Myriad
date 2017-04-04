@@ -27,11 +27,6 @@ myr::Rect myr::DefaultRenderTarget::getRect() const
 	return rect;
 }
 
-myr::Renderer *myr::DefaultRenderTarget::getRenderer() const
-{
-	return renderer;
-}
-
 void myr::DefaultRenderTarget::bind()
 {
 	if(current)
@@ -54,6 +49,11 @@ void myr::DefaultRenderTarget::unbind()
 	render();
 
 	flags &= ~BOUND;
+}
+
+myr::Renderer *myr::DefaultRenderTarget::getRenderer() const
+{
+	return renderer;
 }
 
 void myr::DefaultRenderTarget::clear() const

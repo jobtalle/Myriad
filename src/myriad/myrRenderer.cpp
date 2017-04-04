@@ -8,7 +8,7 @@ namespace {
 }
 
 myr::Renderer::Renderer(const Color clearColor, const Rect rect)
-:renderTarget(clearColor, rect, this)
+:renderTarget(clearColor, rect, this), rect(rect)
 {
 	if(!initializedGL)
 	{
@@ -34,7 +34,12 @@ void myr::Renderer::setRect(const Rect rect)
 	renderTarget.setRect(rect);
 }
 
-myr::DefaultRenderTarget &myr::Renderer::getRenderTarget()
+myr::Rect myr::Renderer::getRect() const
+{
+	return rect;
+}
+
+myr::DefaultRenderTarget &myr::Renderer::getDefaultRenderTarget()
 {
 	return renderTarget;
 }

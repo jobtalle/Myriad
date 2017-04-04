@@ -1,11 +1,21 @@
 #include <myriad/myrSprite.h>
+#include <myriad/myrDefaultRenderTarget.h>
 
-#include <cstring>
-
-myr::Sprite::Sprite(const Rect size, const char *image)
-:flags(0), size(size)
+myr::Sprite::Sprite(Archive *archive, const std::string name)
+:flags(0)
 {
-	pixels = new char(size.getWidth() * size.getHeight() * 4);
+	
+}
 
-	std::memcpy(pixels, image, sizeof(pixels));
+void myr::Sprite::draw()
+{
+	if(!(flags & LOADED))
+		load();
+}
+
+void myr::Sprite::load()
+{
+	flags |= LOADED;
+
+	myr::DefaultRenderTarget::getCurrent()->getRenderer();
 }
