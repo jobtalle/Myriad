@@ -8,7 +8,7 @@ namespace {
 }
 
 myr::Renderer::Renderer(const Color clearColor, const Rect rect)
-:renderTarget(clearColor, rect, this), currentShader(nullptr), defaultShader()
+:renderTarget(clearColor, rect, this)
 {
 	if(!initializedGL)
 	{
@@ -16,7 +16,7 @@ myr::Renderer::Renderer(const Color clearColor, const Rect rect)
 		initializedGL = true;
 	}
 
-	bindShader(&getDefaultShader());
+	getDefaultShader().bind();
 }
 
 myr::Renderer::~Renderer()
@@ -32,16 +32,6 @@ void myr::Renderer::render()
 void myr::Renderer::setRect(const Rect rect)
 {
 	renderTarget.setRect(rect);
-}
-
-void myr::Renderer::bindShader(Shader *shader)
-{
-	if(currentShader != shader)
-	{
-		shader->bind();
-
-		currentShader = shader;
-	}
 }
 
 myr::DefaultRenderTarget &myr::Renderer::getRenderTarget()

@@ -7,8 +7,6 @@ namespace myr {
 	public:
 		Shader();
 		~Shader();
-
-	protected:
-		void bind() const;
+		void bind();
 	};
 }
