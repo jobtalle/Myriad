@@ -8,13 +8,15 @@ namespace {
 }
 
 myr::Renderer::Renderer(const Color clearColor, const Rect rect)
-	:renderTarget(clearColor, rect, this)
+:renderTarget(clearColor, rect, this), currentShader(nullptr), defaultShader()
 {
 	if(!initializedGL)
 	{
 		ogl_LoadFunctions();
 		initializedGL = true;
 	}
+
+	bindShader(&getDefaultShader());
 }
 
 myr::Renderer::~Renderer()
@@ -22,9 +24,24 @@ myr::Renderer::~Renderer()
 	
 }
 
+void myr::Renderer::render()
+{
+	renderTarget.unbind();
+}
+
 void myr::Renderer::setRect(const Rect rect)
 {
 	renderTarget.setRect(rect);
+}
+
+void myr::Renderer::bindShader(Shader *shader)
+{
+	if(currentShader != shader)
+	{
+		shader->bind();
+
+		currentShader = shader;
+	}
 }
 
 myr::DefaultRenderTarget &myr::Renderer::getRenderTarget()
@@ -32,7 +49,7 @@ myr::DefaultRenderTarget &myr::Renderer::getRenderTarget()
 	return renderTarget;
 }
 
-void myr::Renderer::render()
+myr::Shader &myr::Renderer::getDefaultShader()
 {
-	renderTarget.unbind();
+	return defaultShader;
 }
