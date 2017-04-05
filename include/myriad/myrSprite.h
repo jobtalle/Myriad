@@ -1,10 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include <string>
 #include <archive/archive.h>
-
-#include "myrRect.h"
 
 namespace myr {
 	class Sprite {
@@ -12,11 +9,12 @@ namespace myr {
 		Sprite();
 		Sprite(const ArchiveFile &file);
 		~Sprite();
+		Sprite &operator=(const Sprite &other);
 		bool isSet() const;
 		void draw();
 
 	private:
-		const ArchiveFile file;
+		ArchiveFile file;
 		uint8_t flags;
 
 		void load();

@@ -11,7 +11,18 @@ myr::Sprite::Sprite(const ArchiveFile &file)
 
 myr::Sprite::~Sprite()
 {
+	if(!(flags & UNSET) && (flags & LOADED))
+	{
+		std::cout << "Release from atlas\n";
+	}
+}
 
+myr::Sprite &myr::Sprite::operator = (const myr::Sprite &other)
+{
+	file = other.file;
+	flags = other.flags;
+
+	return *this;
 }
 
 bool myr::Sprite::isSet() const
@@ -22,12 +33,17 @@ bool myr::Sprite::isSet() const
 void myr::Sprite::draw()
 {
 	if(!(flags & LOADED))
-		load();
+		if(!(flags & UNSET))
+			load();
+	else
+	{
+
+	}
 }
 
 void myr::Sprite::load()
 {
 	flags |= LOADED;
-
+	std::cout << "Loaded sprite\n";
 	myr::DefaultRenderTarget::getCurrent()->getRenderer();
 }
