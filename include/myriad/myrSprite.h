@@ -1,7 +1,8 @@
 #pragma once
 
 #include <cstdint>
-#include <archive/archive.h>
+
+#include "archive/archive.h"
 
 namespace myr {
 	class Sprite {
@@ -9,7 +10,6 @@ namespace myr {
 		Sprite();
 		Sprite(const ArchiveFile &file);
 		~Sprite();
-		Sprite &operator=(const Sprite &other);
 		bool isSet() const;
 		void draw();
 

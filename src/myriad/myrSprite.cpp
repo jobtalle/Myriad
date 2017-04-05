@@ -17,14 +17,6 @@ myr::Sprite::~Sprite()
 	}
 }
 
-myr::Sprite &myr::Sprite::operator = (const myr::Sprite &other)
-{
-	file = other.file;
-	flags = other.flags;
-
-	return *this;
-}
-
 bool myr::Sprite::isSet() const
 {
 	return !(flags & UNSET);
