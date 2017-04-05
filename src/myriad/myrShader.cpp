@@ -1,4 +1,4 @@
-#include <myriad/myrShader.h>
+#include "myriad/myrShader.h"
 
 namespace {
 	myr::Shader *current = nullptr;

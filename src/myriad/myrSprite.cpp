@@ -1,10 +1,22 @@
-#include <myriad/myrSprite.h>
-#include <myriad/myrDefaultRenderTarget.h>
+#include "myriad/myrSprite.h"
+#include "myriad/myrDefaultRenderTarget.h"
 
-myr::Sprite::Sprite(Archive *archive, const std::string name)
-:flags(0)
+#include <iostream>
+
+myr::Sprite::Sprite()
+:flags(UNSET) {}
+
+myr::Sprite::Sprite(const ArchiveFile &file)
+:flags(0), file(file) {}
+
+myr::Sprite::~Sprite()
 {
-	
+
+}
+
+bool myr::Sprite::isSet() const
+{
+	return !(flags & UNSET);
 }
 
 void myr::Sprite::draw()

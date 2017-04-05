@@ -1,7 +1,5 @@
-#include <opengl/opengl.h>
-#include <myriad/myrRenderer.h>
-
-#include <iostream>
+#include "opengl/opengl.h"
+#include "myriad/myrRenderer.h"
 
 namespace {
 	bool initializedGL;

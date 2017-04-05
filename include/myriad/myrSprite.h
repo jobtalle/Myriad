@@ -9,18 +9,21 @@
 namespace myr {
 	class Sprite {
 	public:
-		Sprite(Archive *archive, const std::string name);
+		Sprite();
+		Sprite(const ArchiveFile &file);
 		~Sprite();
+		bool isSet() const;
 		void draw();
 
 	private:
+		const ArchiveFile file;
 		uint8_t flags;
-		char *pixels;
 
 		void load();
 
 		enum flags {
-			LOADED = 0x01
+			LOADED = 0x01,
+			UNSET = 0x02
 		};
 	};
 }
