@@ -4,6 +4,7 @@
 #include "myrRect.h"
 #include "myrDefaultRenderTarget.h"
 #include "myrShader.h"
+#include "internal/myrAtlas.h"
 
 namespace myr {
 	class Renderer {
@@ -19,6 +20,7 @@ namespace myr {
 	private:
 		DefaultRenderTarget renderTarget;
 		Shader defaultShader;
+		Atlas atlas;
 		Rect rect;
 	};
 }
