@@ -16,6 +16,7 @@ namespace myr {
 		Rect getRect() const;
 		DefaultRenderTarget &getDefaultRenderTarget();
 		Shader &getDefaultShader();
+		Atlas &getAtlas();
 
 	private:
 		DefaultRenderTarget renderTarget;

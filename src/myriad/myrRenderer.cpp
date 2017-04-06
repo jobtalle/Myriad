@@ -46,3 +46,8 @@ myr::Shader &myr::Renderer::getDefaultShader()
 {
 	return defaultShader;
 }
+
+myr::Atlas &myr::Renderer::getAtlas()
+{
+	return atlas;
+}
