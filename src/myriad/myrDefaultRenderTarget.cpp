@@ -13,9 +13,7 @@ myr::DefaultRenderTarget *myr::DefaultRenderTarget::getCurrent()
 }
 
 myr::DefaultRenderTarget::DefaultRenderTarget(const Color clearColor, const Rect rect, Renderer *renderer)
-:fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer)
-{
-}
+:fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer) {}
 
 void myr::DefaultRenderTarget::setRect(const Rect rect)
 {
