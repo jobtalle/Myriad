@@ -8,7 +8,8 @@ myr::Atlas::Atlas(const GLuint channel, const unsigned char atom)
 	glGenTextures(1, &texture);
 
 	this->atom = tryAtom(atom);
-
+	
+	bind();
 	initializeTexture();
 	allocateTexture();
 }
@@ -22,6 +23,19 @@ void myr::Atlas::bind()
 {
 	glActiveTexture(channel);
 	glBindTexture(GL_TEXTURE_2D, texture);
+}
+
+myr::Atlas::Location myr::Atlas::query(const std::string name)
+{
+	Location location;
+
+	location.atlasIndex = 0;
+	location.location.x = location.location.y;
+	location.size = 0;
+
+	//QuadSpace::Node node = tree.query();
+
+	return location;
 }
 
 unsigned char myr::Atlas::tryAtom(unsigned char atom) const
@@ -40,7 +54,6 @@ unsigned char myr::Atlas::tryAtom(unsigned char atom) const
 
 void myr::Atlas::initializeTexture()
 {
-	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

@@ -133,6 +133,7 @@
     <ClInclude Include="include\myriad\myrRect.h" />
     <ClInclude Include="include\myriad\myrShader.h" />
     <ClInclude Include="include\myriad\myrSprite.h" />
+    <ClInclude Include="include\myriad\myrVector.h" />
     <ClInclude Include="include\opengl\opengl.h" />
     <ClInclude Include="include\myriad\myr.h" />
     <ClInclude Include="include\myriad\myrColor.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="src\myriad\myrRect.cpp" />
     <ClCompile Include="src\myriad\myrShader.cpp" />
     <ClCompile Include="src\myriad\myrSprite.cpp" />
+    <ClCompile Include="src\myriad\myrVector.cpp" />
     <ClCompile Include="src\opengl\opengl.c" />
     <ClCompile Include="src\myriad\myrColor.cpp" />
     <ClCompile Include="src\myriad\myrRenderer.cpp" />
