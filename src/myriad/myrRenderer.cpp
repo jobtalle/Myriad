@@ -11,10 +11,10 @@ void myr::initialize()
 }
 
 myr::Renderer::Renderer(const Color clearColor, const Rect rect)
-	:renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS)
-{
-	getDefaultShader().bind();
-}
+	:renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS) {}
+
+myr::Renderer::Renderer(const Color clearColor, const Rect rect, const unsigned char atom)
+	:renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS, atom) {}
 
 myr::Renderer::~Renderer()
 {
@@ -58,5 +58,6 @@ void myr::Renderer::bind()
 		current = this;
 
 		atlas.bind();
+		getDefaultShader().bind();
 	}
 }

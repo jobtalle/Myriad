@@ -13,6 +13,7 @@ namespace myr {
 
 	public:
 		Renderer(const Color clearColor, const Rect rect);
+		Renderer(const Color clearColor, const Rect rect, const unsigned char atom);
 		~Renderer();
 		void render();
 		void setRect(const Rect rect);

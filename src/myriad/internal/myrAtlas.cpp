@@ -2,12 +2,15 @@
 
 #include <iostream>
 
-myr::Atlas::Atlas(const GLuint channel)
+myr::Atlas::Atlas(const GLuint channel, const unsigned char atom)
 	:channel(channel)
 {
 	glGenTextures(1, &texture);
 
+	this->atom = tryAtom(atom);
+
 	initializeTexture();
+	allocateTexture();
 }
 
 myr::Atlas::~Atlas()
@@ -21,6 +24,20 @@ void myr::Atlas::bind()
 	glBindTexture(GL_TEXTURE_2D, texture);
 }
 
+unsigned char myr::Atlas::tryAtom(unsigned char atom) const
+{
+	GLint maxTextureSize;
+
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
+
+	unsigned int maxAtom = maxTextureSize / QuadSpace::dimensions;
+
+	while(atom > maxAtom)
+		atom >>= 1;
+
+	return atom;
+}
+
 void myr::Atlas::initializeTexture()
 {
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -28,4 +45,18 @@ void myr::Atlas::initializeTexture()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+}
+
+void myr::Atlas::allocateTexture()
+{
+	glTexImage2D(
+		GL_TEXTURE_2D,
+		0,
+		GL_RGBA8,
+		atom * QuadSpace::dimensions,
+		atom * QuadSpace::dimensions,
+		0,
+		GL_RGBA,
+		GL_UNSIGNED_BYTE,
+		NULL);
 }

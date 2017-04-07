@@ -20,13 +20,14 @@ public:
 		uint16_t node:15;
 	};
 
+	static const unsigned char dimensions = 128;
+
 	QuadSpace();
 	~QuadSpace();
 	Node query(const uint8_t scale);
 	void release(const Node node);
 
 private:
-	static const unsigned char dimensions = 128;
 	static const unsigned int nodeCount = 21845;
 	unsigned char *nodes;
 
