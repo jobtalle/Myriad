@@ -2,18 +2,17 @@
 #include "myriad/myrRenderer.h"
 
 namespace {
-	bool initializedGL;
+	myr::Renderer *current = nullptr;
+}
+
+void myr::initialize()
+{
+	ogl_LoadFunctions();
 }
 
 myr::Renderer::Renderer(const Color clearColor, const Rect rect)
-:renderTarget(clearColor, rect, this), rect(rect)
+	:renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS)
 {
-	if(!initializedGL)
-	{
-		ogl_LoadFunctions();
-		initializedGL = true;
-	}
-
 	getDefaultShader().bind();
 }
 
@@ -50,4 +49,14 @@ myr::Shader &myr::Renderer::getDefaultShader()
 myr::Atlas &myr::Renderer::getAtlas()
 {
 	return atlas;
+}
+
+void myr::Renderer::bind()
+{
+	if(current != this)
+	{
+		current = this;
+
+		atlas.bind();
+	}
 }
