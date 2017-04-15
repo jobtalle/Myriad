@@ -6,7 +6,7 @@ myr::Atlas::Atlas(const GLuint channel, const unsigned char atom)
 	:channel(channel)
 {
 	glGenTextures(1, &texture);
-
+	
 	this->atom = tryAtom(atom);
 	
 	bind();
@@ -30,10 +30,13 @@ myr::Atlas::Location myr::Atlas::query(const std::string name)
 	Location location;
 
 	location.atlasIndex = 0;
-	location.location.x = location.location.y;
+	location.location.x = location.location.y = 0;
 	location.size = 0;
 
-	//QuadSpace::Node node = tree.query();
+	QuadSpace::Node node = tree.query(7);
+
+	location.location.x = float(node.getX()) / QuadSpace::dimensions;
+	location.location.y = float(node.getY()) / QuadSpace::dimensions;
 
 	return location;
 }

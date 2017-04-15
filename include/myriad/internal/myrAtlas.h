@@ -13,8 +13,6 @@ namespace myr {
 	public:
 		struct Location
 		{
-			Location();
-
 			unsigned char atlasIndex;
 			Vector location;
 			float size;
@@ -28,6 +26,7 @@ namespace myr {
 	private:
 		struct Entry
 		{
+			unsigned int usageCount;
 			QuadSpace::Node node;
 			std::string name;
 

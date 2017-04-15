@@ -1,5 +1,6 @@
 #include "myriad/myrSprite.h"
-#include "myriad/myrDefaultRenderTarget.h"
+#include "myriad/myrRenderTarget.h"
+#include "myriad/myrRenderer.h"
 
 #include <iostream>
 
@@ -36,6 +37,8 @@ void myr::Sprite::draw()
 void myr::Sprite::load()
 {
 	flags |= LOADED;
-	std::cout << "Loaded sprite\n";
-	myr::DefaultRenderTarget::getCurrent()->getRenderer();
+	
+	location = myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(file.getName());
+	
+	std::cout << location.location.x << ", " << location.location.y << std::endl;
 }

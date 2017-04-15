@@ -1,6 +1,8 @@
 #include "opengl/opengl.h"
 #include "myriad/myrRenderer.h"
 
+#include <iostream>
+
 namespace {
 	myr::Renderer *current = nullptr;
 }
