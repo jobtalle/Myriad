@@ -26,7 +26,11 @@ namespace myr {
 		Atlas(const GLuint channel, const unsigned char atom = atomDefault);
 		~Atlas();
 		void bind();
-		Location query(const std::string name);
+		Location query(
+			const std::string name,
+			const unsigned short width,
+			const unsigned short height,
+			const char *bytes);
 
 	private:
 		struct Entry

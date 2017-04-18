@@ -9,14 +9,14 @@ namespace myr {
 	class Sprite {
 	public:
 		Sprite();
-		Sprite(const ArchiveFile &file);
+		Sprite(ArchiveFile *file);
 		~Sprite();
 		bool isSet() const;
 		void draw();
 
 	private:
 		myr::Atlas::Location location;
-		ArchiveFile file;
+		ArchiveFile *file;
 		uint8_t flags;
 
 		void load();

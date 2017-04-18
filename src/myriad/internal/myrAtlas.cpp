@@ -35,9 +35,15 @@ void myr::Atlas::bind()
 	glBindTexture(GL_TEXTURE_2D, texture);
 }
 
-myr::Atlas::Location myr::Atlas::query(const std::string name)
+myr::Atlas::Location myr::Atlas::query(
+	const std::string name,
+	const unsigned short width,
+	const unsigned short height,
+	const char *bytes)
 {
 	auto match = std::lower_bound(entries.begin(), entries.end(), Entry(name));
+
+	std::cout << width << "x" << height << std::endl;
 
 	if(match == entries.end() || match->name.compare(name) != 0)
 	{
