@@ -7,6 +7,8 @@ namespace myr {
 		float x;
 		float y;
 
+		Vector(const float x, const float y);
+
 	private:
 	};
 }

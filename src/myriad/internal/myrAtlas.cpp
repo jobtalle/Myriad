@@ -1,6 +1,16 @@
 #include "myriad/internal/myrAtlas.h"
 
 #include <iostream>
+#include <algorithm>
+
+myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector location, const float size)
+	:atlasIndex(atlasIndex), location(location), size(size) {}
+
+myr::Atlas::Entry::Entry()
+	:usageCount(1) {}
+
+myr::Atlas::Entry::Entry(const std::string name)
+	:name(name), usageCount(1) {}
 
 myr::Atlas::Atlas(const GLuint channel, const unsigned char atom)
 	:channel(channel)
@@ -27,18 +37,31 @@ void myr::Atlas::bind()
 
 myr::Atlas::Location myr::Atlas::query(const std::string name)
 {
-	Location location;
+	auto match = std::lower_bound(entries.begin(), entries.end(), Entry(name));
 
-	location.atlasIndex = 0;
-	location.location.x = location.location.y = 0;
-	location.size = 0;
+	if(match == entries.end() || match->name.compare(name) != 0)
+	{
+		return Location();
+	}
+	else
+	{
+		++match->usageCount;
 
+		return Location(
+			0,
+			Vector(
+				float(match->node.getX()) / QuadSpace::dimensions,
+				float(match->node.getY()) / QuadSpace::dimensions),
+			1);
+	}
+	/*
 	QuadSpace::Node node = tree.query(7);
 
-	location.location.x = float(node.getX()) / QuadSpace::dimensions;
-	location.location.y = float(node.getY()) / QuadSpace::dimensions;
-
-	return location;
+	return Location(
+		0,
+		Vector(float(node.getX()) / QuadSpace::dimensions, float(node.getY()) / QuadSpace::dimensions),
+		1);
+		*/
 }
 
 unsigned char myr::Atlas::tryAtom(unsigned char atom) const

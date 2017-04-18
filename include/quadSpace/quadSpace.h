@@ -8,6 +8,7 @@ public:
 	class Node
 	{
 	public:
+		Node() {};
 		Node(const bool valid, const uint8_t x = 0, const uint8_t y = 0, const uint16_t node = 0);
 		uint8_t getX() const;
 		uint8_t getY() const;

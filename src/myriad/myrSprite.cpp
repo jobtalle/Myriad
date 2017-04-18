@@ -30,7 +30,7 @@ void myr::Sprite::draw()
 			load();
 	else
 	{
-
+		
 	}
 }
 
