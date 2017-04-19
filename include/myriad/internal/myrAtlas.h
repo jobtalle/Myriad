@@ -36,12 +36,11 @@ namespace myr {
 		struct Entry
 		{
 			unsigned int usageCount;
-			unsigned short size;
-			QuadSpace::Node node;
 			std::string name;
+			QuadSpace::Node node;
 
-			Entry();
 			Entry(const std::string name);
+			Entry(const std::string name, const QuadSpace::Node node);
 
 			bool operator < (const struct Entry &entry) const
 			{
@@ -56,6 +55,8 @@ namespace myr {
 		GLuint channel;
 		unsigned char atom;
 
+		Location entryToLocation(const std::vector<Entry>::iterator entry) const;
+		unsigned char quadSpaceLevel(const unsigned int maxDim) const;
 		unsigned char tryAtom(unsigned char atom) const;
 		void initializeTexture();
 		void allocateTexture();

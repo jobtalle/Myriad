@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <memory>
 
 #include "archive/archive.h"
 #include "internal/myrAtlas.h"
@@ -16,7 +17,7 @@ namespace myr {
 
 	private:
 		myr::Atlas::Location location;
-		ArchiveFile *file;
+		std::auto_ptr<ArchiveFile> file;
 		uint8_t flags;
 
 		void load();

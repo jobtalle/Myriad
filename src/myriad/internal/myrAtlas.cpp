@@ -6,11 +6,11 @@
 myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector location, const float size)
 	:atlasIndex(atlasIndex), location(location), size(size) {}
 
-myr::Atlas::Entry::Entry()
-	:usageCount(1) {}
-
 myr::Atlas::Entry::Entry(const std::string name)
 	:name(name), usageCount(1) {}
+
+myr::Atlas::Entry::Entry(const std::string name, const QuadSpace::Node node)
+	:name(name), node(node), usageCount(1) {}
 
 myr::Atlas::Atlas(const GLuint channel, const unsigned char atom)
 	:channel(channel)
@@ -43,31 +43,43 @@ myr::Atlas::Location myr::Atlas::query(
 {
 	auto match = std::lower_bound(entries.begin(), entries.end(), Entry(name));
 
-	std::cout << width << "x" << height << std::endl;
-
 	if(match == entries.end() || match->name.compare(name) != 0)
 	{
-		return Location();
+		const auto level = quadSpaceLevel(std::max(width, height));
+		const auto entry = Entry(name, tree.query(level));
+		const auto iterator = entries.insert(
+			std::lower_bound(entries.begin(), entries.end(), Entry(name)),
+			entry);
+		
+		return entryToLocation(iterator);
 	}
 	else
 	{
 		++match->usageCount;
-
-		return Location(
-			0,
-			Vector(
-				float(match->node.getX()) / QuadSpace::dimensions,
-				float(match->node.getY()) / QuadSpace::dimensions),
-			1);
+		
+		return entryToLocation(match);
 	}
-	/*
-	QuadSpace::Node node = tree.query(7);
+}
 
+myr::Atlas::Location myr::Atlas::entryToLocation(const std::vector<Entry>::iterator entry) const
+{
 	return Location(
 		0,
-		Vector(float(node.getX()) / QuadSpace::dimensions, float(node.getY()) / QuadSpace::dimensions),
-		1);
-		*/
+		Vector(
+			float(entry->node.getX()) / QuadSpace::dimensions,
+			float(entry->node.getY()) / QuadSpace::dimensions),
+			1);
+}
+
+unsigned char myr::Atlas::quadSpaceLevel(const unsigned int maxDim) const
+{
+	unsigned char atoms = 1;
+	unsigned char level = 7;
+
+	while(maxDim > unsigned int(atoms * atom))
+		atoms <<= 1, --level;
+
+	return level;
 }
 
 unsigned char myr::Atlas::tryAtom(unsigned char atom) const
@@ -89,7 +101,7 @@ void myr::Atlas::initializeTexture()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
 void myr::Atlas::allocateTexture()
