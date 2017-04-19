@@ -7,7 +7,7 @@ myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector loca
 	:atlasIndex(atlasIndex), location(location), size(size) {}
 
 myr::Atlas::Entry::Entry(const std::string name)
-	:name(name), usageCount(1) {}
+	:name(name) {}
 
 myr::Atlas::Entry::Entry(const std::string name, const QuadSpace::Node node)
 	:name(name), node(node), usageCount(1) {}
@@ -45,30 +45,33 @@ myr::Atlas::Location myr::Atlas::query(
 
 	if(match == entries.end() || match->name.compare(name) != 0)
 	{
-		const auto level = quadSpaceLevel(std::max(width, height));
-		const auto entry = Entry(name, tree.query(level));
-		const auto iterator = entries.insert(
+		const auto entry = Entry(name, tree.query(quadSpaceLevel(std::max(width, height))));
+
+		match = entries.insert(
 			std::lower_bound(entries.begin(), entries.end(), Entry(name)),
 			entry);
-		
-		return entryToLocation(iterator);
+
+		blit(match, bytes);
 	}
 	else
-	{
 		++match->usageCount;
-		
-		return entryToLocation(match);
-	}
+
+	return entryToLocation(match);
 }
 
-myr::Atlas::Location myr::Atlas::entryToLocation(const std::vector<Entry>::iterator entry) const
+void myr::Atlas::blit(const std::list<Entry>::iterator entry, const char *bytes)
+{
+	std::cout << "Blit here\n";
+}
+
+myr::Atlas::Location myr::Atlas::entryToLocation(const std::list<Entry>::iterator entry) const
 {
 	return Location(
 		0,
 		Vector(
 			float(entry->node.getX()) / QuadSpace::dimensions,
 			float(entry->node.getY()) / QuadSpace::dimensions),
-			1);
+		1);
 }
 
 unsigned char myr::Atlas::quadSpaceLevel(const unsigned int maxDim) const
