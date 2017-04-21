@@ -2,21 +2,21 @@
 
 #include <iostream>
 #include <algorithm>
-
+#include <cmath>
 myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector location, const float size)
 	:atlasIndex(atlasIndex), location(location), size(size) {}
 
 myr::Atlas::Entry::Entry(const std::string name)
 	:name(name) {}
 
-myr::Atlas::Entry::Entry(const std::string name, const QuadSpace::Node node)
-	:name(name), node(node), usageCount(1) {}
+myr::Atlas::Entry::Entry(const std::string name, const QuadSpace::Node node, const unsigned short width, const unsigned short height)
+	:name(name), node(node), width(width), height(height), usageCount(1) {}
 
 myr::Atlas::Atlas(const GLuint channel, const unsigned char atom)
 	:channel(channel)
 {
 	glGenTextures(1, &texture);
-	
+
 	this->atom = tryAtom(atom);
 	
 	bind();
@@ -45,8 +45,8 @@ myr::Atlas::Location myr::Atlas::query(
 
 	if(match == entries.end() || match->name.compare(name) != 0)
 	{
-		const auto entry = Entry(name, tree.query(quadSpaceLevel(std::max(width, height))));
-
+		const auto entry = Entry(name, tree.query(quadSpaceLevel(std::max(width, height))), width, height);
+		std::cout << "Level " << int(quadSpaceLevel(std::max(width, height))) << std::endl;
 		match = entries.insert(
 			std::lower_bound(entries.begin(), entries.end(), Entry(name)),
 			entry);
@@ -61,7 +61,7 @@ myr::Atlas::Location myr::Atlas::query(
 
 void myr::Atlas::blit(const std::list<Entry>::iterator entry, const char *bytes)
 {
-	std::cout << "Blit here\n";
+	std::cout << "Blit at " << int(entry->node.getX()) << ", " << int(entry->node.getY()) << std::endl;
 }
 
 myr::Atlas::Location myr::Atlas::entryToLocation(const std::list<Entry>::iterator entry) const
@@ -76,13 +76,7 @@ myr::Atlas::Location myr::Atlas::entryToLocation(const std::list<Entry>::iterato
 
 unsigned char myr::Atlas::quadSpaceLevel(const unsigned int maxDim) const
 {
-	unsigned char atoms = 1;
-	unsigned char level = 7;
-
-	while(maxDim > unsigned int(atoms * atom))
-		atoms <<= 1, --level;
-
-	return level;
+	return 7 - unsigned char(log2((maxDim / atom) + 1));
 }
 
 unsigned char myr::Atlas::tryAtom(unsigned char atom) const

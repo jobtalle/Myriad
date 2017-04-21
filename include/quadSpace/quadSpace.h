@@ -13,12 +13,13 @@ public:
 		uint8_t getX() const;
 		uint8_t getY() const;
 		uint16_t getNode() const;
+		uint8_t getLevel() const;
 
 	private:
 		uint8_t x;
 		uint8_t y;
 		uint8_t valid:1;
-		uint16_t node:15;
+		unsigned short node:15;
 	};
 
 	static const unsigned char dimensions = 128;
@@ -29,11 +30,10 @@ public:
 	void release(const Node node);
 
 private:
-	static const unsigned int nodeCount = 21845;
+	static const unsigned short nodeCount = 21845;
 	unsigned char *nodes;
 
-	uint8_t level(const Node node) const;
-	void validateParent(const unsigned int child, const uint8_t scale);
-	unsigned int getParent(const unsigned int node) const;
-	unsigned int getChildren(const unsigned int node) const;
+	void validateParent(const unsigned short child, const uint8_t scale);
+	unsigned short getParent(const unsigned short node) const;
+	unsigned short getChildren(const unsigned short node) const;
 };

@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cmath>
 
 #include "quadSpace/quadSpace.h"
 
@@ -65,28 +66,17 @@ QuadSpace::Node QuadSpace::query(const uint8_t scale)
 
 void QuadSpace::release(const Node node)
 {
-	const uint8_t scale = level(node);
+	const uint8_t scale = node.getLevel();
 
 	nodes[node.getNode()] = 0xFF;
 	if(scale != 0)
 		validateParent(node.getNode(), scale);
 }
 
-uint8_t QuadSpace::level(const Node node) const
+void QuadSpace::validateParent(const unsigned short child, const uint8_t scale)
 {
-	unsigned int index = nodeCount - pow4(7);
-	uint8_t scale = 7;
-
-	while(node.getNode() < index)
-		index -= pow4(--scale);
-
-	return scale;
-}
-
-void QuadSpace::validateParent(const unsigned int child, const uint8_t scale)
-{
-	const unsigned int node = getParent(child);
-	const unsigned int children = getChildren(node);
+	const unsigned short node = getParent(child);
+	const unsigned short children = getChildren(node);
 	uint8_t newNode =
 		nodes[children] |
 		nodes[children + 1] |
@@ -99,12 +89,8 @@ void QuadSpace::validateParent(const unsigned int child, const uint8_t scale)
 		nodes[children + 2] &
 		nodes[children + 3] &
 		(1 << (scale - 1))))
-	{
-		uint8_t i;
-
-		for(i = scale; i-- > 0;)
+		for(unsigned char i = scale; i-- > 0;)
 			newNode &= ~(1 << i);
-	}
 
 	if(nodes[node] != newNode)
 	{
@@ -115,12 +101,12 @@ void QuadSpace::validateParent(const unsigned int child, const uint8_t scale)
 	}
 }
 
-unsigned int QuadSpace::getParent(const unsigned int node) const
+unsigned short QuadSpace::getParent(const unsigned short node) const
 {
 	return (node - 1) >> 2;
 }
 
-unsigned int QuadSpace::getChildren(const unsigned int node) const
+unsigned short QuadSpace::getChildren(const unsigned short node) const
 {
 	return (node << 2) + 1;
 }
@@ -141,4 +127,9 @@ uint8_t QuadSpace::Node::getY() const
 uint16_t QuadSpace::Node::getNode() const
 {
 	return node;
+}
+
+uint8_t QuadSpace::Node::getLevel() const
+{	
+	return uint8_t(log(3 * (node + 1) + 1) / log(4) - 1);
 }
