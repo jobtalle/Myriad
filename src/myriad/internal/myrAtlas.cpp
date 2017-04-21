@@ -76,7 +76,7 @@ myr::Atlas::Location myr::Atlas::entryToLocation(const std::list<Entry>::iterato
 
 unsigned char myr::Atlas::quadSpaceLevel(const unsigned int maxDim) const
 {
-	return 7 - unsigned char(log2((maxDim / atom) + 1));
+	return 7 - unsigned char(ceil(log2(float(maxDim) / atom)));
 }
 
 unsigned char myr::Atlas::tryAtom(unsigned char atom) const
