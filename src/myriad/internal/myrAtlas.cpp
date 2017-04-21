@@ -61,7 +61,17 @@ myr::Atlas::Location myr::Atlas::query(
 
 void myr::Atlas::blit(const std::list<Entry>::iterator entry, const char *bytes)
 {
-	std::cout << "Blit at " << int(entry->node.getX()) << ", " << int(entry->node.getY()) << std::endl;
+	glActiveTexture(channel);
+	glTexSubImage2D(
+		GL_TEXTURE_2D,
+		0,
+		atom * entry->node.getX(),
+		atom * entry->node.getY(),
+		entry->width,
+		entry->height,
+		GL_RGBA,
+		GL_UNSIGNED_BYTE,
+		bytes);
 }
 
 myr::Atlas::Location myr::Atlas::entryToLocation(const std::list<Entry>::iterator entry) const
