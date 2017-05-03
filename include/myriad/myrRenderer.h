@@ -12,7 +12,6 @@
 namespace myr {
 	class Renderer {
 		friend class DefaultRenderTarget;
-		friend class RenderTarget;
 
 	public:
 		Renderer(const Color clearColor, const Rect rect);
