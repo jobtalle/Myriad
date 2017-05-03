@@ -3,6 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
+
 myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector location, const float size)
 	:atlasIndex(atlasIndex), location(location), size(size) {}
 
@@ -46,7 +47,7 @@ myr::Atlas::Location myr::Atlas::query(
 	if(match == entries.end() || match->name.compare(name) != 0)
 	{
 		const auto entry = Entry(name, tree.query(quadSpaceLevel(std::max(width, height))), width, height);
-		std::cout << "Level " << int(quadSpaceLevel(std::max(width, height))) << std::endl;
+		
 		match = entries.insert(
 			std::lower_bound(entries.begin(), entries.end(), Entry(name)),
 			entry);
@@ -55,6 +56,8 @@ myr::Atlas::Location myr::Atlas::query(
 	}
 	else
 		++match->usageCount;
+
+	//std::cout << int(match->node.getX()) << ", " << int(match->node.getY()) << std::endl;
 
 	return entryToLocation(match);
 }
