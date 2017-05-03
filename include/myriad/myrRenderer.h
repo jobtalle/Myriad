@@ -2,14 +2,17 @@
 
 #include "myrColor.h"
 #include "myrRect.h"
-#include "myrDefaultRenderTarget.h"
 #include "myrShader.h"
+#include "myrDefaultRenderTarget.h"
 #include "internal/myrAtlas.h"
 #include "opengl/opengl.h"
+
+#include <memory>
 
 namespace myr {
 	class Renderer {
 		friend class DefaultRenderTarget;
+		friend class RenderTarget;
 
 	public:
 		Renderer(const Color clearColor, const Rect rect);
@@ -19,23 +22,34 @@ namespace myr {
 		void setRect(const Rect rect);
 		Rect getRect() const;
 		DefaultRenderTarget &getDefaultRenderTarget();
-		Shader &getDefaultShader();
 		Atlas &getAtlas();
 
 	protected:
+		enum shaders
+		{
+			RECT,
+			LINE,
+			POINT,
+			POLY,
+			DEFAULT_SHADER_COUNT
+		};
+
 		void bind();
+		Shader *getDefaultShader(const enum shaders shader) const;
 
 	private:
 		DefaultRenderTarget renderTarget;
-		Shader defaultShader;
 		Atlas atlas;
 		Rect rect;
+		std::auto_ptr<Shader> shaders[DEFAULT_SHADER_COUNT];
 
 		enum textureChannels
 		{
 			ATLAS         = 0,
 			RENDER_TARGET = 1
 		};
+
+		void createDefaultShader();
 	};
 
 	void initialize();
