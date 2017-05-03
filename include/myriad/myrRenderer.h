@@ -33,6 +33,12 @@ namespace myr {
 			DEFAULT_SHADER_COUNT
 		};
 
+		enum textureChannels
+		{
+			ATLAS,
+			RENDER_TARGET
+		};
+
 		void bind();
 		Shader *getDefaultShader(const enum shaders shader) const;
 
@@ -41,12 +47,6 @@ namespace myr {
 		Atlas atlas;
 		Rect rect;
 		std::auto_ptr<Shader> shaders[DEFAULT_SHADER_COUNT];
-
-		enum textureChannels
-		{
-			ATLAS         = 0,
-			RENDER_TARGET = 1
-		};
 
 		void createDefaultShader();
 	};
