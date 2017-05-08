@@ -7,9 +7,6 @@
 myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector location, const float size)
 	:atlasIndex(atlasIndex), location(location), size(size) {}
 
-myr::Atlas::Entry::Entry(const std::string name)
-	:name(name) {}
-
 myr::Atlas::Entry::Entry(const std::string name, const QuadSpace::Node node, const unsigned short width, const unsigned short height)
 	:name(name), node(node), width(width), height(height), usageCount(1) {}
 
@@ -65,6 +62,7 @@ myr::Atlas::Location myr::Atlas::query(
 	else
 	{
 		match = entries.insert(entries.lower_bound(name), std::make_pair(name, recycle->second));
+		++match->second->usageCount;
 		
 		unusedEntries.erase(recycle);
 	}
@@ -123,6 +121,7 @@ unsigned char myr::Atlas::tryAtom(unsigned char atom) const
 
 	unsigned int maxAtom = maxTextureSize / QuadSpace::dimensions;
 
+	// Todo: use log
 	while(atom > maxAtom)
 		atom >>= 1;
 

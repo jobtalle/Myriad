@@ -8,7 +8,10 @@ namespace {
 	myr::Shader *current = nullptr;
 }
 
-myr::Shader::Shader(const std::string vertex, const std::string fragment, const std::vector<std::string> uniforms)
+myr::Shader::Shader(
+	const std::string vertex,
+	const std::string fragment,
+	const std::vector<std::string> uniforms)
 {
 	program = glCreateProgram();
 
@@ -65,12 +68,10 @@ GLuint myr::Shader::createShader(const GLenum type, const std::string source) co
 	
 	if(logLength != 0)
 	{
-		char *buf = new char[logLength + 1];
+		std::auto_ptr<char> buf(new char[logLength + 1]);
 
-		glGetShaderInfoLog(shader, logLength, NULL, buf);
-		std::cout << "Error compiling shader:" << std::endl << buf << std::endl;
-
-		delete buf;
+		glGetShaderInfoLog(shader, logLength, NULL, buf.get());
+		std::cout << "Error compiling shader:" << std::endl << buf.get() << std::endl;
 	}
 #endif
 
