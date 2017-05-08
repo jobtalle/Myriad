@@ -2,8 +2,6 @@
 #include "myriad/myrRenderTarget.h"
 #include "myriad/myrRenderer.h"
 
-#include <iostream>
-
 myr::Sprite::Sprite()
 :flags(UNSET), file(nullptr) {}
 
@@ -14,7 +12,7 @@ myr::Sprite::~Sprite()
 {
 	if(!(flags & UNSET) && (flags & LOADED))
 	{
-		std::cout << "Release from atlas\n";
+		myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().release(file->getName());
 	}
 }
 

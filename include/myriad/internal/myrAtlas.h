@@ -31,6 +31,7 @@ namespace myr {
 			const unsigned short width,
 			const unsigned short height,
 			const char *bytes);
+		void release(const std::string name);
 
 	private:
 		struct Entry

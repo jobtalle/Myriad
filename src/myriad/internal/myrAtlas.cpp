@@ -49,7 +49,6 @@ myr::Atlas::Location myr::Atlas::query(
 		const auto entry = Entry(name, tree.query(quadSpaceLevel(std::max(width, height))), width, height);
 		
 		match = entries.insert(entries.lower_bound(name), std::make_pair(name, entry));
-		
 		blit(match, bytes);
 	}
 	else
@@ -58,6 +57,17 @@ myr::Atlas::Location myr::Atlas::query(
 	std::cout << int(match->second.node.getX()) << ", " << int(match->second.node.getY()) << std::endl;
 
 	return entryToLocation(match);
+}
+
+void myr::Atlas::release(const std::string name)
+{
+	auto match = entries.find(name);
+	
+	if(--match->second.usageCount == 0) {
+		std::cout << "Removed entry\n";
+		
+		entries.erase(match);
+	}
 }
 
 void myr::Atlas::blit(const std::map<std::string, Entry>::iterator entry, const char *bytes)
