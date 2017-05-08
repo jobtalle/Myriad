@@ -43,20 +43,22 @@ myr::Atlas::Location myr::Atlas::query(
 	const char *bytes)
 {
 	auto recycle = unusedEntries.find(name);
-	std::map<std::string, Entry>::iterator match;
+	std::map<std::string, std::auto_ptr<Entry>>::iterator match;
 
 	if(recycle == unusedEntries.end()) {
 		match = entries.find(name);
 
 		if(match == entries.end())
 		{
-			const auto entry = Entry(name, tree.query(quadSpaceLevel(std::max(width, height))), width, height);
+			auto *entry = new Entry(name, tree.query(quadSpaceLevel(std::max(width, height))), width, height);
 
-			match = entries.insert(entries.lower_bound(name), std::make_pair(name, entry));
+			match = entries.insert(
+				entries.lower_bound(name),
+				std::make_pair(name, std::auto_ptr<Entry>(entry)));
 			blit(match, bytes);
 		}
 		else
-			++match->second.usageCount;
+			++match->second->usageCount;
 	}
 	else
 	{
@@ -65,7 +67,7 @@ myr::Atlas::Location myr::Atlas::query(
 		unusedEntries.erase(recycle);
 	}
 
-	std::cout << int(match->second.node.getX()) << ", " << int(match->second.node.getY()) << std::endl;
+	std::cout << int(match->second->node.getX()) << ", " << int(match->second->node.getY()) << std::endl;
 
 	return entryToLocation(match);
 }
@@ -74,35 +76,35 @@ void myr::Atlas::release(const std::string name)
 {
 	auto match = entries.find(name);
 	
-	if(--match->second.usageCount == 0) {
+	if(--match->second->usageCount == 0) {
 		unusedEntries.insert(unusedEntries.lower_bound(name), std::make_pair(name, match->second));
 		
 		entries.erase(match);
 	}
 }
 
-void myr::Atlas::blit(const std::map<std::string, Entry>::iterator entry, const char *bytes)
+void myr::Atlas::blit(const std::map<std::string, std::auto_ptr<Entry>>::iterator entry, const char *bytes)
 {
 	glActiveTexture(channel);
 	glTexSubImage2D(
 		GL_TEXTURE_2D,
 		0,
-		atom * entry->second.node.getX(),
-		atom * entry->second.node.getY(),
-		entry->second.width,
-		entry->second.height,
+		atom * entry->second->node.getX(),
+		atom * entry->second->node.getY(),
+		entry->second->width,
+		entry->second->height,
 		GL_RGBA,
 		GL_UNSIGNED_BYTE,
 		bytes);
 }
 
-myr::Atlas::Location myr::Atlas::entryToLocation(const std::map<std::string, Entry>::iterator entry) const
+myr::Atlas::Location myr::Atlas::entryToLocation(const std::map<std::string, std::auto_ptr<Entry>>::iterator entry) const
 {
 	return Location(
 		0,
 		Vector(
-			float(entry->second.node.getX()) / QuadSpace::dimensions,
-			float(entry->second.node.getY()) / QuadSpace::dimensions),
+			float(entry->second->node.getX()) / QuadSpace::dimensions,
+			float(entry->second->node.getY()) / QuadSpace::dimensions),
 		1);
 }
 

@@ -54,15 +54,15 @@ namespace myr {
 		};
 
 		static const unsigned char atomDefault = 16;
-		std::map<std::string, Entry> entries;
-		std::map<std::string, Entry> unusedEntries;
+		std::map<std::string, std::auto_ptr<Entry>> entries;
+		std::map<std::string, std::auto_ptr<Entry>> unusedEntries;
 		QuadSpace tree;
 		GLuint texture;
 		GLuint channel;
 		unsigned char atom;
 
-		void blit(const std::map<std::string, Entry>::iterator entry, const char *bytes);
-		Location entryToLocation(const std::map<std::string, Entry>::iterator entry) const;
+		void blit(const std::map<std::string, std::auto_ptr<Entry>>::iterator entry, const char *bytes);
+		Location entryToLocation(const std::map<std::string, std::auto_ptr<Entry>>::iterator entry) const;
 		unsigned char quadSpaceLevel(const unsigned int maxDim) const;
 		unsigned char tryAtom(unsigned char atom) const;
 		void initializeTexture();
