@@ -42,17 +42,28 @@ myr::Atlas::Location myr::Atlas::query(
 	const unsigned short height,
 	const char *bytes)
 {
-	auto match = entries.find(name);
+	auto recycle = unusedEntries.find(name);
+	std::map<std::string, Entry>::iterator match;
 
-	if(match == entries.end())
-	{
-		const auto entry = Entry(name, tree.query(quadSpaceLevel(std::max(width, height))), width, height);
-		
-		match = entries.insert(entries.lower_bound(name), std::make_pair(name, entry));
-		blit(match, bytes);
+	if(recycle == unusedEntries.end()) {
+		match = entries.find(name);
+
+		if(match == entries.end())
+		{
+			const auto entry = Entry(name, tree.query(quadSpaceLevel(std::max(width, height))), width, height);
+
+			match = entries.insert(entries.lower_bound(name), std::make_pair(name, entry));
+			blit(match, bytes);
+		}
+		else
+			++match->second.usageCount;
 	}
 	else
-		++match->second.usageCount;
+	{
+		match = entries.insert(entries.lower_bound(name), std::make_pair(name, recycle->second));
+		
+		unusedEntries.erase(recycle);
+	}
 
 	std::cout << int(match->second.node.getX()) << ", " << int(match->second.node.getY()) << std::endl;
 
@@ -64,7 +75,7 @@ void myr::Atlas::release(const std::string name)
 	auto match = entries.find(name);
 	
 	if(--match->second.usageCount == 0) {
-		std::cout << "Removed entry\n";
+		unusedEntries.insert(unusedEntries.lower_bound(name), std::make_pair(name, match->second));
 		
 		entries.erase(match);
 	}
