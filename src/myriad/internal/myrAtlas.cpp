@@ -43,14 +43,16 @@ myr::Atlas::Location myr::Atlas::query(
 	const char *bytes)
 {
 	auto recycle = unusedEntries.find(name);
-	std::map<std::string, std::auto_ptr<Entry>>::iterator match;
+	std::map<std::string, std::shared_ptr<Entry>>::iterator match;
 
 	if(recycle == unusedEntries.end()) {
 		match = entries.find(name);
 
 		if(match == entries.end())
 		{
-			auto *entry = new Entry(name, tree.query(quadSpaceLevel(std::max(width, height))), width, height);
+			auto *entry = new Entry(
+				name,
+				tree.query(quadSpaceLevel(std::max(width, height))), width, height);
 
 			match = entries.insert(
 				entries.lower_bound(name),
@@ -83,7 +85,7 @@ void myr::Atlas::release(const std::string name)
 	}
 }
 
-void myr::Atlas::blit(const std::map<std::string, std::auto_ptr<Entry>>::iterator entry, const char *bytes)
+void myr::Atlas::blit(const std::map<std::string, std::shared_ptr<Entry>>::iterator entry, const char *bytes)
 {
 	glActiveTexture(channel);
 	glTexSubImage2D(
@@ -98,7 +100,7 @@ void myr::Atlas::blit(const std::map<std::string, std::auto_ptr<Entry>>::iterato
 		bytes);
 }
 
-myr::Atlas::Location myr::Atlas::entryToLocation(const std::map<std::string, std::auto_ptr<Entry>>::iterator entry) const
+myr::Atlas::Location myr::Atlas::entryToLocation(const std::map<std::string, std::shared_ptr<Entry>>::iterator entry) const
 {
 	return Location(
 		0,
