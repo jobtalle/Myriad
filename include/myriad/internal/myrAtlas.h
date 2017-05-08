@@ -5,7 +5,7 @@
 #include "opengl/opengl.h"
 
 #include <string>
-#include <list>
+#include <map>
 
 namespace myr {
 	class Atlas
@@ -44,6 +44,8 @@ namespace myr {
 			Entry(const std::string name);
 			Entry(const std::string name, const QuadSpace::Node node, const unsigned short width, const unsigned short height);
 
+			Entry() {}
+
 			bool operator < (const struct Entry &entry) const
 			{
 				return name.compare(entry.name) < 0;
@@ -51,14 +53,15 @@ namespace myr {
 		};
 
 		static const unsigned char atomDefault = 16;
-		std::list<Entry> entries;
+		std::map<std::string, Entry> entries;
+		std::map<std::string, Entry> unusedEntries;
 		QuadSpace tree;
 		GLuint texture;
 		GLuint channel;
 		unsigned char atom;
 
-		void blit(const std::list<Entry>::iterator entry, const char *bytes);
-		Location entryToLocation(const std::list<Entry>::iterator entry) const;
+		void blit(const std::map<std::string, Entry>::iterator entry, const char *bytes);
+		Location entryToLocation(const std::map<std::string, Entry>::iterator entry) const;
 		unsigned char quadSpaceLevel(const unsigned int maxDim) const;
 		unsigned char tryAtom(unsigned char atom) const;
 		void initializeTexture();

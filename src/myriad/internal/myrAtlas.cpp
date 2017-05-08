@@ -42,48 +42,46 @@ myr::Atlas::Location myr::Atlas::query(
 	const unsigned short height,
 	const char *bytes)
 {
-	auto match = std::lower_bound(entries.begin(), entries.end(), Entry(name));
+	auto match = entries.find(name);
 
-	if(match == entries.end() || match->name.compare(name) != 0)
+	if(match == entries.end())
 	{
 		const auto entry = Entry(name, tree.query(quadSpaceLevel(std::max(width, height))), width, height);
 		
-		match = entries.insert(
-			std::lower_bound(entries.begin(), entries.end(), Entry(name)),
-			entry);
-
+		match = entries.insert(entries.lower_bound(name), std::make_pair(name, entry));
+		
 		blit(match, bytes);
 	}
 	else
-		++match->usageCount;
+		++match->second.usageCount;
 
-	//std::cout << int(match->node.getX()) << ", " << int(match->node.getY()) << std::endl;
+	std::cout << int(match->second.node.getX()) << ", " << int(match->second.node.getY()) << std::endl;
 
 	return entryToLocation(match);
 }
 
-void myr::Atlas::blit(const std::list<Entry>::iterator entry, const char *bytes)
+void myr::Atlas::blit(const std::map<std::string, Entry>::iterator entry, const char *bytes)
 {
 	glActiveTexture(channel);
 	glTexSubImage2D(
 		GL_TEXTURE_2D,
 		0,
-		atom * entry->node.getX(),
-		atom * entry->node.getY(),
-		entry->width,
-		entry->height,
+		atom * entry->second.node.getX(),
+		atom * entry->second.node.getY(),
+		entry->second.width,
+		entry->second.height,
 		GL_RGBA,
 		GL_UNSIGNED_BYTE,
 		bytes);
 }
 
-myr::Atlas::Location myr::Atlas::entryToLocation(const std::list<Entry>::iterator entry) const
+myr::Atlas::Location myr::Atlas::entryToLocation(const std::map<std::string, Entry>::iterator entry) const
 {
 	return Location(
 		0,
 		Vector(
-			float(entry->node.getX()) / QuadSpace::dimensions,
-			float(entry->node.getY()) / QuadSpace::dimensions),
+			float(entry->second.node.getX()) / QuadSpace::dimensions,
+			float(entry->second.node.getY()) / QuadSpace::dimensions),
 		1);
 }
 
