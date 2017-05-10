@@ -7,8 +7,8 @@
 myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector location, const float size)
 	:atlasIndex(atlasIndex), location(location), size(size) {}
 
-myr::Atlas::Entry::Entry(const std::string name, const QuadSpace::Node node, const unsigned short width, const unsigned short height)
-	:name(name), node(node), width(width), height(height), usageCount(1) {}
+myr::Atlas::Entry::Entry(const QuadSpace::Node node, const unsigned short width, const unsigned short height)
+	:node(node), width(width), height(height), usageCount(1) {}
 
 myr::Atlas::Atlas(const GLuint channel, const unsigned char atom)
 	:channel(channel)
@@ -47,13 +47,12 @@ myr::Atlas::Location myr::Atlas::query(
 
 		if(match == entries.end())
 		{
-			auto *entry = new Entry(
-				name,
-				tree.query(quadSpaceLevel(std::max(width, height))), width, height);
-
+			auto *entry = new Entry(tree.query(quadSpaceLevel(std::max(width, height))), width, height);
+			
 			match = entries.insert(
 				entries.lower_bound(name),
 				std::make_pair(name, std::auto_ptr<Entry>(entry)));
+
 			blit(match, bytes);
 		}
 		else

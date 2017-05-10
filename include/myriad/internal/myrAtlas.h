@@ -40,17 +40,10 @@ namespace myr {
 			unsigned int usageCount;
 			unsigned short width;
 			unsigned short height;
-			std::string name;
 			QuadSpace::Node node;
 
-			Entry(const std::string name, const QuadSpace::Node node, const unsigned short width, const unsigned short height);
-
+			Entry(const QuadSpace::Node node, const unsigned short width, const unsigned short height);
 			Entry() {}
-
-			bool operator < (const struct Entry &entry) const
-			{
-				return name.compare(entry.name) < 0;
-			}
 		};
 
 		static const unsigned char atomDefault = 16;
