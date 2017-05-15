@@ -49,6 +49,8 @@ namespace myr
 				const unsigned short height);
 		};
 
+		typedef std::map<std::string, std::shared_ptr<Entry>>::iterator mapEntry;
+
 		std::map<std::string, std::shared_ptr<Entry>> entries;
 		std::map<std::string, std::shared_ptr<Entry>> unusedEntries;
 		QuadSpace tree;
@@ -56,8 +58,8 @@ namespace myr
 		GLuint channel;
 		unsigned char atom;
 
-		void blit(const std::map<std::string, std::shared_ptr<Entry>>::iterator entry, const char *bytes);
-		Location entryToLocation(const std::map<std::string, std::shared_ptr<Entry>>::iterator entry) const;
+		void blit(const mapEntry entry, const char *bytes);
+		Location entryToLocation(const mapEntry entry) const;
 		unsigned char quadSpaceLevel(const unsigned int maxDim) const;
 		unsigned char tryAtom(unsigned char atom) const;
 		void initializeTexture();
