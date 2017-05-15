@@ -1,9 +1,13 @@
 #pragma once
 
-namespace myr {
-	class Color {
-		union {
-			struct {
+namespace myr
+{
+	class Color
+	{
+		union
+		{
+			struct
+			{
 				float r, g, b;
 			};
 

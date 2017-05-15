@@ -35,7 +35,7 @@ void myr::DefaultRenderTarget::bind()
 	
 	if(flags & BOUND)
 		return;
-
+	
 	renderer->bind();
 
 	flags |= BOUND;

@@ -6,7 +6,8 @@
 #include <vector>
 #include <string>
 
-namespace myr {
+namespace myr
+{
 	class Shader {
 	public:
 		Shader(

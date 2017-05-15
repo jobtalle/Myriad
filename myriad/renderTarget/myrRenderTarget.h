@@ -2,7 +2,8 @@
 
 #include "myrDefaultRenderTarget.h"
 
-namespace myr {
+namespace myr
+{
 	class RenderTarget : public DefaultRenderTarget
 	{
 	public:

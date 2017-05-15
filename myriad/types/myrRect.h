@@ -2,7 +2,8 @@
 
 #include <cstdint>
 
-namespace myr {
+namespace myr
+{
 	class Rect
 	{
 	public:

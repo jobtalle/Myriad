@@ -5,7 +5,8 @@
 #include "types/myrRect.h"
 #include "types/myrColor.h"
 
-namespace myr {
+namespace myr
+{
 	class Renderer;
 
 	class DefaultRenderTarget

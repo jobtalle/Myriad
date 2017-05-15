@@ -8,7 +8,8 @@
 #include <string>
 #include <map>
 
-namespace myr {
+namespace myr
+{
 	class Atlas
 	{
 	public:

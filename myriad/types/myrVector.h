@@ -1,6 +1,7 @@
 #pragma once
 
-namespace myr {
+namespace myr
+{
 	class Vector
 	{
 	public:

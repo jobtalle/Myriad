@@ -6,8 +6,10 @@
 #include "archive/archive.h"
 #include "renderer/myrAtlas.h"
 
-namespace myr {
-	class Sprite {
+namespace myr
+{
+	class Sprite
+	{
 	public:
 		Sprite();
 		Sprite(ArchiveFile *file);
@@ -22,7 +24,8 @@ namespace myr {
 
 		void load();
 
-		enum flags {
+		enum flags
+		{
 			LOADED = 0x01,
 			UNSET = 0x02
 		};

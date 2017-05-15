@@ -5,12 +5,15 @@
 #include "types/myrColor.h"
 #include "types/myrRect.h"
 #include "shader/myrShader.h"
+#include "shader/shaderTypes.h"
 #include "renderTarget/myrDefaultRenderTarget.h"
 
 #include <memory>
 
-namespace myr {
-	class Renderer {
+namespace myr
+{
+	class Renderer
+	{
 		friend class DefaultRenderTarget;
 
 	public:
@@ -23,32 +26,21 @@ namespace myr {
 		DefaultRenderTarget &getDefaultRenderTarget();
 		Atlas &getAtlas();
 
-	protected:
-		enum shaders
-		{
-			RECT,
-			LINE,
-			POINT,
-			POLY,
-			DEFAULT_SHADER_COUNT
-		};
-
+	private:
 		enum textureChannels
 		{
 			ATLAS,
 			RENDER_TARGET
 		};
 
-		void bind();
-		Shader *getDefaultShader(const enum shaders shader) const;
-
-	private:
 		DefaultRenderTarget renderTarget;
 		Atlas atlas;
 		Rect rect;
-		std::auto_ptr<Shader> shaders[DEFAULT_SHADER_COUNT];
+		std::auto_ptr<Shader> shaders[ShaderType::COUNT];
 
-		void createDefaultShader();
+		void bind();
+		Shader *getDefaultShader(const enum ShaderType type) const;
+		void createDefaultShaders();
 	};
 
 	void initialize();

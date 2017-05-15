@@ -58,7 +58,12 @@ void myr::Renderer::bind()
 	}
 }
 
-myr::Shader *myr::Renderer::getDefaultShader(const enum shaders shader) const
+myr::Shader *myr::Renderer::getDefaultShader(const enum ShaderType type) const
 {
-	return shaders[shader].get();
+	return shaders[type].get();
+}
+
+void myr::Renderer::createDefaultShaders()
+{
+	// TODO
 }
