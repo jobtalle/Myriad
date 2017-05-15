@@ -1,9 +1,9 @@
 #pragma once
 
-#include "opengl/opengl.h"
+#include "renderer/opengl/opengl.h"
 
-#include "myriad/types/myrRect.h"
-#include "myriad/types/myrColor.h"
+#include "types/myrRect.h"
+#include "types/myrColor.h"
 
 namespace myr {
 	class Renderer;

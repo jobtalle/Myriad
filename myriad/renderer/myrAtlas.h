@@ -1,8 +1,8 @@
 #pragma once
 
-#include "myriad/types/myrVector.h"
-#include "quadSpace/quadSpace.h"
 #include "opengl/opengl.h"
+#include "quadSpace/quadSpace.h"
+#include "types/myrVector.h"
 
 #include <memory>
 #include <string>

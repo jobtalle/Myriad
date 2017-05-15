@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <cmath>
 
-#include "quadSpace/quadSpace.h"
+#include "quadSpace.h"
 
 namespace {
 	unsigned int pow2(const unsigned int pwr)

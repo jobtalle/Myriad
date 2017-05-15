@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "archive/archive.h"
-#include "myriad/renderer/myrAtlas.h"
+#include "renderer/myrAtlas.h"
 
 namespace myr {
 	class Sprite {

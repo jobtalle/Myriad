@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
-#include <opengl/opengl.h>
+#include "opengl.h"
 
 #if defined(__APPLE__)
 #include <mach-o/dyld.h>

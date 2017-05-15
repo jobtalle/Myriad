@@ -1,6 +1,6 @@
 #pragma once
 
-#include "myriad/renderer/myrRenderer.h"
-#include "myriad/renderTarget/myrRenderTarget.h"
-#include "myriad/sprite/myrSprite.h"
-#include "myriad/shader/myrShader.h"
+#include "renderer/myrRenderer.h"
+#include "renderTarget/myrRenderTarget.h"
+#include "sprite/myrSprite.h"
+#include "shader/myrShader.h"

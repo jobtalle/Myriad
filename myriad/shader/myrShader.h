@@ -1,6 +1,6 @@
 #pragma once
 
-#include "opengl/opengl.h"
+#include "renderer/opengl/opengl.h"
 
 #include <map>
 #include <vector>

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "myriad/types/myrColor.h"
-#include "myriad/types/myrRect.h"
-#include "myriad/shader/myrShader.h"
-#include "myriad/renderTarget/myrDefaultRenderTarget.h"
 #include "myrAtlas.h"
 #include "opengl/opengl.h"
+#include "types/myrColor.h"
+#include "types/myrRect.h"
+#include "shader/myrShader.h"
+#include "renderTarget/myrDefaultRenderTarget.h"
 
 #include <memory>
 

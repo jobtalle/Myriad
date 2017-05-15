@@ -69,7 +69,7 @@
     <IncludePath>../archiveReader/include/;include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>myriad/;../archiveReader/include/;$(IncludePath)</IncludePath>
+    <IncludePath>myriad;../archiveReader/include/;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -128,31 +128,31 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="myriad\myriad\renderer\myrAtlas.h" />
-    <ClInclude Include="myriad\myriad\renderTarget\myrDefaultRenderTarget.h" />
-    <ClInclude Include="myriad\myriad\types\myrRect.h" />
-    <ClInclude Include="myriad\myriad\shader\myrShader.h" />
-    <ClInclude Include="myriad\myriad\sprite\myrSprite.h" />
-    <ClInclude Include="myriad\myriad\types\myrVector.h" />
-    <ClInclude Include="myriad\opengl\opengl.h" />
+    <ClInclude Include="myriad\renderer\myrAtlas.h" />
+    <ClInclude Include="myriad\renderTarget\myrDefaultRenderTarget.h" />
+    <ClInclude Include="myriad\types\myrRect.h" />
+    <ClInclude Include="myriad\shader\myrShader.h" />
+    <ClInclude Include="myriad\sprite\myrSprite.h" />
+    <ClInclude Include="myriad\types\myrVector.h" />
+    <ClInclude Include="myriad\renderer\opengl\opengl.h" />
     <ClInclude Include="myriad\myriad.h" />
-    <ClInclude Include="myriad\myriad\types\myrColor.h" />
-    <ClInclude Include="myriad\myriad\renderer\myrRenderer.h" />
-    <ClInclude Include="myriad\myriad\renderTarget\myrRenderTarget.h" />
-    <ClInclude Include="myriad\quadSpace\quadSpace.h" />
+    <ClInclude Include="myriad\types\myrColor.h" />
+    <ClInclude Include="myriad\renderer\myrRenderer.h" />
+    <ClInclude Include="myriad\renderTarget\myrRenderTarget.h" />
+    <ClInclude Include="myriad\renderer\quadSpace\quadSpace.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="myriad\myriad\renderer\myrAtlas.cpp" />
-    <ClCompile Include="myriad\myriad\renderTarget\myrDefaultRenderTarget.cpp" />
-    <ClCompile Include="myriad\myriad\types\myrRect.cpp" />
-    <ClCompile Include="myriad\myriad\shader\myrShader.cpp" />
-    <ClCompile Include="myriad\myriad\sprite\myrSprite.cpp" />
-    <ClCompile Include="myriad\myriad\types\myrVector.cpp" />
-    <ClCompile Include="myriad\opengl\opengl.c" />
-    <ClCompile Include="myriad\myriad\types\myrColor.cpp" />
-    <ClCompile Include="myriad\myriad\renderer\myrRenderer.cpp" />
-    <ClCompile Include="myriad\myriad\renderTarget\myrRenderTarget.cpp" />
-    <ClCompile Include="myriad\quadSpace\quadSpace.cpp" />
+    <ClCompile Include="myriad\renderer\myrAtlas.cpp" />
+    <ClCompile Include="myriad\renderTarget\myrDefaultRenderTarget.cpp" />
+    <ClCompile Include="myriad\types\myrRect.cpp" />
+    <ClCompile Include="myriad\shader\myrShader.cpp" />
+    <ClCompile Include="myriad\sprite\myrSprite.cpp" />
+    <ClCompile Include="myriad\types\myrVector.cpp" />
+    <ClCompile Include="myriad\renderer\opengl\opengl.c" />
+    <ClCompile Include="myriad\types\myrColor.cpp" />
+    <ClCompile Include="myriad\renderer\myrRenderer.cpp" />
+    <ClCompile Include="myriad\renderTarget\myrRenderTarget.cpp" />
+    <ClCompile Include="myriad\renderer\quadSpace\quadSpace.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
