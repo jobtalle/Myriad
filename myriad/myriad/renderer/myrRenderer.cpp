@@ -1,5 +1,5 @@
 #include "opengl/opengl.h"
-#include "myriad/myrRenderer.h"
+#include "myrRenderer.h"
 
 #include <iostream> // TODO: Debug
 

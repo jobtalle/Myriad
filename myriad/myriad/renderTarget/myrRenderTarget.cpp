@@ -1,4 +1,4 @@
-#include "myriad/myrRenderTarget.h"
+#include "myrRenderTarget.h"
 
 myr::RenderTarget::RenderTarget(const Color clearColor, const Rect rect, Renderer *renderer)
 	:DefaultRenderTarget(clearColor, rect, renderer)

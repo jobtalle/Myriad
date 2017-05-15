@@ -1,4 +1,4 @@
-#include "myriad/internal/myrAtlas.h"
+#include "myrAtlas.h"
 
 #include <iostream>
 #include <algorithm>
@@ -120,11 +120,7 @@ unsigned char myr::Atlas::tryAtom(unsigned char atom) const
 
 	unsigned int maxAtom = maxTextureSize / QuadSpace::dimensions;
 
-	// Todo: use log
-	while(atom > maxAtom)
-		atom >>= 1;
-
-	return atom;
+	return atom > maxAtom?maxAtom:atom;
 }
 
 void myr::Atlas::initializeTexture()

@@ -1,6 +1,6 @@
-#include "myriad/myrSprite.h"
-#include "myriad/myrRenderTarget.h"
-#include "myriad/myrRenderer.h"
+#include "myrSprite.h"
+#include "myriad/renderer/myrRenderer.h"
+#include "myriad/renderTarget/myrRenderTarget.h"
 
 myr::Sprite::Sprite()
 :flags(UNSET), file(nullptr) {}

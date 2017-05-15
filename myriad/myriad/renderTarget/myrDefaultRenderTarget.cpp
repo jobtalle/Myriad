@@ -1,5 +1,5 @@
-#include "myriad/myrDefaultRenderTarget.h"
-#include "myriad/myrRenderer.h"
+#include "myrDefaultRenderTarget.h"
+#include "myriad/renderer/myrRenderer.h"
 
 #include <cassert>
 

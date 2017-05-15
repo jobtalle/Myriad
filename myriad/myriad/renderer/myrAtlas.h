@@ -1,6 +1,6 @@
 #pragma once
 
-#include "myriad/myrVector.h"
+#include "myriad/types/myrVector.h"
 #include "quadSpace/quadSpace.h"
 #include "opengl/opengl.h"
 
@@ -24,7 +24,7 @@ namespace myr {
 				const float size = 0);
 		};
 
-		Atlas(const GLuint channel, const unsigned char atom = atomDefault);
+		Atlas(const GLuint channel, const unsigned char atom = 16);
 		~Atlas();
 		void bind();
 		Location query(
@@ -42,11 +42,12 @@ namespace myr {
 			unsigned short height;
 			QuadSpace::Node node;
 
-			Entry(const QuadSpace::Node node, const unsigned short width, const unsigned short height);
-			Entry() {}
+			Entry(
+				const QuadSpace::Node node,
+				const unsigned short width,
+				const unsigned short height);
 		};
 
-		static const unsigned char atomDefault = 16;
 		std::map<std::string, std::shared_ptr<Entry>> entries;
 		std::map<std::string, std::shared_ptr<Entry>> unusedEntries;
 		QuadSpace tree;

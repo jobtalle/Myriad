@@ -1,4 +1,4 @@
-#include "myriad/myrShader.h"
+#include "myrShader.h"
 
 #ifdef _DEBUG
 #include <iostream>
