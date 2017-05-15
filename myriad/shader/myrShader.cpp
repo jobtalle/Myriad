@@ -81,5 +81,7 @@ GLuint myr::Shader::createShader(const GLenum type, const std::string source) co
 void myr::Shader::locateUniforms(const std::vector<std::string> uniforms)
 {
 	for(auto uniform : uniforms)
-		uniformLocations[uniform] = glGetUniformLocation(program, uniform.c_str());
+		uniformLocations.insert(
+			uniformLocations.lower_bound(uniform),
+			std::make_pair(uniform, glGetUniformLocation(program, uniform.c_str())));
 }
