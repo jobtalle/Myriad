@@ -6,7 +6,7 @@
 
 #include <memory>
 #include <string>
-#include <map>
+#include <unordered_map>
 
 namespace myr
 {
@@ -49,10 +49,10 @@ namespace myr
 				const unsigned short height);
 		};
 
-		typedef std::map<std::string, std::shared_ptr<Entry>>::iterator mapEntry;
+		typedef std::unordered_map<std::string, std::shared_ptr<Entry>>::iterator mapEntry;
 
-		std::map<std::string, std::shared_ptr<Entry>> entries;
-		std::map<std::string, std::shared_ptr<Entry>> unusedEntries;
+		std::unordered_map<std::string, std::shared_ptr<Entry>> entries;
+		std::unordered_map<std::string, std::shared_ptr<Entry>> unusedEntries;
 		QuadSpace tree;
 		GLuint texture;
 		GLuint channel;

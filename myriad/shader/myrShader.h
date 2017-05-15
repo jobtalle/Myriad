@@ -2,7 +2,7 @@
 
 #include "renderer/opengl/opengl.h"
 
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include <string>
 
@@ -20,7 +20,7 @@ namespace myr
 
 	private:
 		GLuint program;
-		std::map<std::string, GLint> uniformLocations;
+		std::unordered_map<std::string, GLint> uniformLocations;
 
 		GLuint createShader(const GLenum type, const std::string source) const;
 		void locateUniforms(const std::vector<std::string> uniforms);
