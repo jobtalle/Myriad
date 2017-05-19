@@ -9,7 +9,5 @@ namespace myr
 		float y;
 
 		Vector(const float x, const float y);
-
-	private:
 	};
 }

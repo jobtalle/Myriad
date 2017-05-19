@@ -17,12 +17,12 @@ namespace myr
 		{
 			unsigned char atlasIndex;
 			Vector location;
-			float size;
+			Vector size;
 
 			Location(
 				const unsigned char atlasIndex = 0,
 				const Vector location = Vector(0, 0),
-				const float size = 0);
+				const Vector size = Vector(0, 0));
 		};
 
 		Atlas(const GLuint channel, const unsigned char atom = 16);
@@ -49,8 +49,6 @@ namespace myr
 				const unsigned short height);
 		};
 
-		typedef std::unordered_map<std::string, std::shared_ptr<Entry>>::iterator mapEntry;
-
 		std::unordered_map<std::string, std::shared_ptr<Entry>> entries;
 		std::unordered_map<std::string, std::shared_ptr<Entry>> unusedEntries;
 		QuadSpace tree;
@@ -58,8 +56,8 @@ namespace myr
 		GLuint channel;
 		unsigned char atom;
 
-		void blit(const mapEntry entry, const char *bytes);
-		Location entryToLocation(const mapEntry entry) const;
+		void blit(const struct Entry *entry, const char *bytes);
+		Location entryToLocation(const struct Entry *entry) const;
 		unsigned char quadSpaceLevel(const unsigned int maxDim) const;
 		unsigned char tryAtom(unsigned char atom) const;
 		void initializeTexture();

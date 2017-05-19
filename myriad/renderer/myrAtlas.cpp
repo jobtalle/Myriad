@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <cmath>
 
-myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector location, const float size)
+myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector location, const Vector size)
 	:atlasIndex(atlasIndex), location(location), size(size) {}
 
 myr::Atlas::Entry::Entry(const QuadSpace::Node node, const unsigned short width, const unsigned short height)
@@ -39,10 +39,9 @@ myr::Atlas::Location myr::Atlas::query(
 	const unsigned short height,
 	const char *bytes)
 {
-	auto recycle = unusedEntries.find(name);
-	mapEntry match;
+	auto match = unusedEntries.find(name);
 
-	if(recycle == unusedEntries.end()) {
+	if(match == unusedEntries.end()) {
 		match = entries.find(name);
 
 		if(match == entries.end())
@@ -51,13 +50,15 @@ myr::Atlas::Location myr::Atlas::query(
 			
 			match = entries.insert(std::make_pair(name, std::auto_ptr<Entry>(entry))).first;
 
-			blit(match, bytes);
+			blit(match->second.get(), bytes);
 		}
 		else
 			++match->second->usageCount;
 	}
 	else
 	{
+		auto recycle = match;
+
 		match = entries.insert(std::make_pair(name, recycle->second)).first;
 		++match->second->usageCount;
 		
@@ -66,7 +67,7 @@ myr::Atlas::Location myr::Atlas::query(
 
 	std::cout << int(match->second->node.getX()) << ", " << int(match->second->node.getY()) << std::endl;
 
-	return entryToLocation(match);
+	return entryToLocation(match->second.get());
 }
 
 void myr::Atlas::release(const std::string name)
@@ -80,29 +81,29 @@ void myr::Atlas::release(const std::string name)
 	}
 }
 
-void myr::Atlas::blit(const mapEntry entry, const char *bytes)
+void myr::Atlas::blit(const struct Entry *entry, const char *bytes)
 {
 	glActiveTexture(channel);
 	glTexSubImage2D(
 		GL_TEXTURE_2D,
 		0,
-		atom * entry->second->node.getX(),
-		atom * entry->second->node.getY(),
-		entry->second->width,
-		entry->second->height,
+		atom * entry->node.getX(),
+		atom * entry->node.getY(),
+		entry->width,
+		entry->height,
 		GL_RGBA,
 		GL_UNSIGNED_BYTE,
 		bytes);
 }
 
-myr::Atlas::Location myr::Atlas::entryToLocation(const mapEntry entry) const
+myr::Atlas::Location myr::Atlas::entryToLocation(const struct Entry *entry) const
 {
 	return Location(
 		0,
 		Vector(
-			float(entry->second->node.getX()) / QuadSpace::dimensions,
-			float(entry->second->node.getY()) / QuadSpace::dimensions),
-		1);
+			float(entry->node.getX()) / QuadSpace::dimensions,
+			float(entry->node.getY()) / QuadSpace::dimensions),
+		Vector(0, 0)); // TODO: Nonzero size
 }
 
 unsigned char myr::Atlas::quadSpaceLevel(const unsigned int maxDim) const

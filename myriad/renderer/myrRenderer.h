@@ -5,7 +5,7 @@
 #include "types/myrColor.h"
 #include "types/myrRect.h"
 #include "shader/myrShader.h"
-#include "shader/shaderTypes.h"
+#include "shader/myrShaderTypes.h"
 #include "renderTarget/myrDefaultRenderTarget.h"
 
 #include <memory>
