@@ -3,16 +3,16 @@
 #include "renderTarget/myrRenderTarget.h"
 
 myr::Sprite::Sprite()
-:flags(UNSET), file(nullptr) {}
+:flags(UNSET), decoder(nullptr) {}
 
-myr::Sprite::Sprite(ArchiveFile *file)
-:flags(0), file(file) {}
+myr::Sprite::Sprite(const std::string name, SpriteDecoder *decoder)
+:flags(0), name(name), decoder(decoder) {}
 
 myr::Sprite::~Sprite()
 {
 	if(!(flags & UNSET) && (flags & LOADED))
 	{
-		myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().release(file->getName());
+		myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().release(name);
 	}
 }
 
@@ -34,17 +34,11 @@ void myr::Sprite::draw()
 
 void myr::Sprite::load()
 {
-	const char *bytes = file->getBytes();
-	uint32_t width, height;
-	
-	memcpy(&width, bytes, sizeof(uint32_t));
-	memcpy(&height, bytes + sizeof(uint32_t), sizeof(uint32_t));
-
 	flags |= LOADED;
 
 	location = myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(
-		file->getName(),
-		width,
-		height,
-		bytes + sizeof(uint32_t) * 2);
+		name,
+		decoder->getWidth(),
+		decoder->getHeight(),
+		decoder->getPixels());
 }

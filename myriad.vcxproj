@@ -132,6 +132,7 @@
     <ClInclude Include="myriad\renderTarget\myrDefaultRenderTarget.h" />
     <ClInclude Include="myriad\shader\myrShaderTypes.h" />
     <ClInclude Include="myriad\sprite\myrSpriteAttributes.h" />
+    <ClInclude Include="myriad\sprite\myrSpriteDecoder.h" />
     <ClInclude Include="myriad\types\myrRect.h" />
     <ClInclude Include="myriad\shader\myrShader.h" />
     <ClInclude Include="myriad\sprite\myrSprite.h" />

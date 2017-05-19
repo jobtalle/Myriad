@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <memory>
 
-#include "archive/archive.h"
 #include "renderer/myrAtlas.h"
+#include "myrSpriteDecoder.h"
 
 namespace myr
 {
@@ -12,14 +12,15 @@ namespace myr
 	{
 	public:
 		Sprite();
-		Sprite(ArchiveFile *file);
+		Sprite(const std::string name, SpriteDecoder *decoder);
 		~Sprite();
 		bool isSet() const;
 		void draw();
 
 	private:
+		std::string name;
+		std::auto_ptr<SpriteDecoder> decoder;
 		myr::Atlas::Location location;
-		std::auto_ptr<ArchiveFile> file;
 		uint8_t flags;
 
 		void load();
