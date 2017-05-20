@@ -1,4 +1,5 @@
 #include "myrShader.h"
+#include "renderer/myrRenderer.h"
 
 #ifdef _DEBUG
 #include <iostream>
@@ -11,7 +12,8 @@ namespace {
 myr::Shader::Shader(
 	const std::string vertex,
 	const std::string fragment,
-	const std::vector<std::string> uniforms)
+	const std::vector<std::string> uniforms,
+	const Renderer *renderer)
 {
 	program = glCreateProgram();
 

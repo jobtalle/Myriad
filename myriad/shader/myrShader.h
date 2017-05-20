@@ -8,12 +8,15 @@
 
 namespace myr
 {
+	class Renderer;
+
 	class Shader {
 	public:
 		Shader(
 			const std::string vertex,
 			const std::string fragment,
-			const std::vector<std::string> uniforms);
+			const std::vector<std::string> uniforms,
+			const Renderer *renderer);
 		~Shader();
 		void bind();
 		GLuint getUniformLocation(const std::string name) const;
