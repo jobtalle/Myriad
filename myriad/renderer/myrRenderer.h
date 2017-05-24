@@ -7,6 +7,7 @@
 #include "shader/myrShader.h"
 #include "shader/myrShaderTypes.h"
 #include "renderTarget/myrDefaultRenderTarget.h"
+#include "myrSharedUniforms.h"
 
 #include <memory>
 
@@ -33,6 +34,11 @@ namespace myr
 			RENDER_TARGET
 		};
 
+		struct {
+			SharedUniforms data;
+			GLuint buffer;
+		} sharedUniforms;
+
 		DefaultRenderTarget renderTarget;
 		Atlas atlas;
 		Rect rect;
@@ -41,6 +47,8 @@ namespace myr
 		void bind();
 		Shader *getDefaultShader(const enum ShaderType type) const;
 		void createDefaultShaders();
+		void initializeUbo();
+		void freeUbo();
 	};
 
 	void initialize();

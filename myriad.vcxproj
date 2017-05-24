@@ -128,7 +128,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="myriad\debug\myrGLDebug.h" />
     <ClInclude Include="myriad\renderer\myrAtlas.h" />
+    <ClInclude Include="myriad\renderer\myrSharedUniforms.h" />
     <ClInclude Include="myriad\renderTarget\myrDefaultRenderTarget.h" />
     <ClInclude Include="myriad\shader\myrShaderTypes.h" />
     <ClInclude Include="myriad\sprite\myrSpriteAttributes.h" />

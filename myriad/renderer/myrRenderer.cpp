@@ -13,14 +13,20 @@ void myr::initialize()
 }
 
 myr::Renderer::Renderer(const Color clearColor, const Rect rect)
-:renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS){}
+:renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS)
+{
+	initializeUbo();
+}
 
 myr::Renderer::Renderer(const Color clearColor, const Rect rect, const unsigned char atom)
-:renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS, atom) {}
+:renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS, atom)
+{
+	initializeUbo();
+}
 
 myr::Renderer::~Renderer()
 {
-	
+	freeUbo();
 }
 
 void myr::Renderer::render()
@@ -66,4 +72,20 @@ myr::Shader *myr::Renderer::getDefaultShader(const enum ShaderType type) const
 void myr::Renderer::createDefaultShaders()
 {
 	// TODO
+}
+
+void myr::Renderer::initializeUbo()
+{
+	glGenBuffers(1, &sharedUniforms.buffer);
+
+	glBindBuffer(GL_UNIFORM_BUFFER, sharedUniforms.buffer);
+	glBufferData(GL_UNIFORM_BUFFER, sizeof(sharedUniforms.data), NULL, GL_DYNAMIC_DRAW);
+	glBindBufferBase(GL_UNIFORM_BUFFER, 0, sharedUniforms.buffer);
+
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+}
+
+void myr::Renderer::freeUbo()
+{
+	glDeleteBuffers(1, &sharedUniforms.buffer);
 }
