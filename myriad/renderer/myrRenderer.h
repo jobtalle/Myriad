@@ -49,6 +49,7 @@ namespace myr
 		void createDefaultShaders();
 		void initializeUbo();
 		void freeUbo();
+		void setTargetRect(const Rect rect);
 	};
 
 	void initialize();

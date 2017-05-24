@@ -32,6 +32,13 @@ myr::Renderer::~Renderer()
 void myr::Renderer::render()
 {
 	renderTarget.unbind();
+
+#ifdef _DEBUG
+	GLuint err = glGetError();
+
+	if(err != 0)
+		std::cout << glGetError() << std::endl;
+#endif
 }
 
 void myr::Renderer::setRect(const Rect rect)
@@ -88,4 +95,14 @@ void myr::Renderer::initializeUbo()
 void myr::Renderer::freeUbo()
 {
 	glDeleteBuffers(1, &sharedUniforms.buffer);
+}
+
+void myr::Renderer::setTargetRect(const Rect rect)
+{
+	sharedUniforms.data.target.width = rect.getWidth();
+	sharedUniforms.data.target.height = rect.getHeight();
+
+	glBindBuffer(GL_UNIFORM_BUFFER, sharedUniforms.buffer);
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(sharedUniforms.data), &sharedUniforms.data);
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 }

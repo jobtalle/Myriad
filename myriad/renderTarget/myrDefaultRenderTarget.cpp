@@ -70,5 +70,5 @@ void myr::DefaultRenderTarget::clear() const
 
 void myr::DefaultRenderTarget::render()
 {
-	
+	getRenderer()->setTargetRect(getRect());
 }

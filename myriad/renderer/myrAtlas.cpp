@@ -1,5 +1,4 @@
 #include "myrAtlas.h"
-#include "debug/myrGLDebug.h"
 
 #include <iostream>
 #include <algorithm>
@@ -32,8 +31,6 @@ void myr::Atlas::bind()
 {
 	glActiveTexture(GL_TEXTURE0 + channel);
 	glBindTexture(GL_TEXTURE_2D, texture);
-
-	glCheck();
 }
 
 myr::Atlas::Location myr::Atlas::query(
@@ -97,8 +94,6 @@ void myr::Atlas::blit(const struct Entry *entry, const char *bytes)
 		GL_RGBA,
 		GL_UNSIGNED_BYTE,
 		bytes);
-
-	glCheck();
 }
 
 myr::Atlas::Location myr::Atlas::entryToLocation(const struct Entry *entry) const
