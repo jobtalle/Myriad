@@ -5,7 +5,6 @@
 #include "types/color.h"
 #include "types/rect.h"
 #include "shader/shader.h"
-#include "shader/shaderTypes.h"
 #include "renderTarget/defaultRenderTarget.h"
 #include "sharedUniforms.h"
 
@@ -46,10 +45,10 @@ namespace myr
 		DefaultRenderTarget renderTarget;
 		Atlas atlas;
 		Rect rect;
-		std::unique_ptr<Shader> shaders[ShaderType::COUNT];
+		std::shared_ptr<Shader> shaders[RENDER_SYSTEM_COUNT];
 
 		void bind();
-		Shader *getDefaultShader(const enum ShaderType type) const;
+		std::shared_ptr<Shader> getDefaultShader(const enum ShaderType type) const;
 		void createDefaultShaders();
 		void initializeUbo();
 		void freeUbo();

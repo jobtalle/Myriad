@@ -1,5 +1,6 @@
 #include "renderer/opengl/opengl.h"
 #include "renderer.h"
+#include "renderTarget/systems/sprites/renderSprites.h"
 
 #include <iostream> // TODO: Debug
 
@@ -13,15 +14,14 @@ void myr::initialize()
 }
 
 myr::Renderer::Renderer(const Color clearColor, const Rect rect)
-:renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS)
-{
-	initializeUbo();
-}
+:Renderer(clearColor, rect, Atlas::DEFAULT_ATOM) {}
 
 myr::Renderer::Renderer(const Color clearColor, const Rect rect, const unsigned char atom)
 :renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS, atom)
 {
 	initializeUbo();
+
+	createDefaultShaders();
 }
 
 myr::Renderer::~Renderer()
@@ -37,7 +37,7 @@ void myr::Renderer::render()
 	GLuint err = glGetError();
 
 	if(err != 0)
-		std::cout << glGetError() << std::endl;
+		std::cout << err << std::endl;
 #endif
 }
 
@@ -71,14 +71,17 @@ void myr::Renderer::bind()
 	}
 }
 
-myr::Shader *myr::Renderer::getDefaultShader(const enum ShaderType type) const
+std::shared_ptr<myr::Shader> myr::Renderer::getDefaultShader(const enum ShaderType type) const
 {
-	return shaders[type].get();
+	return shaders[type];
 }
 
 void myr::Renderer::createDefaultShaders()
 {
-	// TODO
+	shaders[RENDER_SYSTEM_SPRITES].reset(new Shader(
+		RenderSprites::getShaderVertex(),
+		RenderSprites::getShaderFragment(),
+		this));
 }
 
 void myr::Renderer::initializeUbo()

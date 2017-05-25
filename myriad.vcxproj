@@ -66,7 +66,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>../archiveReader/include/;include;$(IncludePath)</IncludePath>
+    <IncludePath>../archiveReader/include/;myriad;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>myriad;../archiveReader/include/;$(IncludePath)</IncludePath>
@@ -135,7 +135,6 @@
     <ClInclude Include="myriad\renderTarget\systems\renderSystem.h" />
     <ClInclude Include="myriad\renderTarget\systems\renderSystems.h" />
     <ClInclude Include="myriad\renderTarget\systems\sprites\renderSprites.h" />
-    <ClInclude Include="myriad\shader\shaderTypes.h" />
     <ClInclude Include="myriad\renderTarget\systems\sprites\spriteAttributes.h" />
     <ClInclude Include="myriad\sprite\spriteDecoder.h" />
     <ClInclude Include="myriad\types\rect.h" />
@@ -155,6 +154,7 @@
     <ClCompile Include="myriad\renderTarget\systems\renderBatch.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\renderSystem.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\sprites\renderSprites.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\sprites\spriteShaders.cpp" />
     <ClCompile Include="myriad\types\rect.cpp" />
     <ClCompile Include="myriad\shader\shader.cpp" />
     <ClCompile Include="myriad\sprite\sprite.cpp" />

@@ -25,7 +25,9 @@ namespace myr
 				const Vector size = Vector(0, 0));
 		};
 
-		Atlas(const GLuint channel, const unsigned char atom = 16);
+		static const unsigned char DEFAULT_ATOM = 16;
+
+		Atlas(const GLuint channel, const unsigned char atom);
 		~Atlas();
 		void bind();
 		Location query(

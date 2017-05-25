@@ -41,7 +41,7 @@ namespace myr
 		Renderer *renderer;
 		Color clearColor;
 		unsigned char flags;
-
+		
 		void render(const RenderSystems system, const void *element);
 		void render();
 		void createRenderSystems();

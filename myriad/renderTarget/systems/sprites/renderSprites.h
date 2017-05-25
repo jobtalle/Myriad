@@ -15,6 +15,9 @@ namespace myr
 		void push(const void *element) override;
 		size_t getBufferIndex() const override;
 
+		static const char *getShaderVertex();
+		static const char *getShaderFragment();
+
 	protected:
 		size_t getBufferSize() const override;
 		const void *getBufferData() const override;

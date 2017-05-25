@@ -26,7 +26,7 @@ myr::Shader::Shader(
 	glLinkProgram(program);
 
 	locateUniforms(uniforms);
-
+	
 	glUniformBlockBinding(
 		program,
 		glGetUniformBlockIndex(
@@ -40,6 +40,12 @@ myr::Shader::Shader(
 	glDeleteShader(shaderVertex);
 	glDeleteShader(shaderFragment);
 }
+
+myr::Shader::Shader(
+	const std::string vertex,
+	const std::string fragment,
+	const Renderer *renderer)
+	:Shader(vertex, fragment, std::vector<std::string>(), renderer) {}
 
 myr::Shader::~Shader()
 {
