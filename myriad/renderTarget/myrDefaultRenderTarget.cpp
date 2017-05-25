@@ -64,7 +64,7 @@ void myr::DefaultRenderTarget::clear() const
 	assert(flags & BOUND);
 #endif
 
-	glClearColor(clearColor.getRed(), clearColor.getGreen(), clearColor.getBlue(), 1);
+	glClearColor(clearColor.getRed(), clearColor.getGreen(), clearColor.getBlue(), clearColor.getAlpha());
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
