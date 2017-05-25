@@ -1,13 +1,13 @@
 #pragma once
 
-#include "myrAtlas.h"
+#include "atlas.h"
 #include "opengl/opengl.h"
-#include "types/myrColor.h"
-#include "types/myrRect.h"
-#include "shader/myrShader.h"
-#include "shader/myrShaderTypes.h"
-#include "renderTarget/myrDefaultRenderTarget.h"
-#include "myrSharedUniforms.h"
+#include "types/color.h"
+#include "types/rect.h"
+#include "shader/shader.h"
+#include "shader/shaderTypes.h"
+#include "renderTarget/defaultRenderTarget.h"
+#include "sharedUniforms.h"
 
 #include <memory>
 

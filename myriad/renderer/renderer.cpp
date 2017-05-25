@@ -1,5 +1,5 @@
 #include "renderer/opengl/opengl.h"
-#include "myrRenderer.h"
+#include "renderer.h"
 
 #include <iostream> // TODO: Debug
 

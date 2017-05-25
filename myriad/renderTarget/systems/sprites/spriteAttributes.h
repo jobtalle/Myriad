@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include "types/myrVector.h"
+#include "types/vector.h"
 
 namespace myr
 {

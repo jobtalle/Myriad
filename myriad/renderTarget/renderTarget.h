@@ -1,6 +1,6 @@
 #pragma once
 
-#include "myrDefaultRenderTarget.h"
+#include "defaultRenderTarget.h"
 
 namespace myr
 {

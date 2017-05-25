@@ -1,4 +1,4 @@
-#include "myrRenderSystem.h"
+#include "renderSystem.h"
 
 myr::RenderSystem::RenderSystem()
 {

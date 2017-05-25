@@ -1,6 +1,6 @@
-#include "myrDefaultRenderTarget.h"
-#include "renderer/myrRenderer.h"
-#include "systems/sprites/myrRenderSprites.h"
+#include "defaultRenderTarget.h"
+#include "renderer/renderer.h"
+#include "systems/sprites/renderSprites.h"
 
 #include <cassert>
 

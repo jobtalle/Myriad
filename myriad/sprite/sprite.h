@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <memory>
 
-#include "renderer/myrAtlas.h"
-#include "myrSpriteDecoder.h"
+#include "renderer/atlas.h"
+#include "spriteDecoder.h"
 
 namespace myr
 {

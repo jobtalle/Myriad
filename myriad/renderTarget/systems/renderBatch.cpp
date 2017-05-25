@@ -1,4 +1,4 @@
-#include "myrRenderBatch.h"
+#include "renderBatch.h"
 
 myr::RenderBatch::RenderBatch(const enum RenderSystems type, const unsigned int start)
 	:type(type), start(start), end(start) { }

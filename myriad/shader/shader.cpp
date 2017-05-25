@@ -1,5 +1,5 @@
-#include "myrShader.h"
-#include "renderer/myrRenderer.h"
+#include "shader.h"
+#include "renderer/renderer.h"
 
 #ifdef _DEBUG
 #include <iostream>

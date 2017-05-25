@@ -1,4 +1,4 @@
-#include "myrAtlas.h"
+#include "atlas.h"
 
 #include <iostream>
 #include <algorithm>

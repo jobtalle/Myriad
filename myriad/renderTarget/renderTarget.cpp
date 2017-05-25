@@ -1,4 +1,4 @@
-#include "myrRenderTarget.h"
+#include "renderTarget.h"
 
 myr::RenderTarget::RenderTarget(const Color clearColor, const Rect rect, Renderer *renderer)
 	:DefaultRenderTarget(clearColor, rect, renderer)

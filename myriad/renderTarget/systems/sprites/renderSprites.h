@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../myrRenderSystem.h"
-#include "myrSpriteAttributes.h"
+#include "../renderSystem.h"
+#include "spriteAttributes.h"
 
 #include <vector>
 

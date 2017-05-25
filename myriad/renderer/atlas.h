@@ -2,7 +2,7 @@
 
 #include "opengl/opengl.h"
 #include "quadSpace/quadSpace.h"
-#include "types/myrVector.h"
+#include "types/vector.h"
 
 #include <memory>
 #include <string>

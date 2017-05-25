@@ -1,6 +1,6 @@
-#include "myrSprite.h"
-#include "renderer/myrRenderer.h"
-#include "renderTarget/myrRenderTarget.h"
+#include "sprite.h"
+#include "renderer/renderer.h"
+#include "renderTarget/renderTarget.h"
 
 myr::Sprite::Sprite()
 :flags(UNSET), decoder(nullptr) {}

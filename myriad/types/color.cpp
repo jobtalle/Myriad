@@ -1,6 +1,6 @@
 #include <algorithm>
 
-#include "myrColor.h"
+#include "color.h"
 
 myr::Color::Color(const float r, const float g, const float b)
 	:r(r), g(g), b(b), a(1) {}

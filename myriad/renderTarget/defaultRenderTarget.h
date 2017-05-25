@@ -1,11 +1,11 @@
 #pragma once
 
 #include "renderer/opengl/opengl.h"
-#include "systems/myrRenderBatch.h"
-#include "systems/myrRenderSystem.h"
+#include "systems/renderBatch.h"
+#include "systems/renderSystem.h"
 
-#include "types/myrRect.h"
-#include "types/myrColor.h"
+#include "types/rect.h"
+#include "types/color.h"
 
 #include <queue>
 #include <vector>
