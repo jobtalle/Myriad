@@ -16,6 +16,7 @@ namespace myr
 	class Renderer
 	{
 		friend class DefaultRenderTarget;
+		friend class Shader;
 
 	public:
 		Renderer(const Color clearColor, const Rect rect);
@@ -35,6 +36,8 @@ namespace myr
 		};
 
 		struct {
+			static const char *name() { return "sharedUniforms"; }
+			static const GLuint index = 0;
 			SharedUniforms data;
 			GLuint buffer;
 		} sharedUniforms;

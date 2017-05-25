@@ -27,7 +27,12 @@ myr::Shader::Shader(
 
 	locateUniforms(uniforms);
 
-	glUniformBlockBinding(program, glGetUniformBlockIndex(program, "sharedUniforms"), 0);
+	glUniformBlockBinding(
+		program,
+		glGetUniformBlockIndex(
+			program,
+			renderer->sharedUniforms.name()),
+		renderer->sharedUniforms.index);
 	
 	glDetachShader(program, shaderVertex);
 	glDetachShader(program, shaderFragment);

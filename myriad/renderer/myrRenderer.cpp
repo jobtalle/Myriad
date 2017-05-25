@@ -87,7 +87,7 @@ void myr::Renderer::initializeUbo()
 
 	glBindBuffer(GL_UNIFORM_BUFFER, sharedUniforms.buffer);
 	glBufferData(GL_UNIFORM_BUFFER, sizeof(sharedUniforms.data), NULL, GL_DYNAMIC_DRAW);
-	glBindBufferBase(GL_UNIFORM_BUFFER, 0, sharedUniforms.buffer);
+	glBindBufferBase(GL_UNIFORM_BUFFER, sharedUniforms.index, sharedUniforms.buffer);
 
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 }
@@ -103,8 +103,8 @@ void myr::Renderer::setTargetRect(const Rect rect)
 	sharedUniforms.data.target.height = rect.getHeight();
 
 	glBindBuffer(GL_UNIFORM_BUFFER, sharedUniforms.buffer);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(sharedUniforms.data), &sharedUniforms.data);
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
+	glBufferSubData(GL_UNIFORM_BUFFER, sharedUniforms.index, sizeof(sharedUniforms.data), &sharedUniforms.data);
+	glBindBuffer(GL_UNIFORM_BUFFER, sharedUniforms.index);
+	
 	glViewport(0, 0, rect.getWidth(), rect.getHeight());
 }
