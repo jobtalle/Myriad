@@ -17,3 +17,8 @@ enum myr::RenderSystems myr::RenderBatch::getType() const
 {
 	return type;
 }
+
+void myr::RenderBatch::increment()
+{
+	++end;
+}

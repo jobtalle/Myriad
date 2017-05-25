@@ -11,6 +11,10 @@ namespace myr
 	{
 	public:
 
+	protected:
+		size_t getBufferSize() const override;
+		const void *getBufferData() const override;
+
 	private:
 		std::vector<SpriteAttributes> instances;
 	};

@@ -12,6 +12,7 @@ namespace myr
 		unsigned int getStart() const;
 		unsigned int getEnd() const;
 		enum RenderSystems getType() const;
+		void increment();
 
 	private:
 		unsigned int start;
