@@ -1,10 +1,12 @@
 #include "renderSprites.h"
 
+#include <iostream>
+
 void myr::RenderSprites::render(const RenderBatch &batch)
 {
 	RenderSystem::render(batch);
 
-
+	
 }
 
 void myr::RenderSprites::push(const void *element)

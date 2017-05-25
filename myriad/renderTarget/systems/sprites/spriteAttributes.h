@@ -8,6 +8,18 @@ namespace myr
 {
 	struct SpriteAttributes
 	{
+		SpriteAttributes(
+			const Vector atlasPosition,
+			const Vector atlasSize,
+			const Vector position,
+			const float angle,
+			const float z)
+			:atlasPosition(atlasPosition),
+			atlasSize(atlasSize),
+			position(position),
+			angle(angle),
+			z(z) {}
+
 		union {
 			struct {
 				Vector atlasPosition;

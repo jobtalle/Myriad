@@ -1,6 +1,7 @@
 #include "sprite.h"
 #include "renderer/renderer.h"
 #include "renderTarget/renderTarget.h"
+#include "renderTarget/systems/sprites/spriteAttributes.h"
 
 myr::Sprite::Sprite()
 :flags(UNSET), decoder(nullptr) {}
@@ -26,10 +27,15 @@ void myr::Sprite::draw()
 	if(!(flags & LOADED))
 		if(!(flags & UNSET))
 			load();
-	else
-	{
-		
-	}
+
+	SpriteAttributes attributes(
+		Vector(0, 0),
+		Vector(0, 0),
+		Vector(0, 0),
+		0,
+		0);
+
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
 }
 
 void myr::Sprite::load()

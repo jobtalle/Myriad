@@ -25,7 +25,6 @@ namespace myr
 		Rect getRect() const;
 		void bind();
 		void clear() const;
-		void render(const RenderSystems system, const void *element);
 
 	protected:
 		Rect rect;
@@ -43,6 +42,7 @@ namespace myr
 		Color clearColor;
 		unsigned char flags;
 
+		void render(const RenderSystems system, const void *element);
 		void render();
 		void createRenderSystems();
 
