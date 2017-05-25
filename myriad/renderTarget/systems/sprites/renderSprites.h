@@ -24,6 +24,8 @@ namespace myr
 		const void *getBufferData() const override;
 
 	private:
+		static const char *UNIFORM_ATLAS;
+
 		std::vector<SpriteAttributes> instances;
 	};
 }

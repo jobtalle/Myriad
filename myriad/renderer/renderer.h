@@ -16,6 +16,7 @@ namespace myr
 	{
 		friend class DefaultRenderTarget;
 		friend class Shader;
+		friend class RenderSprites;
 
 	public:
 		Renderer(const Color clearColor, const Rect rect);
@@ -28,7 +29,7 @@ namespace myr
 		Atlas &getAtlas();
 
 	private:
-		enum textureChannels
+		enum TextureChannels
 		{
 			ATLAS,
 			RENDER_TARGET

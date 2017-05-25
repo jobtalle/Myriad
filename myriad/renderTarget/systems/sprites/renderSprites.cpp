@@ -1,4 +1,5 @@
 #include "renderSprites.h"
+#include "renderer/renderer.h"
 
 #include <iostream>
 
@@ -13,7 +14,7 @@ void myr::RenderSprites::render(const RenderBatch &batch, Shader *shader)
 {
 	RenderSystem::render(batch, shader);
 
-	
+	glUniform1i(shader->getUniformLocation(UNIFORM_ATLAS), Renderer::TextureChannels::ATLAS);
 }
 
 void myr::RenderSprites::push(const void *element)

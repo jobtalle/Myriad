@@ -1,5 +1,7 @@
 #include "renderSprites.h"
 
+const char *myr::RenderSprites::UNIFORM_ATLAS = "atlas";
+
 const char *myr::RenderSprites::getShaderVertex()
 {
 	return
@@ -26,13 +28,13 @@ const char *myr::RenderSprites::getShaderFragment()
 		"layout (location = 0) out vec4 color;\n"
 
 		"void main() {\n"
-		"  color = vec4(1, 0, 0, 0);\n"
+		"  color = texture(atlas, vec2(0, 0));\n"
 		"}";
 }
 
 const std::vector<std::string> myr::RenderSprites::getShaderUniforms()
 {
 	return std::vector<std::string>({
-		"atlas"
+		RenderSprites::UNIFORM_ATLAS
 	});
 }
