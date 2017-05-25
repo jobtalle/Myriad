@@ -57,7 +57,7 @@ void myr::Shader::bind()
 	if(current != this)
 	{
 		current = this;
-
+		
 		glUseProgram(program);
 	}
 }

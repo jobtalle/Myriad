@@ -2,6 +2,7 @@
 
 #include "renderSystems.h"
 #include "renderBatch.h"
+#include "shader/shader.h"
 #include "renderer/opengl/opengl.h"
 
 namespace myr
@@ -12,7 +13,7 @@ namespace myr
 		RenderSystem();
 		virtual ~RenderSystem();
 		virtual void flush();
-		virtual void render(const RenderBatch &batch);
+		virtual void render(const RenderBatch &batch, Shader *shader);
 		virtual void push(const void *element) = 0;
 		virtual size_t getBufferIndex() const = 0;
 
@@ -28,6 +29,7 @@ namespace myr
 		unsigned char flags = 0;
 		size_t bufferCapacity = 0;
 		static const size_t bufferCapacityInitial = 64;
+		GLuint vao;
 		GLuint buffer;
 
 		void upload();

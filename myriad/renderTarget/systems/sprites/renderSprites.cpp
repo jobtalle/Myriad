@@ -9,9 +9,9 @@ void myr::RenderSprites::flush()
 	instances.clear();
 }
 
-void myr::RenderSprites::render(const RenderBatch &batch)
+void myr::RenderSprites::render(const RenderBatch &batch, Shader *shader)
 {
-	RenderSystem::render(batch);
+	RenderSystem::render(batch, shader);
 
 	
 }

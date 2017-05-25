@@ -45,10 +45,10 @@ namespace myr
 		DefaultRenderTarget renderTarget;
 		Atlas atlas;
 		Rect rect;
-		std::shared_ptr<Shader> shaders[RENDER_SYSTEM_COUNT];
+		std::unique_ptr<Shader> shaders[RENDER_SYSTEM_COUNT];
 
 		void bind();
-		std::shared_ptr<Shader> getDefaultShader(const enum ShaderType type) const;
+		Shader *getDefaultShader(const enum RenderSystems system) const;
 		void createDefaultShaders();
 		void initializeUbo();
 		void freeUbo();

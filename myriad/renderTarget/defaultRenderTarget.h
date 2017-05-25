@@ -3,6 +3,7 @@
 #include "renderer/opengl/opengl.h"
 #include "systems/renderBatch.h"
 #include "systems/renderSystem.h"
+#include "../shader/shader.h"
 
 #include "types/rect.h"
 #include "types/color.h"
@@ -34,17 +35,18 @@ namespace myr
 		void unbind();
 		Renderer *getRenderer() const;
 		static DefaultRenderTarget *getCurrent();
+		void createRenderSystems();
 
 	private:
 		std::queue<RenderBatch> batches;
 		std::unique_ptr<RenderSystem> systems[RENDER_SYSTEM_COUNT];
+		Shader *shaders[RENDER_SYSTEM_COUNT];
 		Renderer *renderer;
 		Color clearColor;
 		unsigned char flags;
 		
 		void render(const RenderSystems system, const void *element);
 		void render();
-		void createRenderSystems();
 
 		enum flags {
 			BOUND = 0x01

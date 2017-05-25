@@ -16,10 +16,7 @@ myr::DefaultRenderTarget *myr::DefaultRenderTarget::getCurrent()
 }
 
 myr::DefaultRenderTarget::DefaultRenderTarget(const Color clearColor, const Rect rect, Renderer *renderer)
-:fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer)
-{
-	createRenderSystems();
-}
+:fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer) {}
 
 void myr::DefaultRenderTarget::setRect(const Rect rect)
 {
@@ -97,8 +94,10 @@ void myr::DefaultRenderTarget::render()
 			usedSystems.end(),
 			batches.front().getType()) == usedSystems.end())
 			usedSystems.push_back(batches.front().getType());
-
-		systems[batches.front().getType()].get()->render(batches.front());
+		
+		systems[batches.front().getType()].get()->render(
+			batches.front(),
+			shaders[batches.front().getType()]);
 		batches.pop();
 	}
 
@@ -109,4 +108,7 @@ void myr::DefaultRenderTarget::render()
 void myr::DefaultRenderTarget::createRenderSystems()
 {
 	systems[RENDER_SYSTEM_SPRITES].reset(new RenderSprites());
+	
+	for(size_t i = 0; i < RENDER_SYSTEM_COUNT; ++i)
+		shaders[i] = getRenderer()->getDefaultShader(static_cast<RenderSystems>(i));
 }

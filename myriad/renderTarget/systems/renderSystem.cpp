@@ -5,11 +5,13 @@
 myr::RenderSystem::RenderSystem()
 {
 	glGenBuffers(1, &buffer);
+	glGenVertexArrays(1, &vao);
 }
 
 myr::RenderSystem::~RenderSystem()
 {
 	glDeleteBuffers(1, &buffer);
+	glDeleteVertexArrays(1, &vao);
 }
 
 void myr::RenderSystem::flush()
@@ -17,10 +19,12 @@ void myr::RenderSystem::flush()
 	flags = 0;
 }
 
-void myr::RenderSystem::render(const RenderBatch &batch)
+void myr::RenderSystem::render(const RenderBatch &batch, Shader *shader)
 {
 	if(!(flags & UPLOADED))
 		upload();
+	
+	shader->bind();
 }
 
 void myr::RenderSystem::upload()

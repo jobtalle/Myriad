@@ -22,6 +22,8 @@ myr::Renderer::Renderer(const Color clearColor, const Rect rect, const unsigned 
 	initializeUbo();
 
 	createDefaultShaders();
+
+	renderTarget.createRenderSystems();
 }
 
 myr::Renderer::~Renderer()
@@ -71,9 +73,9 @@ void myr::Renderer::bind()
 	}
 }
 
-std::shared_ptr<myr::Shader> myr::Renderer::getDefaultShader(const enum ShaderType type) const
+myr::Shader *myr::Renderer::getDefaultShader(const enum RenderSystems system) const
 {
-	return shaders[type];
+	return shaders[system].get();
 }
 
 void myr::Renderer::createDefaultShaders()
