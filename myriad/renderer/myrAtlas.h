@@ -10,7 +10,7 @@
 
 namespace myr
 {
-	class Atlas
+	class Atlas final
 	{
 	public:
 		struct Location

@@ -1,5 +1,6 @@
 #include "myrDefaultRenderTarget.h"
 #include "renderer/myrRenderer.h"
+#include "systems/sprites/myrRenderSprites.h"
 
 #include <cassert>
 
@@ -15,7 +16,10 @@ myr::DefaultRenderTarget *myr::DefaultRenderTarget::getCurrent()
 }
 
 myr::DefaultRenderTarget::DefaultRenderTarget(const Color clearColor, const Rect rect, Renderer *renderer)
-:fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer) {}
+:fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer)
+{
+	createRenderSystems();
+}
 
 void myr::DefaultRenderTarget::setRect(const Rect rect)
 {
@@ -71,4 +75,16 @@ void myr::DefaultRenderTarget::clear() const
 void myr::DefaultRenderTarget::render()
 {
 	getRenderer()->setTargetRect(getRect());
+
+	flushRenderSystems();
+}
+
+void myr::DefaultRenderTarget::createRenderSystems()
+{
+	systems[RENDER_SYSTEM_SPRITES].reset(new RenderSprites());
+}
+
+void myr::DefaultRenderTarget::flushRenderSystems()
+{
+
 }

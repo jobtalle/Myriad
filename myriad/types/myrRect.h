@@ -4,7 +4,7 @@
 
 namespace myr
 {
-	class Rect
+	class Rect final
 	{
 	public:
 		Rect(const uint16_t width, const uint16_t height);

@@ -13,7 +13,7 @@
 
 namespace myr
 {
-	class Renderer
+	class Renderer final
 	{
 		friend class DefaultRenderTarget;
 		friend class Shader;
@@ -38,6 +38,7 @@ namespace myr
 		struct {
 			static const char *name() { return "sharedUniforms"; }
 			static const GLuint index = 0;
+
 			SharedUniforms data;
 			GLuint buffer;
 		} sharedUniforms;
@@ -45,7 +46,7 @@ namespace myr
 		DefaultRenderTarget renderTarget;
 		Atlas atlas;
 		Rect rect;
-		std::auto_ptr<Shader> shaders[ShaderType::COUNT];
+		std::unique_ptr<Shader> shaders[ShaderType::COUNT];
 
 		void bind();
 		Shader *getDefaultShader(const enum ShaderType type) const;

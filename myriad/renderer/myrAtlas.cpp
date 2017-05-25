@@ -48,7 +48,7 @@ myr::Atlas::Location myr::Atlas::query(
 		{
 			auto *entry = new Entry(tree.query(quadSpaceLevel(std::max(width, height))), width, height);
 			
-			match = entries.insert(std::make_pair(name, std::auto_ptr<Entry>(entry))).first;
+			match = entries.insert(std::make_pair(name, std::unique_ptr<Entry>(entry))).first;
 
 			blit(match->second.get(), bytes);
 		}

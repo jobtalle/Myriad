@@ -131,8 +131,12 @@
     <ClInclude Include="myriad\renderer\myrAtlas.h" />
     <ClInclude Include="myriad\renderer\myrSharedUniforms.h" />
     <ClInclude Include="myriad\renderTarget\myrDefaultRenderTarget.h" />
+    <ClInclude Include="myriad\renderTarget\systems\myrRenderBatch.h" />
+    <ClInclude Include="myriad\renderTarget\systems\myrRenderSystem.h" />
+    <ClInclude Include="myriad\renderTarget\systems\myrRenderSystems.h" />
+    <ClInclude Include="myriad\renderTarget\systems\sprites\myrRenderSprites.h" />
     <ClInclude Include="myriad\shader\myrShaderTypes.h" />
-    <ClInclude Include="myriad\sprite\myrSpriteAttributes.h" />
+    <ClInclude Include="myriad\renderTarget\systems\sprites\myrSpriteAttributes.h" />
     <ClInclude Include="myriad\sprite\myrSpriteDecoder.h" />
     <ClInclude Include="myriad\types\myrRect.h" />
     <ClInclude Include="myriad\shader\myrShader.h" />
@@ -148,6 +152,9 @@
   <ItemGroup>
     <ClCompile Include="myriad\renderer\myrAtlas.cpp" />
     <ClCompile Include="myriad\renderTarget\myrDefaultRenderTarget.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\myrRenderBatch.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\myrRenderSystem.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\sprites\myrRenderSprites.cpp" />
     <ClCompile Include="myriad\types\myrRect.cpp" />
     <ClCompile Include="myriad\shader\myrShader.cpp" />
     <ClCompile Include="myriad\sprite\myrSprite.cpp" />

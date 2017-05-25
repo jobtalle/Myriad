@@ -2,10 +2,10 @@
 
 #include <cstdint>
 
-class QuadSpace
+class QuadSpace final
 {
 public:
-	class Node
+	class Node final
 	{
 	public:
 		Node() {};

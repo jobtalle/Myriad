@@ -2,7 +2,7 @@
 
 namespace myr
 {
-	class Vector
+	class Vector final
 	{
 	public:
 		float x;

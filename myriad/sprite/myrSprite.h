@@ -8,7 +8,7 @@
 
 namespace myr
 {
-	class Sprite
+	class Sprite final
 	{
 	public:
 		Sprite();
@@ -19,7 +19,7 @@ namespace myr
 
 	private:
 		std::string name;
-		std::auto_ptr<SpriteDecoder> decoder;
+		std::unique_ptr<SpriteDecoder> decoder;
 		myr::Atlas::Location location;
 		uint8_t flags;
 

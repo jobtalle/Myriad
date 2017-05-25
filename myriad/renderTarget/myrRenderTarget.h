@@ -4,7 +4,7 @@
 
 namespace myr
 {
-	class RenderTarget : public DefaultRenderTarget
+	class RenderTarget final : public DefaultRenderTarget
 	{
 	public:
 		RenderTarget(const Color clearColor, const Rect rect, Renderer *renderer);

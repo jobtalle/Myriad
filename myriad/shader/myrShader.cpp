@@ -77,7 +77,7 @@ GLuint myr::Shader::createShader(const GLenum type, const std::string source) co
 	
 	if(logLength != 0)
 	{
-		std::auto_ptr<char> buf(new char[logLength + 1]);
+		std::unique_ptr<char> buf(new char[logLength + 1]);
 
 		glGetShaderInfoLog(shader, logLength, NULL, buf.get());
 		std::cout << "Error compiling shader:" << std::endl << buf.get() << std::endl;

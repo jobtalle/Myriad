@@ -2,7 +2,7 @@
 
 namespace myr
 {
-	class Color
+	class Color final
 	{
 		union
 		{
