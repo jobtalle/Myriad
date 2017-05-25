@@ -81,6 +81,7 @@ void myr::Renderer::createDefaultShaders()
 	shaders[RENDER_SYSTEM_SPRITES].reset(new Shader(
 		RenderSprites::getShaderVertex(),
 		RenderSprites::getShaderFragment(),
+		RenderSprites::getShaderUniforms(),
 		this));
 }
 

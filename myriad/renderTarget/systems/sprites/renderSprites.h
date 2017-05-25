@@ -17,6 +17,7 @@ namespace myr
 
 		static const char *getShaderVertex();
 		static const char *getShaderFragment();
+		static const std::vector<std::string> getShaderUniforms();
 
 	protected:
 		size_t getBufferSize() const override;
