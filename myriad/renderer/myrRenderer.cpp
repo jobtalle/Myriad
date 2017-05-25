@@ -105,4 +105,6 @@ void myr::Renderer::setTargetRect(const Rect rect)
 	glBindBuffer(GL_UNIFORM_BUFFER, sharedUniforms.buffer);
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(sharedUniforms.data), &sharedUniforms.data);
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+	glViewport(0, 0, rect.getWidth(), rect.getHeight());
 }
