@@ -2,6 +2,13 @@
 
 #include <iostream>
 
+void myr::RenderSprites::flush()
+{
+	RenderSystem::flush();
+
+	instances.clear();
+}
+
 void myr::RenderSprites::render(const RenderBatch &batch)
 {
 	RenderSystem::render(batch);
@@ -11,7 +18,7 @@ void myr::RenderSprites::render(const RenderBatch &batch)
 
 void myr::RenderSprites::push(const void *element)
 {
-	
+	instances.push_back(*((SpriteAttributes*)element));
 }
 
 size_t myr::RenderSprites::getBufferIndex() const

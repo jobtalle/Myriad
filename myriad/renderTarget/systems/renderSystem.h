@@ -11,7 +11,7 @@ namespace myr
 	public:
 		RenderSystem();
 		virtual ~RenderSystem();
-		void flush();
+		virtual void flush();
 		virtual void render(const RenderBatch &batch);
 		virtual void push(const void *element) = 0;
 		virtual size_t getBufferIndex() const = 0;
@@ -26,7 +26,6 @@ namespace myr
 		};
 
 		unsigned char flags = 0;
-		size_t bufferIndex = 0;
 		size_t bufferCapacity = 0;
 		static const size_t bufferCapacityInitial = 64;
 		GLuint buffer;

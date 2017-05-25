@@ -1,5 +1,7 @@
 #include "renderSystem.h"
 
+#include <iostream> // TODO: Debug
+
 myr::RenderSystem::RenderSystem()
 {
 	glGenBuffers(1, &buffer);
@@ -12,7 +14,6 @@ myr::RenderSystem::~RenderSystem()
 
 void myr::RenderSystem::flush()
 {
-	bufferIndex = 0;
 	flags = 0;
 }
 
@@ -25,7 +26,7 @@ void myr::RenderSystem::render(const RenderBatch &batch)
 void myr::RenderSystem::upload()
 {
 	flags |= UPLOADED;
-
+	
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
 
 	if(getBufferSize() > bufferCapacity)
