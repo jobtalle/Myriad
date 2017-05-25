@@ -72,19 +72,41 @@ void myr::DefaultRenderTarget::clear() const
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+void myr::DefaultRenderTarget::render(const RenderSystems system, const void *element)
+{
+	if(batches.empty() || batches.front().getType() != system)
+	{
+		batches.push(RenderBatch(system, systems[system].get()->getBufferIndex()));
+	}
+	else
+		batches.front().increment();
+
+	systems[system].get()->push(element);
+}
+
 void myr::DefaultRenderTarget::render()
 {
+	std::vector<RenderSystems> usedSystems;
+
 	getRenderer()->setTargetRect(getRect());
 
-	flushRenderSystems();
+	while(!batches.empty())
+	{
+		if(std::find(
+			usedSystems.begin(),
+			usedSystems.end(),
+			batches.front().getType()) == usedSystems.end())
+			usedSystems.push_back(batches.front().getType());
+
+		systems[batches.front().getType()].get()->render(batches.front());
+		batches.pop();
+	}
+
+	for(auto i = usedSystems.begin(); i != usedSystems.end(); ++i)
+		systems[*i].get()->flush();
 }
 
 void myr::DefaultRenderTarget::createRenderSystems()
 {
 	systems[RENDER_SYSTEM_SPRITES].reset(new RenderSprites());
-}
-
-void myr::DefaultRenderTarget::flushRenderSystems()
-{
-
 }

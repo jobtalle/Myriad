@@ -13,7 +13,8 @@ namespace myr
 		virtual ~RenderSystem();
 		void flush();
 		virtual void render(const RenderBatch &batch);
-		virtual void push(const void *element);
+		virtual void push(const void *element) = 0;
+		virtual size_t getBufferIndex() const = 0;
 
 	protected:
 		virtual size_t getBufferSize() const = 0;

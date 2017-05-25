@@ -7,16 +7,16 @@ namespace myr
 	class RenderBatch final
 	{
 	public:
-		RenderBatch(const enum RenderSystems type, const unsigned int start);
+		RenderBatch(const enum RenderSystems type, const size_t start);
 
-		unsigned int getStart() const;
-		unsigned int getEnd() const;
+		size_t getStart() const;
+		size_t getEnd() const;
 		enum RenderSystems getType() const;
 		void increment();
 
 	private:
-		unsigned int start;
-		unsigned int end;
+		size_t start;
+		size_t end;
 		enum RenderSystems type;
 	};
 }

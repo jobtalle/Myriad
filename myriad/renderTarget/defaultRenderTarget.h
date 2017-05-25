@@ -25,6 +25,7 @@ namespace myr
 		Rect getRect() const;
 		void bind();
 		void clear() const;
+		void render(const RenderSystems system, const void *element);
 
 	protected:
 		Rect rect;
@@ -44,7 +45,6 @@ namespace myr
 
 		void render();
 		void createRenderSystems();
-		void flushRenderSystems();
 
 		enum flags {
 			BOUND = 0x01

@@ -10,6 +10,9 @@ namespace myr
 	class RenderSprites final : public RenderSystem
 	{
 	public:
+		void render(const RenderBatch &batch) override;
+		void push(const void *element) override;
+		size_t getBufferIndex() const override;
 
 	protected:
 		size_t getBufferSize() const override;

@@ -22,11 +22,6 @@ void myr::RenderSystem::render(const RenderBatch &batch)
 		upload();
 }
 
-void myr::RenderSystem::push(const void *element)
-{
-
-}
-
 void myr::RenderSystem::upload()
 {
 	flags |= UPLOADED;
