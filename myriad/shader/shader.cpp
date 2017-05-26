@@ -33,7 +33,7 @@ myr::Shader::Shader(
 			program,
 			renderer->sharedUniforms.name()),
 		renderer->sharedUniforms.index);
-	
+
 	glDetachShader(program, shaderVertex);
 	glDetachShader(program, shaderFragment);
 

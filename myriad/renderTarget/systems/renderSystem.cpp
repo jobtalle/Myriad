@@ -32,7 +32,7 @@ void myr::RenderSystem::vaoBind() const
 
 void myr::RenderSystem::vaoRelease() const
 {
-	glBindVertexArray(vao);
+	glBindVertexArray(0);
 }
 
 void myr::RenderSystem::bindBuffer() const
