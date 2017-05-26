@@ -18,16 +18,10 @@ myr::RenderSystem::~RenderSystem()
 	glDeleteVertexArrays(1, &vao);
 }
 
-void myr::RenderSystem::flush()
-{
-	flags = 0;
-}
-
 void myr::RenderSystem::render(const RenderBatch &batch, Shader *shader)
 {
-	if(!(flags & UPLOADED))
-		upload();
-	
+	upload(batch);
+
 	shader->bind();
 }
 
@@ -41,24 +35,28 @@ void myr::RenderSystem::vaoRelease() const
 	glBindVertexArray(vao);
 }
 
-void myr::RenderSystem::upload()
+void myr::RenderSystem::upload(const RenderBatch &batch)
 {
-	flags |= UPLOADED;
+	const size_t requiredSize = batch.getEnd() - batch.getStart();
 	
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
 
-	if(getBufferSize() > bufferCapacity)
+	if(requiredSize > bufferCapacity)
 	{
-		while(getBufferSize() > bufferCapacity)
+		while(requiredSize > bufferCapacity)
 		{
 			if(bufferCapacity == 0)
-				bufferCapacity = bufferCapacityInitial;
+				bufferCapacity = BUFFER_CAPACITY_INITIAL;
 			else
 				bufferCapacity <<= 1;
 		}
 
-		glBufferData(GL_ARRAY_BUFFER, bufferCapacity, NULL, GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, requiredSize * getBufferSizeof(), NULL, GL_DYNAMIC_DRAW);
 	}
 
-	glBufferSubData(GL_ARRAY_BUFFER, 0, getBufferSize(), getBufferData());
+	glBufferSubData(
+		GL_ARRAY_BUFFER, 
+		0,
+		requiredSize * getBufferSizeof(),
+		(char*)getBufferData() + batch.getStart() * getBufferSizeof());
 }

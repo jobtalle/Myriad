@@ -20,7 +20,7 @@ namespace myr
 		static const std::vector<std::string> getShaderUniforms();
 
 	protected:
-		size_t getBufferSize() const override;
+		size_t getBufferSizeof() const override;
 		const void *getBufferData() const override;
 		void vaoConfigure() override;
 
