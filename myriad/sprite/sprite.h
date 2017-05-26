@@ -11,10 +11,8 @@ namespace myr
 	class Sprite final
 	{
 	public:
-		Sprite();
 		Sprite(const std::string name, SpriteDecoder *decoder);
 		~Sprite();
-		bool isSet() const;
 		void draw();
 
 	private:
@@ -27,8 +25,7 @@ namespace myr
 
 		enum flags
 		{
-			LOADED = 0x01,
-			UNSET = 0x02
+			LOADED = 0x01
 		};
 	};
 }

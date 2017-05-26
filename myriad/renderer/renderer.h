@@ -16,6 +16,7 @@ namespace myr
 	{
 		friend class DefaultRenderTarget;
 		friend class Shader;
+		friend class Sprite;
 		friend class RenderSprites;
 
 	public:
@@ -26,7 +27,6 @@ namespace myr
 		void setRect(const Rect rect);
 		Rect getRect() const;
 		DefaultRenderTarget &getDefaultRenderTarget();
-		Atlas &getAtlas();
 
 	private:
 		enum TextureChannels
@@ -49,6 +49,7 @@ namespace myr
 		std::unique_ptr<Shader> shaders[RENDER_SYSTEM_COUNT];
 
 		void bind();
+		Atlas &getAtlas();
 		Shader *getDefaultShader(const enum RenderSystems system) const;
 		void createDefaultShaders();
 		void initializeUbo();
