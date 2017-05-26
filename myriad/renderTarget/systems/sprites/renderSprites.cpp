@@ -3,6 +3,20 @@
 
 #include <iostream>
 
+myr::RenderSprites::RenderSprites()
+	:RenderSystem()
+{
+	glGenBuffers(1, &quad);
+	glBindBuffer(GL_ARRAY_BUFFER, quad);
+	glBufferData(GL_ARRAY_BUFFER, getQuad().size() * sizeof(Vector), getQuad().data(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+myr::RenderSprites::~RenderSprites()
+{
+	glDeleteBuffers(1, &quad);
+}
+
 void myr::RenderSprites::flush()
 {
 	instances.clear();
@@ -41,5 +55,5 @@ const void *myr::RenderSprites::getBufferData() const
 
 void myr::RenderSprites::vaoConfigure()
 {
-
+	
 }

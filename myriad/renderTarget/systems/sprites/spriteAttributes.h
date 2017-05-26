@@ -17,8 +17,7 @@ namespace myr
 			:atlasPosition(atlasPosition),
 			atlasSize(atlasSize),
 			position(position),
-			angle(angle),
-			z(z) {}
+			size(size) {}
 
 		union {
 			struct {
@@ -32,8 +31,7 @@ namespace myr
 		union {
 			struct {
 				Vector position;
-				float angle;
-				float z;
+				Vector size;
 			};
 
 			float attributeLocation[4];
