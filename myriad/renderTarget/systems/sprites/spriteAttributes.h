@@ -12,8 +12,7 @@ namespace myr
 			const Vector atlasPosition,
 			const Vector atlasSize,
 			const Vector position,
-			const float angle,
-			const float z)
+			const Vector size)
 			:atlasPosition(atlasPosition),
 			atlasSize(atlasSize),
 			position(position),

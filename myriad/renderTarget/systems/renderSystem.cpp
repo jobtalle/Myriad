@@ -44,7 +44,7 @@ void myr::RenderSystem::upload(const RenderBatch &batch)
 {
 	const size_t requiredSize = batch.getEnd() - batch.getStart();
 	
-	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	bindBuffer();
 
 	if(requiredSize > bufferCapacity)
 	{
@@ -56,9 +56,9 @@ void myr::RenderSystem::upload(const RenderBatch &batch)
 				bufferCapacity <<= 1;
 		}
 
-		glBufferData(GL_ARRAY_BUFFER, requiredSize * getBufferSizeof(), NULL, GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, bufferCapacity * getBufferSizeof(), NULL, GL_DYNAMIC_DRAW);
 	}
-
+	
 	glBufferSubData(
 		GL_ARRAY_BUFFER, 
 		0,

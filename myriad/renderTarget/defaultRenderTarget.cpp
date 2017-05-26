@@ -40,8 +40,9 @@ void myr::DefaultRenderTarget::bind()
 	renderer->bind();
 
 	flags |= BOUND;
-
+	
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+	glViewport(0, 0, rect.getWidth(), rect.getHeight());
 }
 
 void myr::DefaultRenderTarget::unbind()
@@ -101,8 +102,8 @@ void myr::DefaultRenderTarget::render()
 		batches.pop();
 	}
 
-	for(auto i = usedSystems.begin(); i != usedSystems.end(); ++i)
-		systems[*i].get()->flush();
+	for(auto system : usedSystems)
+		systems[system].get()->flush();
 }
 
 void myr::DefaultRenderTarget::createRenderSystems()

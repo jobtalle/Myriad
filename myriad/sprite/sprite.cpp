@@ -32,8 +32,7 @@ void myr::Sprite::draw()
 		Vector(0, 0),
 		Vector(0, 0),
 		Vector(0, 0),
-		0,
-		0);
+		Vector(0, 0));
 
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
 }

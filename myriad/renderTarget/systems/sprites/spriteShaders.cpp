@@ -18,7 +18,7 @@ const char *myr::RenderSprites::getShaderVertex()
 		"layout (location = 2) in vec4 location;"
 
 		"void main() {"
-		"  gl_Position = vec4(width, height, 0, 1);"
+		"  gl_Position = vec4(vertex * 10 - vec2(5), 0, 1);"
 		"}";
 }
 
@@ -32,7 +32,7 @@ const char *myr::RenderSprites::getShaderFragment()
 		"layout (location = 0) out vec4 color;"
 
 		"void main() {"
-		"  color = texture(atlas, vec2(0, 0));"
+		"  color = vec4(1, 0, 1, 1);"
 		"}";
 }
 

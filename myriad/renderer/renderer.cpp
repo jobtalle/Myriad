@@ -11,6 +11,9 @@ namespace {
 void myr::initialize()
 {
 	ogl_LoadFunctions();
+
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_DEPTH_TEST);
 }
 
 myr::Renderer::Renderer(const Color clearColor, const Rect rect)
@@ -115,6 +118,4 @@ void myr::Renderer::setTargetRect(const Rect rect)
 		sizeof(sharedUniforms.data),
 		&sharedUniforms.data);
 	glBindBuffer(GL_UNIFORM_BUFFER, sharedUniforms.index);
-	
-	glViewport(0, 0, rect.getWidth(), rect.getHeight());
 }
