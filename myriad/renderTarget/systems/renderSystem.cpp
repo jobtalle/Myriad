@@ -6,6 +6,10 @@ myr::RenderSystem::RenderSystem()
 {
 	glGenBuffers(1, &buffer);
 	glGenVertexArrays(1, &vao);
+
+	vaoBind();
+	vaoConfigure();
+	vaoRelease();
 }
 
 myr::RenderSystem::~RenderSystem()
@@ -25,6 +29,16 @@ void myr::RenderSystem::render(const RenderBatch &batch, Shader *shader)
 		upload();
 	
 	shader->bind();
+}
+
+void myr::RenderSystem::vaoBind() const
+{
+	glBindVertexArray(vao);
+}
+
+void myr::RenderSystem::vaoRelease() const
+{
+	glBindVertexArray(vao);
 }
 
 void myr::RenderSystem::upload()

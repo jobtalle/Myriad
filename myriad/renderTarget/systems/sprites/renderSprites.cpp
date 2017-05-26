@@ -36,3 +36,8 @@ const void *myr::RenderSprites::getBufferData() const
 {
 	return instances.data();
 }
+
+void myr::RenderSprites::vaoConfigure()
+{
+
+}

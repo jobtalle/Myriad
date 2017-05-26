@@ -7,14 +7,14 @@ const char *myr::RenderSprites::getShaderVertex()
 	return
 		"#version 330 core\n"
 
-		"layout (std140) uniform sharedUniforms\n"
-		"{\n"
-		"  float width;\n"
-		"  float height;\n"
-		"};\n"
+		"layout (std140) uniform sharedUniforms"
+		"{"
+		"  float width;"
+		"  float height;"
+		"};"
 
-		"void main() {\n"
-		"  gl_Position = vec4(0, 0, 0, 1);\n"
+		"void main() {"
+		"  gl_Position = vec4(width, height, 0, 1);"
 		"}";
 }
 
@@ -25,10 +25,10 @@ const char *myr::RenderSprites::getShaderFragment()
 
 		"uniform sampler2D atlas;"
 
-		"layout (location = 0) out vec4 color;\n"
+		"layout (location = 0) out vec4 color;"
 
-		"void main() {\n"
-		"  color = texture(atlas, vec2(0, 0));\n"
+		"void main() {"
+		"  color = texture(atlas, vec2(0, 0));"
 		"}";
 }
 
