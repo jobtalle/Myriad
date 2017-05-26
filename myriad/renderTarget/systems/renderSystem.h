@@ -23,6 +23,7 @@ namespace myr
 		virtual void vaoConfigure() {};
 		void vaoBind() const;
 		void vaoRelease() const;
+		void bindBuffer() const;
 
 	private:
 		static const size_t BUFFER_CAPACITY_INITIAL = 1;

@@ -35,6 +35,11 @@ void myr::RenderSystem::vaoRelease() const
 	glBindVertexArray(vao);
 }
 
+void myr::RenderSystem::bindBuffer() const
+{
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+}
+
 void myr::RenderSystem::upload(const RenderBatch &batch)
 {
 	const size_t requiredSize = batch.getEnd() - batch.getStart();

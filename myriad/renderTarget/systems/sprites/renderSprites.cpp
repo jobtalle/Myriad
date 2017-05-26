@@ -55,5 +55,20 @@ const void *myr::RenderSprites::getBufferData() const
 
 void myr::RenderSprites::vaoConfigure()
 {
-	
+	glBindBuffer(GL_ARRAY_BUFFER, quad);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vector), NULL);
+
+	bindBuffer();
+
+	glEnableVertexAttribArray(1);
+	glVertexAttribDivisor(1, 1);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
+		(GLvoid*)offsetof(SpriteAttributes, attributeAtlas));
+
+	glEnableVertexAttribArray(2);
+	glVertexAttribDivisor(2, 1);
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
+		(GLvoid*)offsetof(SpriteAttributes, attributeLocation));
 }
