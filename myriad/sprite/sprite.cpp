@@ -22,7 +22,7 @@ void myr::Sprite::draw(
 		Vector(0, 0),
 		Vector(0, 0),
 		Vector(x, y),
-		Vector(64, 64));
+		Vector(width, height));
 
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
 }
@@ -30,7 +30,9 @@ void myr::Sprite::draw(
 void myr::Sprite::load()
 {
 	flags |= LOADED;
-
+	
+	width = decoder->getWidth();
+	height = decoder->getHeight();
 	location = myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(
 		name,
 		decoder->getWidth(),

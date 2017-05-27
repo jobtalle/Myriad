@@ -18,7 +18,11 @@ const char *myr::RenderSprites::getShaderVertex()
 		"layout (location = 2) in vec4 location;"
 
 		"void main() {"
-		"  gl_Position = vec4(vertex - vec2(0.5), 0, 1);"
+		"  gl_Position = vec4("
+		"   vec2("
+		"     (location.x + vertex.x * location.z) / width,"
+		"	  (-location.y -vertex.y * location.w) / height) * 2 + vec2(-1, 1),"
+		"	0, 1);"
 		"}";
 }
 

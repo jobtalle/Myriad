@@ -21,6 +21,8 @@ namespace myr
 		std::string name;
 		std::unique_ptr<SpriteDecoder> decoder;
 		myr::Atlas::Location location;
+		unsigned int width;
+		unsigned int height;
 		uint8_t flags;
 
 		void load();
