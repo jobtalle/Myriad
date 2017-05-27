@@ -20,7 +20,6 @@ namespace myr
 	protected:
 		virtual size_t getBufferSizeof() const = 0;
 		virtual const void *getBufferData() const = 0;
-		virtual void vaoConfigure() {};
 		void vaoBind() const;
 		void vaoRelease() const;
 		void bindBuffer() const;

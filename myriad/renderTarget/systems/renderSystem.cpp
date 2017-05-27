@@ -6,10 +6,6 @@ myr::RenderSystem::RenderSystem()
 {
 	glGenBuffers(1, &buffer);
 	glGenVertexArrays(1, &vao);
-
-	vaoBind();
-	vaoConfigure();
-	vaoRelease();
 }
 
 myr::RenderSystem::~RenderSystem()

@@ -25,7 +25,6 @@ namespace myr
 	protected:
 		size_t getBufferSizeof() const override;
 		const void *getBufferData() const override;
-		void vaoConfigure() override;
 
 	private:
 		static const char *UNIFORM_ATLAS;
