@@ -9,5 +9,6 @@ namespace myr
 		float y;
 
 		Vector(const float x, const float y);
+		Vector(const int x, const int y);
 	};
 }

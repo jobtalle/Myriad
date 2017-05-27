@@ -11,16 +11,18 @@ myr::Sprite::~Sprite()
 	if(flags & LOADED)
 		myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().release(name);
 }
-void myr::Sprite::draw()
+void myr::Sprite::draw(
+	const int x,
+	const int y)
 {
 	if(!(flags & LOADED))
 		load();
-
+	
 	SpriteAttributes attributes(
 		Vector(0, 0),
 		Vector(0, 0),
-		Vector(0, 0),
-		Vector(0, 0));
+		Vector(x, y),
+		Vector(64, 64));
 
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
 }

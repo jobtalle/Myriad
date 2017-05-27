@@ -49,17 +49,7 @@ void myr::RenderSprites::render(const RenderBatch &batch, Shader *shader)
 	
 	vaoBind();
 	glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, (GLsizei)(batch.getEnd() - batch.getStart()));
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-	vaoRelease();
-
-	/*
-	glBindBuffer(GL_ARRAY_BUFFER, quad);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vector), NULL);
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	*/
-	
+	vaoRelease();	
 }
 
 void myr::RenderSprites::push(const void *element)

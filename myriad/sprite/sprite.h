@@ -13,7 +13,9 @@ namespace myr
 	public:
 		Sprite(const std::string name, SpriteDecoder *decoder);
 		~Sprite();
-		void draw();
+		void draw(
+			const int x,
+			const int y);
 
 	private:
 		std::string name;
