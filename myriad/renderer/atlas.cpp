@@ -103,7 +103,9 @@ myr::Atlas::Location myr::Atlas::entryToLocation(const struct Entry *entry) cons
 		Vector(
 			float(entry->node.getX()) / QuadSpace::dimensions,
 			float(entry->node.getY()) / QuadSpace::dimensions),
-		Vector(0, 0)); // TODO: Nonzero size
+		Vector(
+			float(entry->width) / (atom * QuadSpace::dimensions),
+			float(entry->height) / (atom * QuadSpace::dimensions)));
 }
 
 unsigned char myr::Atlas::quadSpaceLevel(const unsigned int maxDim) const

@@ -19,8 +19,8 @@ void myr::Sprite::draw(
 		load();
 	
 	SpriteAttributes attributes(
-		Vector(0, 0),
-		Vector(0, 0),
+		location.location,
+		location.size,
 		Vector(x, y),
 		Vector(width, height));
 
