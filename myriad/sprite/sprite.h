@@ -11,18 +11,30 @@ namespace myr
 	class Sprite final
 	{
 	public:
-		Sprite(const std::string name, SpriteDecoder *decoder);
+		Sprite(
+			const std::string name,
+			SpriteDecoder *decoder,
+			const int originX = 0,
+			const int originY = 0);
 		~Sprite();
 		void draw(
 			const int x,
-			const int y);
+			const int y,
+			const float angle = 0);
+		void setOrigin(const int originX, const int originY);
+		short int getWidth() const;
+		short int getHeight() const;
+		int getOriginX() const;
+		int getOriginY() const;
 
 	private:
 		std::string name;
 		std::unique_ptr<SpriteDecoder> decoder;
 		myr::Atlas::Location location;
-		unsigned int width;
-		unsigned int height;
+		short int width;
+		short int height;
+		int originX;
+		int originY;
 		uint8_t flags;
 
 		void load();

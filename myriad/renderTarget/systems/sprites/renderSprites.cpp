@@ -13,7 +13,6 @@ myr::RenderSprites::RenderSprites()
 	glBufferData(GL_ARRAY_BUFFER, getQuad().size() * sizeof(Vector), getQuad().data(), GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribDivisor(0, 0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vector), NULL);
 
 	bindBuffer();
@@ -27,6 +26,11 @@ myr::RenderSprites::RenderSprites()
 	glVertexAttribDivisor(2, 1);
 	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
 		(GLvoid*)offsetof(SpriteAttributes, attributeLocation));
+
+	glEnableVertexAttribArray(3);
+	glVertexAttribDivisor(3, 1);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
+		(GLvoid*)offsetof(SpriteAttributes, attributeTransform));
 
 	vaoRelease();
 }

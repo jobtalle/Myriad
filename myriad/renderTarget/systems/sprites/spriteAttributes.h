@@ -12,11 +12,15 @@ namespace myr
 			const Vector atlasPosition,
 			const Vector atlasSize,
 			const Vector position,
-			const Vector size)
+			const Vector size,
+			const Vector origin,
+			const float angle)
 			:atlasPosition(atlasPosition),
 			atlasSize(atlasSize),
 			position(position),
-			size(size) {}
+			size(size),
+			origin(origin),
+			angle(angle) {}
 
 		union {
 			struct {
@@ -34,6 +38,15 @@ namespace myr
 			};
 
 			float attributeLocation[4];
+		};
+
+		union {
+			struct {
+				Vector origin;
+				float angle;
+			};
+
+			float attributeTransform[3];
 		};
 	};
 }

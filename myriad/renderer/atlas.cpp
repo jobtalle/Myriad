@@ -65,8 +65,6 @@ myr::Atlas::Location myr::Atlas::query(
 		unusedEntries.erase(recycle);
 	}
 
-	std::cout << int(match->second->node.getX()) << ", " << int(match->second->node.getY()) << std::endl;
-
 	return entryToLocation(match->second.get());
 }
 
@@ -128,8 +126,8 @@ void myr::Atlas::initializeTexture()
 {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
 void myr::Atlas::allocateTexture()

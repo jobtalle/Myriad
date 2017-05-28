@@ -16,16 +16,22 @@ const char *myr::RenderSprites::getShaderVertex()
 		"layout (location = 0) in vec2 vertex;"
 		"layout (location = 1) in vec4 pixels;"
 		"layout (location = 2) in vec4 location;"
+		"layout (location = 3) in vec3 transform;"
 
 		"out vec2 uv;"
 
 		"void main() {"
+		"  float c = cos(transform.z);"
+		"  float s = sin(transform.z);"
+		"  mat2 rotate = mat2(c, -s, s, c);"
+
 		"  uv = pixels.xy + vertex * pixels.zw;"
+
 		"  gl_Position = vec4("
-		"   vec2("
-		"     (location.x + vertex.x * location.z) / width,"
-		"	  (-location.y -vertex.y * location.w) / height) * 2 + vec2(-1, 1),"
-		"	0, 1);"
+		"  (vec2(location.x, -location.y) +"
+		"  rotate * vec2(vertex.x * location.z - transform.x, -vertex.y * location.w + transform.y)) /"
+		"  vec2(width, height) * 2 + vec2(-1, 1),"
+		"  0, 1);"
 		"}";
 }
 
