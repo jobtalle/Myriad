@@ -9,8 +9,8 @@ const char *myr::RenderSprites::getShaderVertex()
 
 		"layout (std140) uniform sharedUniforms"
 		"{"
-		"  float width;"
-		"  float height;"
+		  "float width;"
+		  "float height;"
 		"};"
 
 		"layout (location = 0) in vec2 vertex;"
@@ -21,17 +21,17 @@ const char *myr::RenderSprites::getShaderVertex()
 		"out vec2 uv;"
 
 		"void main() {"
-		"  float c = cos(transform.z);"
-		"  float s = sin(transform.z);"
-		"  mat2 rotate = mat2(c, -s, s, c);"
+		  "float c = cos(transform.z);"
+		  "float s = sin(transform.z);"
+		  "mat2 rotate = mat2(c, -s, s, c);"
 
-		"  uv = pixels.xy + vertex * pixels.zw;"
+		  "uv = pixels.xy + vertex * pixels.zw;"
 
-		"  gl_Position = vec4("
-		"  (vec2(location.x, -location.y) +"
-		"  rotate * vec2(vertex.x * location.z - transform.x, -vertex.y * location.w + transform.y)) /"
-		"  vec2(width, height) * 2 + vec2(-1, 1),"
-		"  0, 1);"
+		  "gl_Position = vec4("
+		    "(vec2(location.x, -location.y) +"
+		    "rotate * vec2(vertex.x * location.z - transform.x, -vertex.y * location.w + transform.y)) /"
+		    "vec2(width, height) * 2 + vec2(-1, 1),"
+		    "0, 1);"
 		"}";
 }
 
@@ -47,7 +47,7 @@ const char *myr::RenderSprites::getShaderFragment()
 		"in vec2 uv;"
 
 		"void main() {"
-		"  color = texture(atlas, uv);"
+		  "color = texture(atlas, uv);"
 		"}";
 }
 

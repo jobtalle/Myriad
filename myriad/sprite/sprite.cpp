@@ -19,7 +19,9 @@ myr::Sprite::~Sprite()
 void myr::Sprite::draw(
 	const int x,
 	const int y,
-	const float angle)
+	const float angle,
+	const float scaleX,
+	const float scaleY)
 {
 	if(!(flags & LOADED))
 		load();
@@ -28,8 +30,8 @@ void myr::Sprite::draw(
 		location.location,
 		location.size,
 		Vector(x, y),
-		Vector(width, height),
-		Vector(originX, originY),
+		Vector(width * scaleX, height * scaleY),
+		Vector(originX * scaleX, originY * scaleY), // TODO: Use operator overloading
 		angle);
 
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
