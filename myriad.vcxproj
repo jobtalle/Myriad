@@ -140,6 +140,7 @@
     <ClInclude Include="myriad\types\rect.h" />
     <ClInclude Include="myriad\shader\shader.h" />
     <ClInclude Include="myriad\sprite\sprite.h" />
+    <ClInclude Include="myriad\types\transform.h" />
     <ClInclude Include="myriad\types\vector.h" />
     <ClInclude Include="myriad\renderer\opengl\opengl.h" />
     <ClInclude Include="myriad\myriad.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="myriad\types\rect.cpp" />
     <ClCompile Include="myriad\shader\shader.cpp" />
     <ClCompile Include="myriad\sprite\sprite.cpp" />
+    <ClCompile Include="myriad\types\transform.cpp" />
     <ClCompile Include="myriad\types\vector.cpp" />
     <ClCompile Include="myriad\renderer\opengl\opengl.c" />
     <ClCompile Include="myriad\types\color.cpp" />
