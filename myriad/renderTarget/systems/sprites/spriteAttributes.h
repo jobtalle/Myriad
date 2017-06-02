@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cmath> // TODO: Debug?
 #include <cstdint>
 
 #include "types/vector.h"
@@ -21,12 +22,13 @@ namespace myr
 			position(position),
 			origin(origin)
 		{
-			// TODO: Rotate here
+			const float s = sin(angle);
+			const float c = cos(angle);
 
-			row0[0] = size.x;
-			row0[1] = 0;
-			row1[0] = 0;
-			row1[1] = size.y;
+			row0[0] = size.x * c;
+			row0[1] = size.x * s;
+			row1[0] = size.y * -s;
+			row1[1] = size.y * c;
 		}
 
 		union {
