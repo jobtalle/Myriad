@@ -21,8 +21,7 @@ namespace myr
 			const int x,
 			const int y,
 			const float angle = 0,
-			const float scaleX = 1,
-			const float scaleY = 1);
+			const Vector scale = Vector(1, 1));
 		void setOrigin(const int originX, const int originY);
 		short int getWidth() const;
 		short int getHeight() const;

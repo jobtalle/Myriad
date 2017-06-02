@@ -20,8 +20,7 @@ void myr::Sprite::draw(
 	const int x,
 	const int y,
 	const float angle,
-	const float scaleX,
-	const float scaleY)
+	const Vector scale)
 {
 	if(!(flags & LOADED))
 		load();
@@ -30,7 +29,7 @@ void myr::Sprite::draw(
 		location.location,
 		location.size,
 		Vector(x, y),
-		Vector(width * scaleX, height * scaleY),
+		Vector(width * scale.x, height * scale.y),
 		origin,
 		angle);
 
