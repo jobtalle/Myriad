@@ -8,9 +8,16 @@ namespace myr
 	{
 	public:
 		Transform();
-		void identity();
-		void translate(const Vector v);
-		void translate(const float x, const float y);
+
+		Transform identity();
+
+		Transform scale(const float scaleUniform);
+		Transform scale(const float scaleX, const float scaleY);
+
+		Transform translate(const Vector v);
+		Transform translate(const float x, const float y);
+
+		Transform rotate(const float radians);
 
 	private:
 		union {

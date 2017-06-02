@@ -37,6 +37,7 @@ namespace myr
 		short int height;
 		int originX;
 		int originY;
+		Vector origin;
 		uint8_t flags;
 
 		void load();

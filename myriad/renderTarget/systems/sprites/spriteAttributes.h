@@ -3,6 +3,7 @@
 #include <cstdint>
 
 #include "types/vector.h"
+#include "types/transform.h"
 
 namespace myr
 {
@@ -18,9 +19,15 @@ namespace myr
 			:atlasPosition(atlasPosition),
 			atlasSize(atlasSize),
 			position(position),
-			size(size),
-			origin(origin),
-			angle(angle) {}
+			origin(origin)
+		{
+			// TODO: Rotate here
+
+			row0[0] = size.x;
+			row0[1] = 0;
+			row1[0] = 0;
+			row1[1] = size.y;
+		}
 
 		union {
 			struct {
@@ -33,20 +40,20 @@ namespace myr
 
 		union {
 			struct {
-				Vector position;
-				Vector size;
+				float row0[2];
+				float row1[2];
 			};
 
-			float attributeLocation[4];
+			float attributeScaleRotate[4];
 		};
 
 		union {
 			struct {
 				Vector origin;
-				float angle;
+				Vector position;
 			};
 
-			float attributeTransform[3];
+			float attributeTransform[4];
 		};
 	};
 }

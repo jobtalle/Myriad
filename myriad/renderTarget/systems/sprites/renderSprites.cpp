@@ -25,11 +25,11 @@ myr::RenderSprites::RenderSprites()
 	glEnableVertexAttribArray(2);
 	glVertexAttribDivisor(2, 1);
 	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
-		(GLvoid*)offsetof(SpriteAttributes, attributeLocation));
+		(GLvoid*)offsetof(SpriteAttributes, attributeScaleRotate));
 
 	glEnableVertexAttribArray(3);
 	glVertexAttribDivisor(3, 1);
-	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
+	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
 		(GLvoid*)offsetof(SpriteAttributes, attributeTransform));
 
 	vaoRelease();

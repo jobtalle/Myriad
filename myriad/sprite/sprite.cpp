@@ -8,7 +8,7 @@ myr::Sprite::Sprite(
 	SpriteDecoder *decoder,
 	const int originX,
 	const int originY)
-:flags(0), name(name), decoder(decoder), originX(originX), originY(originY) {}
+:flags(0), name(name), decoder(decoder), originX(originX), originY(originY), origin(0, 0) {}
 
 myr::Sprite::~Sprite()
 {
@@ -31,7 +31,7 @@ void myr::Sprite::draw(
 		location.size,
 		Vector(x, y),
 		Vector(width * scaleX, height * scaleY),
-		Vector(originX * scaleX, originY * scaleY), // TODO: Use operator overloading
+		origin,
 		angle);
 
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
@@ -69,6 +69,7 @@ void myr::Sprite::load()
 	
 	width = decoder->getWidth();
 	height = decoder->getHeight();
+	origin = Vector(float(originX) / width, float(originY) / height);
 	location = myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(
 		name,
 		decoder->getWidth(),
