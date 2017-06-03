@@ -67,3 +67,13 @@ myr::Transform myr::Transform::rotate(const float radians)
 
 	return *this;
 }
+
+const float *myr::Transform::getRow0() const
+{
+	return values[0];
+}
+
+const float *myr::Transform::getRow1() const
+{
+	return values[1];
+}

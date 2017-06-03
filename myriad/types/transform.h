@@ -19,6 +19,9 @@ namespace myr
 
 		Transform rotate(const float radians);
 
+		const float *getRow0() const;
+		const float *getRow1() const;
+
 	private:
 		union {
 			float values[2][3];

@@ -13,6 +13,22 @@ namespace myr
 		SpriteAttributes(
 			const Vector atlasPosition,
 			const Vector atlasSize,
+			const Vector origin,
+			const Transform transform)
+			:atlasPosition(atlasPosition),
+			atlasSize(atlasSize),
+			position(transform.getRow0()[2], transform.getRow1()[2]),
+			origin(origin)
+		{
+			row0[0] = transform.getRow0()[0];
+			row0[1] = transform.getRow0()[1];
+			row1[0] = transform.getRow1()[0];
+			row1[1] = transform.getRow1()[1];
+		}
+
+		SpriteAttributes(
+			const Vector atlasPosition,
+			const Vector atlasSize,
 			const Vector position,
 			const Vector size,
 			const Vector origin)
