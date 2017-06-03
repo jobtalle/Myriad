@@ -19,8 +19,26 @@ myr::Sprite::~Sprite()
 void myr::Sprite::draw(
 	const int x,
 	const int y,
-	const float angle,
 	const Vector scale)
+{
+	if(!(flags & LOADED))
+		load();
+
+	SpriteAttributes attributes(
+		location.location,
+		location.size,
+		Vector(x, y),
+		Vector(width * scale.x, height * scale.y),
+		origin);
+
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
+}
+
+void myr::Sprite::draw(
+	const int x,
+	const int y,
+	const Vector scale,
+	const float angle)
 {
 	if(!(flags & LOADED))
 		load();

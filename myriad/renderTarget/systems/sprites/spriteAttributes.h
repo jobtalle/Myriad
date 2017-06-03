@@ -15,6 +15,23 @@ namespace myr
 			const Vector atlasSize,
 			const Vector position,
 			const Vector size,
+			const Vector origin)
+			:atlasPosition(atlasPosition),
+			atlasSize(atlasSize),
+			position(position),
+			origin(origin)
+		{
+			row0[0] = size.x;
+			row0[1] = 0;
+			row1[0] = 0;
+			row1[1] = size.y;
+		}
+
+		SpriteAttributes(
+			const Vector atlasPosition,
+			const Vector atlasSize,
+			const Vector position,
+			const Vector size,
 			const Vector origin,
 			const float angle)
 			:atlasPosition(atlasPosition),

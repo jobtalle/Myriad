@@ -20,8 +20,12 @@ namespace myr
 		void draw(
 			const int x,
 			const int y,
-			const float angle = 0,
 			const Vector scale = Vector(1, 1));
+		void draw(
+			const int x,
+			const int y,
+			const Vector scale,
+			const float angle);
 		void setOrigin(const int originX, const int originY);
 		short int getWidth() const;
 		short int getHeight() const;
