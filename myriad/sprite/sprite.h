@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "renderer/atlas.h"
+#include "types/transform.h"
 #include "spriteDecoder.h"
 
 namespace myr
@@ -17,6 +18,9 @@ namespace myr
 			const int originX = 0,
 			const int originY = 0);
 		~Sprite();
+		void draw(
+			const Transform transform,
+			const Vector scale = Vector(1, 1));
 		void draw(
 			const int x,
 			const int y,

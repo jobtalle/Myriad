@@ -6,6 +6,8 @@ namespace myr
 {
 	class Transform final
 	{
+		friend struct SpriteAttributes;
+
 	public:
 		Transform();
 
@@ -18,9 +20,6 @@ namespace myr
 		Transform translate(const float x, const float y);
 
 		Transform rotate(const float radians);
-
-		const float *getRow0() const;
-		const float *getRow1() const;
 
 	private:
 		union {

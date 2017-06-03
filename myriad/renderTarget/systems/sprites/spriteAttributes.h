@@ -6,6 +6,8 @@
 #include "types/vector.h"
 #include "types/transform.h"
 
+#include <iostream> // TODO: Debug
+
 namespace myr
 {
 	struct SpriteAttributes
@@ -13,17 +15,18 @@ namespace myr
 		SpriteAttributes(
 			const Vector atlasPosition,
 			const Vector atlasSize,
+			const Vector size,
 			const Vector origin,
 			const Transform transform)
 			:atlasPosition(atlasPosition),
 			atlasSize(atlasSize),
-			position(transform.getRow0()[2], transform.getRow1()[2]),
+			position(transform.row0[2], transform.row1[2]),
 			origin(origin)
 		{
-			row0[0] = transform.getRow0()[0];
-			row0[1] = transform.getRow0()[1];
-			row1[0] = transform.getRow1()[0];
-			row1[1] = transform.getRow1()[1];
+			row0[0] = transform.row0[0] * size.x;
+			row0[1] = transform.row0[1] * size.x;
+			row1[0] = transform.row1[0] * size.y;
+			row1[1] = transform.row1[1] * size.y;
 		}
 
 		SpriteAttributes(
@@ -59,8 +62,8 @@ namespace myr
 			const float c = cos(angle);
 
 			row0[0] = size.x * c;
-			row0[1] = size.x * s;
-			row1[0] = size.y * -s;
+			row0[1] = size.x * -s;
+			row1[0] = size.y * s;
 			row1[1] = size.y * c;
 		}
 
