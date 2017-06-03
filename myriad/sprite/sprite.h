@@ -19,12 +19,17 @@ namespace myr
 			const int originY = 0);
 		~Sprite();
 		void draw(
+			const Transform transform);
+		void draw(
 			const Transform transform,
-			const Vector scale = Vector(1, 1));
+			const Vector scale);
+		void draw(
+			const int x,
+			const int y);
 		void draw(
 			const int x,
 			const int y,
-			const Vector scale = Vector(1, 1));
+			const Vector scale);
 		void draw(
 			const int x,
 			const int y,
