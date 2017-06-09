@@ -1,1 +1,0 @@
-#include <myriad/myrSprite.h>
