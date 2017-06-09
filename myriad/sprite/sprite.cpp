@@ -17,22 +17,6 @@ myr::Sprite::~Sprite()
 }
 
 void myr::Sprite::draw(
-	const Transform transform)
-{
-	if(!(flags & LOADED))
-		load();
-
-	SpriteAttributes attributes(
-		location.location,
-		location.size,
-		Vector(width, height),
-		origin,
-		transform);
-
-	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
-}
-
-void myr::Sprite::draw(
 	const Transform transform,
 	const Vector scale)
 {
@@ -45,23 +29,6 @@ void myr::Sprite::draw(
 		Vector(width * scale.x, height * scale.y),
 		origin,
 		transform);
-
-	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
-}
-
-void myr::Sprite::draw(
-	const int x,
-	const int y)
-{
-	if(!(flags & LOADED))
-		load();
-
-	SpriteAttributes attributes(
-		location.location,
-		location.size,
-		Vector(x, y),
-		Vector(width, height),
-		origin);
 
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
 }
