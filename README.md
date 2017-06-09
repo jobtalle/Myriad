@@ -1,2 +1,3 @@
 # Myriad
-Myriad 2D engine
+
+Myriad 2D graphics engine
