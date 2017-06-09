@@ -9,8 +9,8 @@ const char *myr::RenderSprites::getShaderVertex()
 
 		"layout (std140) uniform sharedUniforms"
 		"{"
-		  "float width;"
-		  "float height;"
+			"vec4 widthRow0;"
+			"vec4 heightRow1;"
 		"};"
 
 		"layout (location = 0) in vec2 vertex;"
@@ -21,13 +21,14 @@ const char *myr::RenderSprites::getShaderVertex()
 		"out vec2 uv;"
 
 		"void main() {"
-		  "mat3 mat = mat3(vec3(scaleRotate.xy, transform.z), vec3(scaleRotate.zw, -transform.w), vec3(0, 0, 1));"
+		  "mat3 matLocal = mat3(vec3(scaleRotate.xy, transform.z), vec3(scaleRotate.zw, -transform.w), vec3(0, 0, 1));"
+		  "mat3 matGlobal = mat3(widthRow0.yzw, vec3(heightRow1.yz, -heightRow1.w), vec3(0, 0, 1));"
 
 		  "uv = pixels.xy + vertex * pixels.zw;"
 
 		  "gl_Position = vec4("
-		    "(vec3(vertex.x - transform.x, -vertex.y + transform.y, 1) * mat).xy /"
-		    "vec2(width, height) * 2 + vec2(-1, 1),"
+		    "(vec3(vertex.x - transform.x, -vertex.y + transform.y, 1) * matLocal * matGlobal).xy /"
+		    "vec2(widthRow0.x, heightRow1.x) * 2 + vec2(-1, 1),"
 		    "0, 1);"
 		"}";
 }

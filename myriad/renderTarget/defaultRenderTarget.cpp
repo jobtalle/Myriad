@@ -15,10 +15,13 @@ myr::DefaultRenderTarget *myr::DefaultRenderTarget::getCurrent()
 	return current;
 }
 
-myr::DefaultRenderTarget::DefaultRenderTarget(const Color clearColor, const Rect rect, Renderer *renderer)
+myr::DefaultRenderTarget::DefaultRenderTarget(
+	const Color &clearColor,
+	const Rect &rect,
+	Renderer *renderer)
 :fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer) {}
 
-void myr::DefaultRenderTarget::setRect(const Rect rect)
+void myr::DefaultRenderTarget::setRect(const Rect &rect)
 {
 	this->rect = rect;
 }
@@ -26,6 +29,19 @@ void myr::DefaultRenderTarget::setRect(const Rect rect)
 myr::Rect myr::DefaultRenderTarget::getRect() const
 {
 	return rect;
+}
+
+myr::Transform myr::DefaultRenderTarget::getTransform() const
+{
+	return transform;
+}
+
+void myr::DefaultRenderTarget::setTransform(const Transform &transform)
+{
+	if(!batches.empty())
+		bind();
+
+	this->transform = transform;
 }
 
 void myr::DefaultRenderTarget::bind()
@@ -73,9 +89,7 @@ void myr::DefaultRenderTarget::clear() const
 void myr::DefaultRenderTarget::render(const RenderSystems system, const void *element)
 {
 	if(batches.empty() || batches.front().getType() != system)
-	{
 		batches.push(RenderBatch(system, systems[system].get()->getBufferIndex()));
-	}
 	else
 		batches.front().increment();
 
@@ -86,7 +100,7 @@ void myr::DefaultRenderTarget::render()
 {
 	std::vector<RenderSystems> usedSystems;
 
-	getRenderer()->setTargetRect(getRect());
+	getRenderer()->setSharedUniforms(getRect(), getTransform());
 
 	while(!batches.empty())
 	{

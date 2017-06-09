@@ -10,9 +10,9 @@ namespace {
 }
 
 myr::Shader::Shader(
-	const std::string vertex,
-	const std::string fragment,
-	const std::vector<std::string> uniforms,
+	const std::string &vertex,
+	const std::string &fragment,
+	const std::vector<std::string> &uniforms,
 	const Renderer *renderer)
 {
 	program = glCreateProgram();
@@ -42,8 +42,8 @@ myr::Shader::Shader(
 }
 
 myr::Shader::Shader(
-	const std::string vertex,
-	const std::string fragment,
+	const std::string &vertex,
+	const std::string &fragment,
 	const Renderer *renderer)
 	:Shader(vertex, fragment, std::vector<std::string>(), renderer) {}
 
@@ -62,12 +62,12 @@ void myr::Shader::bind()
 	}
 }
 
-GLuint myr::Shader::getUniformLocation(const std::string name) const
+GLuint myr::Shader::getUniformLocation(const std::string &name) const
 {
 	return uniformLocations.at(name);
 }
 
-GLuint myr::Shader::createShader(const GLenum type, const std::string source) const
+GLuint myr::Shader::createShader(const GLenum type, const std::string &source) const
 {
 	const GLuint shader = glCreateShader(type);
 	const GLint length = (GLint)source.length();
@@ -93,7 +93,7 @@ GLuint myr::Shader::createShader(const GLenum type, const std::string source) co
 	return shader;
 }
 
-void myr::Shader::locateUniforms(const std::vector<std::string> uniforms)
+void myr::Shader::locateUniforms(const std::vector<std::string> &uniforms)
 {
 	for(auto uniform : uniforms)
 		uniformLocations.insert(std::make_pair(uniform, glGetUniformLocation(program, uniform.c_str())));

@@ -35,7 +35,7 @@ myr::Transform myr::Transform::scale(const float scaleX, const float scaleY)
 	return *this;
 }
 
-myr::Transform myr::Transform::translate(const Vector v)
+myr::Transform myr::Transform::translate(const Vector &v)
 {
 	translateX += v.x;
 	translateY += v.y;

@@ -6,10 +6,10 @@ namespace myr
 {
 	struct SharedUniforms
 	{
-		struct
-		{
-			GLfloat width;
-			GLfloat height;
-		} target;
+		float width;
+		float row0[3];
+
+		float height;
+		float row1[3];
 	};
 }

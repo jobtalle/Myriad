@@ -21,8 +21,8 @@ namespace myr
 
 			Location(
 				const unsigned char atlasIndex = 0,
-				const Vector location = Vector(0, 0),
-				const Vector size = Vector(0, 0));
+				const Vector &location = Vector(0, 0),
+				const Vector &size = Vector(0, 0));
 		};
 
 		static const unsigned char DEFAULT_ATOM = 16;
@@ -31,11 +31,11 @@ namespace myr
 		~Atlas();
 		void bind();
 		Location query(
-			const std::string name,
+			const std::string &name,
 			const unsigned short width,
 			const unsigned short height,
 			const char *bytes);
-		void release(const std::string name);
+		void release(const std::string &name);
 
 	private:
 		struct Entry

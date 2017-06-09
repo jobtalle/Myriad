@@ -161,7 +161,7 @@
     <ClCompile Include="myriad\sprite\sprite.cpp" />
     <ClCompile Include="myriad\types\transform.cpp" />
     <ClCompile Include="myriad\types\vector.cpp" />
-    <ClCompile Include="myriad\renderer\opengl\opengl.c" />
+    <ClCompile Include="myriad\renderer\opengl\opengl.cpp" />
     <ClCompile Include="myriad\types\color.cpp" />
     <ClCompile Include="myriad\renderer\renderer.cpp" />
     <ClCompile Include="myriad\renderTarget\renderTarget.cpp" />

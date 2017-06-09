@@ -13,27 +13,27 @@ namespace myr
 	{
 	public:
 		Sprite(
-			const std::string name,
+			const std::string &name,
 			SpriteDecoder *decoder,
 			const int originX = 0,
 			const int originY = 0);
 		~Sprite();
 		void draw(
-			const Transform transform);
+			const Transform &transform);
 		void draw(
-			const Transform transform,
-			const Vector scale);
+			const Transform &transform,
+			const Vector &scale);
 		void draw(
 			const int x,
 			const int y);
 		void draw(
 			const int x,
 			const int y,
-			const Vector scale);
+			const Vector &scale);
 		void draw(
 			const int x,
 			const int y,
-			const Vector scale,
+			const Vector &scale,
 			const float angle);
 		void setOrigin(const int originX, const int originY);
 		short int getWidth() const;

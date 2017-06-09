@@ -7,6 +7,7 @@
 
 #include "types/rect.h"
 #include "types/color.h"
+#include "types/transform.h"
 
 #include <queue>
 #include <vector>
@@ -22,8 +23,13 @@ namespace myr
 		friend class Sprite;
 
 	public:
-		DefaultRenderTarget(const Color clearColor, const Rect rect, Renderer *renderer);
+		DefaultRenderTarget(
+			const Color &clearColor,
+			const Rect &rect,
+			Renderer *renderer);
 		Rect getRect() const;
+		Transform getTransform() const;
+		void setTransform(const Transform &transform);
 		void bind();
 		void clear() const;
 
@@ -31,7 +37,7 @@ namespace myr
 		Rect rect;
 		GLuint fbo;
 
-		void setRect(const Rect rect);
+		void setRect(const Rect &rect);
 		void unbind();
 		Renderer *getRenderer() const;
 		static DefaultRenderTarget *getCurrent();
@@ -43,6 +49,7 @@ namespace myr
 		Shader *shaders[RENDER_SYSTEM_COUNT];
 		Renderer *renderer;
 		Color clearColor;
+		Transform transform;
 		unsigned char flags;
 		
 		void render(const RenderSystems system, const void *element);

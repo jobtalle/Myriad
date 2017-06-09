@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <cmath>
 
-myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector location, const Vector size)
+myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector &location, const Vector &size)
 	:atlasIndex(atlasIndex), location(location), size(size) {}
 
 myr::Atlas::Entry::Entry(const QuadSpace::Node node, const unsigned short width, const unsigned short height)
@@ -34,7 +34,7 @@ void myr::Atlas::bind()
 }
 
 myr::Atlas::Location myr::Atlas::query(
-	const std::string name,
+	const std::string &name,
 	const unsigned short width,
 	const unsigned short height,
 	const char *bytes)
@@ -68,7 +68,7 @@ myr::Atlas::Location myr::Atlas::query(
 	return entryToLocation(match->second.get());
 }
 
-void myr::Atlas::release(const std::string name)
+void myr::Atlas::release(const std::string &name)
 {
 	auto match = entries.find(name);
 	

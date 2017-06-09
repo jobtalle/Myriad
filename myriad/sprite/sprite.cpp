@@ -4,7 +4,7 @@
 #include "renderTarget/systems/sprites/spriteAttributes.h"
 
 myr::Sprite::Sprite(
-	const std::string name,
+	const std::string &name,
 	SpriteDecoder *decoder,
 	const int originX,
 	const int originY)
@@ -17,7 +17,7 @@ myr::Sprite::~Sprite()
 }
 
 void myr::Sprite::draw(
-	const Transform transform)
+	const Transform &transform)
 {
 	if(!(flags & LOADED))
 		load();
@@ -33,8 +33,8 @@ void myr::Sprite::draw(
 }
 
 void myr::Sprite::draw(
-	const Transform transform,
-	const Vector scale)
+	const Transform &transform,
+	const Vector &scale)
 {
 	if(!(flags & LOADED))
 		load();
@@ -69,7 +69,7 @@ void myr::Sprite::draw(
 void myr::Sprite::draw(
 	const int x,
 	const int y,
-	const Vector scale)
+	const Vector &scale)
 {
 	if(!(flags & LOADED))
 		load();
@@ -87,7 +87,7 @@ void myr::Sprite::draw(
 void myr::Sprite::draw(
 	const int x,
 	const int y,
-	const Vector scale,
+	const Vector &scale,
 	const float angle)
 {
 	if(!(flags & LOADED))

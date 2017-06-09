@@ -19,10 +19,10 @@ void myr::initialize()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-myr::Renderer::Renderer(const Color clearColor, const Rect rect)
+myr::Renderer::Renderer(const Color &clearColor, const Rect &rect)
 :Renderer(clearColor, rect, Atlas::DEFAULT_ATOM) {}
 
-myr::Renderer::Renderer(const Color clearColor, const Rect rect, const unsigned char atom)
+myr::Renderer::Renderer(const Color &clearColor, const Rect &rect, const unsigned char atom)
 :renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS, atom)
 {
 	initializeUbo();
@@ -49,7 +49,7 @@ void myr::Renderer::render()
 #endif
 }
 
-void myr::Renderer::setRect(const Rect rect)
+void myr::Renderer::setRect(const Rect &rect)
 {
 	renderTarget.setRect(rect);
 }
@@ -109,10 +109,17 @@ void myr::Renderer::freeUbo()
 	glDeleteBuffers(1, &sharedUniforms.buffer);
 }
 
-void myr::Renderer::setTargetRect(const Rect rect)
+void myr::Renderer::setSharedUniforms(const Rect &rect, const Transform &transform)
 {
-	sharedUniforms.data.target.width = rect.getWidth();
-	sharedUniforms.data.target.height = rect.getHeight();
+	sharedUniforms.data.width = rect.getWidth();
+	sharedUniforms.data.row0[0] = transform.row0[0];
+	sharedUniforms.data.row0[1] = transform.row0[1];
+	sharedUniforms.data.row0[2] = transform.translateX;
+
+	sharedUniforms.data.height = rect.getHeight();
+	sharedUniforms.data.row1[0] = transform.row1[0];
+	sharedUniforms.data.row1[1] = transform.row1[1];
+	sharedUniforms.data.row1[2] = transform.translateY;
 
 	glBindBuffer(GL_UNIFORM_BUFFER, sharedUniforms.buffer);
 	glBufferSubData(

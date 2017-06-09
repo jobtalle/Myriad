@@ -20,11 +20,11 @@ namespace myr
 		friend class RenderSprites;
 
 	public:
-		Renderer(const Color clearColor, const Rect rect);
-		Renderer(const Color clearColor, const Rect rect, const unsigned char atom);
+		Renderer(const Color &clearColor, const Rect &rect);
+		Renderer(const Color &clearColor, const Rect &rect, const unsigned char atom);
 		~Renderer();
 		void render();
-		void setRect(const Rect rect);
+		void setRect(const Rect &rect);
 		Rect getRect() const;
 		DefaultRenderTarget &getDefaultRenderTarget();
 
@@ -54,7 +54,7 @@ namespace myr
 		void createDefaultShaders();
 		void initializeUbo();
 		void freeUbo();
-		void setTargetRect(const Rect rect);
+		void setSharedUniforms(const Rect &rect, const Transform &transform);
 	};
 
 	void initialize();
