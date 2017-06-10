@@ -26,9 +26,13 @@ namespace myr
 		const void *getBufferData() const override;
 
 	private:
+		static const size_t INSTANCE_CAPACITY_INITIAL = 8;
 		static const char *UNIFORM_ATLAS;
+
 		GLuint quad;
-		std::vector<SpriteAttributes> instances;
+		SpriteAttributes *instances;
+		size_t instanceCount;
+		size_t instanceCapacity;
 
 		static const std::vector<Vector> getQuad();
 	};

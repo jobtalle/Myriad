@@ -4,7 +4,7 @@
 #include <iostream>
 
 myr::RenderSprites::RenderSprites()
-	:RenderSystem()
+:RenderSystem(), instanceCapacity(INSTANCE_CAPACITY_INITIAL), instanceCount(0)
 {
 	vaoBind();
 
@@ -33,10 +33,14 @@ myr::RenderSprites::RenderSprites()
 		(GLvoid*)offsetof(SpriteAttributes, attributeTransform));
 
 	vaoRelease();
+
+	instances = (myr::SpriteAttributes*)malloc(sizeof(SpriteAttributes)* instanceCapacity);
 }
 
 myr::RenderSprites::~RenderSprites()
 {
+	free(instances);
+
 	glDeleteBuffers(1, &quad);
 }
 
@@ -47,20 +51,27 @@ void myr::RenderSprites::render(Shader *shader)
 	glUniform1i(shader->getUniformLocation(UNIFORM_ATLAS), Renderer::TextureChannels::ATLAS);
 	
 	vaoBind();
-	glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, (GLsizei)(instances.size()));
+	glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, (GLsizei)instanceCount);
 	vaoRelease();	
 
-	instances.clear();
+	instanceCount = 0;
 }
 
 void myr::RenderSprites::push(const void *element)
 {
-	instances.push_back(*((SpriteAttributes*)element));
+	if(instanceCount == instanceCapacity)
+	{
+		instanceCapacity <<= 1;
+
+		instances = (SpriteAttributes*)realloc(instances, instanceCapacity * sizeof(SpriteAttributes));
+	}
+
+	instances[instanceCount++] = *((SpriteAttributes*)element);
 }
 
 size_t myr::RenderSprites::getBufferIndex() const
 {
-	return instances.size();
+	return instanceCount;
 }
 
 size_t myr::RenderSprites::getBufferSizeof() const
@@ -70,5 +81,5 @@ size_t myr::RenderSprites::getBufferSizeof() const
 
 const void *myr::RenderSprites::getBufferData() const
 {
-	return instances.data();
+	return instances;
 }
