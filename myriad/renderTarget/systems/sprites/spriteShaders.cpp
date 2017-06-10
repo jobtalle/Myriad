@@ -27,8 +27,7 @@ const char *myr::RenderSprites::getShaderVertex()
 
 		  "uv = pixels.xy + vertex * pixels.zw;"
 
-		  "gl_Position = vec4("
-		    "vec2(point.x, -point.y) + vec2(-1, 1), 0, 1);"
+		  "gl_Position = vec4(vec2(point.x, -point.y) + vec2(-1, 1), 0, 1);"
 		"}";
 }
 
