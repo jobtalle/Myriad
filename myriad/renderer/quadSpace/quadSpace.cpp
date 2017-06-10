@@ -133,3 +133,8 @@ uint8_t QuadSpace::Node::getLevel() const
 {	
 	return uint8_t(log(3 * (node + 1) + 1) / log(4) - 1);
 }
+
+bool QuadSpace::Node::getValid() const
+{
+	return valid;
+}

@@ -14,6 +14,7 @@ public:
 		uint8_t getY() const;
 		uint16_t getNode() const;
 		uint8_t getLevel() const;
+		bool getValid() const;
 
 	private:
 		uint8_t x;

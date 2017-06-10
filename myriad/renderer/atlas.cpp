@@ -4,6 +4,10 @@
 #include <algorithm>
 #include <cmath>
 
+#ifdef _DEBUG
+#include <cassert>
+#endif
+
 myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector &location, const Vector &size)
 	:atlasIndex(atlasIndex), location(location), size(size) {}
 
@@ -46,8 +50,22 @@ myr::Atlas::Location myr::Atlas::query(
 
 		if(match == entries.end())
 		{
-			auto *entry = new Entry(tree.query(quadSpaceLevel(std::max(width, height))), width, height);
-			
+			QuadSpace::Node node = tree.query(quadSpaceLevel(std::max(width, height)));
+
+			while(!node.getValid() && unusedEntries.size())
+			{
+				tree.release(unusedEntries.begin()->second.get()->node);
+				unusedEntries.erase(unusedEntries.begin());
+
+				node = tree.query(quadSpaceLevel(std::max(width, height)));
+			}
+
+#ifdef _DEBUG
+			assert(node.getValid());
+#endif
+
+			auto *entry = new Entry(node, width, height);
+
 			match = entries.insert(std::make_pair(name, std::unique_ptr<Entry>(entry))).first;
 
 			blit(match->second.get(), bytes);
