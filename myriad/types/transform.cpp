@@ -7,6 +7,23 @@ myr::Transform::Transform()
 	identity();
 }
 
+myr::Transform::Transform(
+	const float row00,
+	const float row01,
+	const float row02,
+	const float row10,
+	const float row11,
+	const float row12)
+{
+	values[0][0] = row00;
+	values[0][1] = row01;
+	values[0][2] = row02;
+	
+	values[1][0] = row10;
+	values[1][1] = row11;
+	values[1][2] = row12;
+}
+
 myr::Transform &myr::Transform::identity()
 {
 	values[0][0] = 1;
@@ -65,7 +82,18 @@ myr::Transform &myr::Transform::rotate(const float radians)
 	return *this;
 }
 
-myr::Vector myr::Transform::operator*(const Vector &vector)
+myr::Transform myr::Transform::operator*(const Transform &other) const
+{
+	return Transform(
+		values[0][0] * other.values[0][0] + values[0][1] * other.values[1][0],
+		values[0][0] * other.values[0][1] + values[0][1] * other.values[1][1],
+		values[0][0] * other.values[0][2] + values[0][1] * other.values[1][2] + values[0][2],
+		values[1][0] * other.values[0][0] + values[1][1] * other.values[1][0],
+		values[1][0] * other.values[0][1] + values[1][1] * other.values[1][1],
+		values[1][0] * other.values[0][2] + values[1][1] * other.values[1][2] + values[1][2]);
+}
+
+myr::Vector myr::Transform::operator*(const Vector &vector) const
 {
 	return Vector(
 		row0[0] * vector.x + row0[1] * vector.y + translateX,

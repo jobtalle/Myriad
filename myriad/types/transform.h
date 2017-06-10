@@ -22,9 +22,19 @@ namespace myr
 
 		Transform &rotate(const float radians);
 
-		Vector operator*(const Vector &vector);
+		Transform operator*(const Transform &other) const;
+
+		Vector operator*(const Vector &vector) const;
 
 	private:
+		Transform(
+			const float row00,
+			const float row01,
+			const float row02,
+			const float row10,
+			const float row11,
+			const float row12);
+
 		union {
 			float values[2][3];
 
