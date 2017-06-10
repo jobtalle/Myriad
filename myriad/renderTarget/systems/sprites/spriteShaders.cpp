@@ -22,7 +22,7 @@ const char *myr::RenderSprites::getShaderVertex()
 
 		"void main() {"
 		  "mat3 matLocal = mat3(vec3(scaleRotate.xy, transform.z), vec3(scaleRotate.zw, transform.w), vec3(0, 0, 1));"
-		  "mat3 matGlobal = mat3(widthRow0.yzw, vec3(heightRow1.yz, heightRow1.w), vec3(0, 0, 1));"
+		  "mat3 matGlobal = mat3(widthRow0.yzw, heightRow1.yzw, vec3(0, 0, 1));"
 
 		  "uv = pixels.xy + vertex * pixels.zw;"
 
