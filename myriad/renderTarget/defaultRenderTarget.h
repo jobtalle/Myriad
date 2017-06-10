@@ -1,7 +1,6 @@
 #pragma once
 
 #include "renderer/opengl/opengl.h"
-#include "systems/renderBatch.h"
 #include "systems/renderSystem.h"
 #include "../shader/shader.h"
 
@@ -44,7 +43,7 @@ namespace myr
 		void createRenderSystems();
 
 	private:
-		std::queue<RenderBatch> batches;
+		RenderSystems currentSystem;
 		std::unique_ptr<RenderSystem> systems[RENDER_SYSTEM_COUNT];
 		Shader *shaders[RENDER_SYSTEM_COUNT];
 		Renderer *renderer;

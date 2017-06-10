@@ -19,7 +19,7 @@ myr::DefaultRenderTarget::DefaultRenderTarget(
 	const Color &clearColor,
 	const Rect &rect,
 	Renderer *renderer)
-:fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer) {}
+:fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer), currentSystem(RENDER_SYSTEM_NONE) {}
 
 void myr::DefaultRenderTarget::setRect(const Rect &rect)
 {
@@ -38,10 +38,13 @@ myr::Transform myr::DefaultRenderTarget::getTransform() const
 
 void myr::DefaultRenderTarget::setTransform(const Transform &transform)
 {
-	if(!batches.empty())
-		bind();
-
 	this->transform = transform;
+
+	if(currentSystem != RENDER_SYSTEM_NONE)
+	{
+		systems[currentSystem].get()->render(shaders[currentSystem]);
+		currentSystem = RENDER_SYSTEM_NONE;
+	}
 }
 
 void myr::DefaultRenderTarget::bind()
@@ -88,36 +91,23 @@ void myr::DefaultRenderTarget::clear() const
 
 void myr::DefaultRenderTarget::render(const RenderSystems system, const void *element)
 {
-	if(batches.empty() || batches.front().getType() != system)
-		batches.push(RenderBatch(system, systems[system].get()->getBufferIndex()));
-	else
-		batches.front().increment();
+	if(currentSystem != system)
+		if(currentSystem == RENDER_SYSTEM_NONE)
+			getRenderer()->setSharedUniforms(getRect(), getTransform());
+		else
+			systems[currentSystem].get()->render(shaders[currentSystem]);
 
-	systems[system].get()->push(element);
+	currentSystem = system;
+	systems[currentSystem].get()->push(element);
 }
 
 void myr::DefaultRenderTarget::render()
 {
-	std::vector<RenderSystems> usedSystems;
-
-	getRenderer()->setSharedUniforms(getRect(), getTransform());
-
-	while(!batches.empty())
+	if(currentSystem != RENDER_SYSTEM_NONE)
 	{
-		if(std::find(
-			usedSystems.begin(),
-			usedSystems.end(),
-			batches.front().getType()) == usedSystems.end())
-			usedSystems.push_back(batches.front().getType());
-		
-		systems[batches.front().getType()].get()->render(
-			batches.front(),
-			shaders[batches.front().getType()]);
-		batches.pop();
+		systems[currentSystem].get()->render(shaders[currentSystem]);
+		currentSystem = RENDER_SYSTEM_NONE;
 	}
-
-	for(auto system : usedSystems)
-		systems[system].get()->flush();
 }
 
 void myr::DefaultRenderTarget::createRenderSystems()

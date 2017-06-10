@@ -1,7 +1,6 @@
 #pragma once
 
 #include "renderSystems.h"
-#include "renderBatch.h"
 #include "shader/shader.h"
 #include "renderer/opengl/opengl.h"
 
@@ -12,8 +11,7 @@ namespace myr
 	public:
 		RenderSystem();
 		virtual ~RenderSystem();
-		virtual void flush() = 0;
-		virtual void render(const RenderBatch &batch, Shader *shader);
+		virtual void render(Shader *shader);
 		virtual void push(const void *element) = 0;
 		virtual size_t getBufferIndex() const = 0;
 
@@ -31,6 +29,6 @@ namespace myr
 		GLuint vao;
 		GLuint buffer;
 
-		void upload(const RenderBatch &batch);
+		void upload();
 	};
 }

@@ -12,15 +12,15 @@ namespace myr
 	public:
 		Transform();
 
-		Transform identity();
+		Transform &identity();
 
-		Transform scale(const float scaleUniform);
-		Transform scale(const float scaleX, const float scaleY);
+		Transform &scale(const float scaleUniform);
+		Transform &scale(const float scaleX, const float scaleY);
 
-		Transform translate(const Vector &v);
-		Transform translate(const float x, const float y);
+		Transform &translate(const Vector &v);
+		Transform &translate(const float x, const float y);
 
-		Transform rotate(const float radians);
+		Transform &rotate(const float radians);
 
 	private:
 		union {

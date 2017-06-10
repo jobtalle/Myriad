@@ -13,8 +13,7 @@ namespace myr
 	public:
 		RenderSprites();
 		~RenderSprites();
-		void flush() override;
-		void render(const RenderBatch &batch, Shader *shader) override;
+		void render(Shader *shader) override;
 		void push(const void *element) override;
 		size_t getBufferIndex() const override;
 

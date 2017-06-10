@@ -40,20 +40,17 @@ myr::RenderSprites::~RenderSprites()
 	glDeleteBuffers(1, &quad);
 }
 
-void myr::RenderSprites::flush()
+void myr::RenderSprites::render(Shader *shader)
 {
-	instances.clear();
-}
-
-void myr::RenderSprites::render(const RenderBatch &batch, Shader *shader)
-{
-	RenderSystem::render(batch, shader);
+	RenderSystem::render(shader);
 	
 	glUniform1i(shader->getUniformLocation(UNIFORM_ATLAS), Renderer::TextureChannels::ATLAS);
 	
 	vaoBind();
-	glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, (GLsizei)(batch.getEnd() - batch.getStart()));
+	glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, (GLsizei)(instances.size()));
 	vaoRelease();	
+
+	instances.clear();
 }
 
 void myr::RenderSprites::push(const void *element)

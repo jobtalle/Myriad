@@ -7,7 +7,7 @@ myr::Transform::Transform()
 	identity();
 }
 
-myr::Transform myr::Transform::identity()
+myr::Transform &myr::Transform::identity()
 {
 	values[0][0] = 1;
 	values[0][1] = 0;
@@ -20,12 +20,12 @@ myr::Transform myr::Transform::identity()
 	return *this;
 }
 
-myr::Transform myr::Transform::scale(const float scaleUniform)
+myr::Transform &myr::Transform::scale(const float scaleUniform)
 {
 	return scale(scaleUniform, scaleUniform);
 }
 
-myr::Transform myr::Transform::scale(const float scaleX, const float scaleY)
+myr::Transform &myr::Transform::scale(const float scaleX, const float scaleY)
 {
 	row0[0] *= scaleX;
 	row0[1] *= scaleX;
@@ -35,23 +35,20 @@ myr::Transform myr::Transform::scale(const float scaleX, const float scaleY)
 	return *this;
 }
 
-myr::Transform myr::Transform::translate(const Vector &v)
+myr::Transform &myr::Transform::translate(const Vector &v)
 {
-	translateX += v.x;
-	translateY += v.y;
+	return translate(v.x, v.y);
+}
+
+myr::Transform &myr::Transform::translate(const float x, const float y)
+{
+	translateX += row0[0] * x + row0[1] * y;
+	translateY += row1[0] * x + row1[1] * y;
 
 	return *this;
 }
 
-myr::Transform myr::Transform::translate(const float x, const float y)
-{
-	translateX += x;
-	translateY += y;
-
-	return *this;
-}
-
-myr::Transform myr::Transform::rotate(const float radians)
+myr::Transform &myr::Transform::rotate(const float radians)
 {
 	// Todo: Use LUT
 
@@ -60,10 +57,10 @@ myr::Transform myr::Transform::rotate(const float radians)
 
 	const float original[2][2] = {row0[0], row1[0], row0[1], row1[1]};
 
-	row0[0] = original[0][0] * c + original[0][1] * s;
-	row0[1] = original[0][0] * -s + original[0][1] * c;
-	row1[0] = original[1][0] * c + original[1][1] * s;
-	row1[1] = original[1][0] * -s + original[1][1] * c;
+	row0[0] = original[0][0] * c + original[0][1] * -s;
+	row0[1] = original[0][0] * s + original[0][1] * c;
+	row1[0] = original[1][0] * c + original[1][1] * -s;
+	row1[1] = original[1][0] * s + original[1][1] * c;
 
 	return *this;
 }

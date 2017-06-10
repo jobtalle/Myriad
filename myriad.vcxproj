@@ -131,7 +131,6 @@
     <ClInclude Include="myriad\renderer\atlas.h" />
     <ClInclude Include="myriad\renderer\sharedUniforms.h" />
     <ClInclude Include="myriad\renderTarget\defaultRenderTarget.h" />
-    <ClInclude Include="myriad\renderTarget\systems\renderBatch.h" />
     <ClInclude Include="myriad\renderTarget\systems\renderSystem.h" />
     <ClInclude Include="myriad\renderTarget\systems\renderSystems.h" />
     <ClInclude Include="myriad\renderTarget\systems\sprites\renderSprites.h" />
@@ -152,7 +151,6 @@
   <ItemGroup>
     <ClCompile Include="myriad\renderer\atlas.cpp" />
     <ClCompile Include="myriad\renderTarget\defaultRenderTarget.cpp" />
-    <ClCompile Include="myriad\renderTarget\systems\renderBatch.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\renderSystem.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\sprites\renderSprites.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\sprites\spriteShaders.cpp" />

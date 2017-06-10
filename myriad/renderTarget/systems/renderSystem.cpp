@@ -14,9 +14,9 @@ myr::RenderSystem::~RenderSystem()
 	glDeleteVertexArrays(1, &vao);
 }
 
-void myr::RenderSystem::render(const RenderBatch &batch, Shader *shader)
+void myr::RenderSystem::render(Shader *shader)
 {
-	upload(batch);
+	upload();
 
 	shader->bind();
 }
@@ -36,15 +36,13 @@ void myr::RenderSystem::bindBuffer() const
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
 }
 
-void myr::RenderSystem::upload(const RenderBatch &batch)
+void myr::RenderSystem::upload()
 {
-	const size_t requiredSize = batch.getEnd() - batch.getStart();
-	
 	bindBuffer();
 
-	if(requiredSize > bufferCapacity)
+	if(getBufferIndex() > bufferCapacity)
 	{
-		while(requiredSize > bufferCapacity)
+		while(getBufferIndex() > bufferCapacity)
 		{
 			if(bufferCapacity == 0)
 				bufferCapacity = BUFFER_CAPACITY_INITIAL;
@@ -58,6 +56,6 @@ void myr::RenderSystem::upload(const RenderBatch &batch)
 	glBufferSubData(
 		GL_ARRAY_BUFFER, 
 		0,
-		requiredSize * getBufferSizeof(),
-		(char*)getBufferData() + batch.getStart() * getBufferSizeof());
+		getBufferIndex() * getBufferSizeof(),
+		(char*)getBufferData());
 }
