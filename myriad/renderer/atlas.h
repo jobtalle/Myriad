@@ -7,6 +7,7 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <list>
 
 namespace myr
 {
@@ -53,6 +54,7 @@ namespace myr
 
 		std::unordered_map<std::string, std::shared_ptr<Entry>> entries;
 		std::unordered_map<std::string, std::shared_ptr<Entry>> unusedEntries;
+		std::list<std::string> unusedEntryNames;
 		QuadSpace tree;
 		GLuint texture;
 		GLuint channel;

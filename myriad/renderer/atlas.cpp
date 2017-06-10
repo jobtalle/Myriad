@@ -53,9 +53,12 @@ myr::Atlas::Location myr::Atlas::query(
 			QuadSpace::Node node = tree.query(quadSpaceLevel(std::max(width, height)));
 
 			while(!node.getValid() && unusedEntries.size())
-			{
-				tree.release(unusedEntries.begin()->second.get()->node);
-				unusedEntries.erase(unusedEntries.begin());
+			{;
+				auto remove = unusedEntries.find(unusedEntryNames.front());
+				unusedEntryNames.pop_front();
+
+				tree.release(remove->second.get()->node);
+				unusedEntries.erase(remove);
 
 				node = tree.query(quadSpaceLevel(std::max(width, height)));
 			}
@@ -81,6 +84,7 @@ myr::Atlas::Location myr::Atlas::query(
 		++match->second->usageCount;
 		
 		unusedEntries.erase(recycle);
+		unusedEntryNames.remove(name);
 	}
 
 	return entryToLocation(match->second.get());
@@ -92,6 +96,7 @@ void myr::Atlas::release(const std::string &name)
 	
 	if(--match->second->usageCount == 0) {
 		unusedEntries.insert(std::make_pair(name, match->second));
+		unusedEntryNames.push_back(name);
 		
 		entries.erase(match);
 	}
