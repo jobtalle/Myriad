@@ -64,3 +64,10 @@ myr::Transform &myr::Transform::rotate(const float radians)
 
 	return *this;
 }
+
+myr::Vector myr::Transform::operator*(const Vector &vector)
+{
+	return Vector(
+		row0[0] * vector.x + row0[1] * vector.y + translateX,
+		row1[0] * vector.x + row1[1] * vector.y + translateY);
+}

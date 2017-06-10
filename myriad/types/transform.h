@@ -22,6 +22,8 @@ namespace myr
 
 		Transform &rotate(const float radians);
 
+		Vector operator*(const Vector &vector);
+
 	private:
 		union {
 			float values[2][3];
