@@ -60,3 +60,10 @@ myr::Vector myr::Vector::operator*(const Vector &other)
 		x * other.x,
 		y * other.y);
 }
+
+myr::Vector myr::Vector::operator*(const float factor)
+{
+	return Vector(
+		x * factor,
+		y * factor);
+}
