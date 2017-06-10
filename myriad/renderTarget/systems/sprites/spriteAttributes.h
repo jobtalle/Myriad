@@ -58,12 +58,14 @@ namespace myr
 			position(position),
 			origin(origin)
 		{
+			// Todo: Use LUT
+
 			const float s = sin(angle);
 			const float c = cos(angle);
 
 			row0[0] = size.x * c;
-			row0[1] = size.x * -s;
-			row1[0] = size.y * s;
+			row0[1] = size.x * s;
+			row1[0] = size.y * -s;
 			row1[1] = size.y * c;
 		}
 

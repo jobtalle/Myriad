@@ -23,11 +23,12 @@ const char *myr::RenderSprites::getShaderVertex()
 		"void main() {"
 		  "mat3 matLocal = mat3(vec3(scaleRotate.xy, transform.z), vec3(scaleRotate.zw, transform.w), vec3(0, 0, 1));"
 		  "mat3 matGlobal = mat3(widthRow0.yzw, heightRow1.yzw, vec3(0, 0, 1));"
+		  "vec2 point = (vec3(vertex.x - transform.x, vertex.y - transform.y, 1) * matLocal * matGlobal).xy;"
 
 		  "uv = pixels.xy + vertex * pixels.zw;"
 
 		  "gl_Position = vec4("
-		    "(vec3(vertex.x - transform.x, -vertex.y + transform.y, 1) * matLocal * matGlobal).xy /"
+		    "vec2(point.x, -point.y) /"
 		    "vec2(widthRow0.x, heightRow1.x) * 2 + vec2(-1, 1),"
 		    "0, 1);"
 		"}";
