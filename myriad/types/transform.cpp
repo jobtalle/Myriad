@@ -45,8 +45,8 @@ myr::Transform &myr::Transform::scale(const float scaleUniform)
 myr::Transform &myr::Transform::scale(const float scaleX, const float scaleY)
 {
 	row0[0] *= scaleX;
-	row0[1] *= scaleX;
-	row1[0] *= scaleY;
+	row0[1] *= scaleY;
+	row1[0] *= scaleX;
 	row1[1] *= scaleY;
 
 	return *this;
