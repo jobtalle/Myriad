@@ -31,6 +31,7 @@ namespace myr
 		void setTransform(const Transform &transform);
 		void bind();
 		void clear() const;
+		void draw(); // TODO
 
 	protected:
 		Rect rect;
