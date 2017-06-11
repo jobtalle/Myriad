@@ -91,6 +91,8 @@ void myr::Renderer::createDefaultShaders()
 		RenderSprites::getShaderFragment(),
 		RenderSprites::getShaderUniforms(),
 		this));
+
+	shaders[RENDER_SYSTEM_RENDER_TARGETS] = shaders[RENDER_SYSTEM_SPRITES];
 }
 
 void myr::Renderer::initializeUbo()

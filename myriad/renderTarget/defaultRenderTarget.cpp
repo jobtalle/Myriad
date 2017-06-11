@@ -1,6 +1,7 @@
 #include "defaultRenderTarget.h"
 #include "renderer/renderer.h"
 #include "systems/sprites/renderSprites.h"
+#include "systems/renderTargets/renderRenderTargets.h"
 
 #include <cassert>
 
@@ -113,7 +114,8 @@ void myr::DefaultRenderTarget::render()
 void myr::DefaultRenderTarget::createRenderSystems()
 {
 	systems[RENDER_SYSTEM_SPRITES].reset(new RenderSprites());
-	
+	systems[RENDER_SYSTEM_RENDER_TARGETS].reset(new RenderRenderTargets());
+
 	for(size_t i = 0; i < RENDER_SYSTEM_COUNT; ++i)
 		shaders[i] = getRenderer()->getDefaultShader(static_cast<RenderSystems>(i));
 }

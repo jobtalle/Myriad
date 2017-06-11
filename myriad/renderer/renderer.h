@@ -46,7 +46,7 @@ namespace myr
 		DefaultRenderTarget renderTarget;
 		Atlas atlas;
 		Rect rect;
-		std::unique_ptr<Shader> shaders[RENDER_SYSTEM_COUNT];
+		std::shared_ptr<Shader> shaders[RENDER_SYSTEM_COUNT];
 
 		void bind();
 		Atlas &getAtlas();

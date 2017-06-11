@@ -8,11 +8,11 @@
 
 namespace myr
 {
-	class RenderSprites final : public RenderSystem
+	class RenderSprites : public RenderSystem
 	{
 	public:
 		RenderSprites();
-		~RenderSprites();
+		virtual ~RenderSprites();
 		void render(Shader *shader) override;
 		void push(const void *element) override;
 		size_t getBufferIndex() const override;
