@@ -33,7 +33,7 @@ myr::RenderSprites::RenderSprites()
 		(GLvoid*)offsetof(SpriteAttributes, attributeTransform));
 
 	vaoRelease();
-
+	
 	instances = (myr::SpriteAttributes*)malloc(sizeof(SpriteAttributes)* instanceCapacity);
 }
 

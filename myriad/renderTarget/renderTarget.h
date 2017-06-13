@@ -9,7 +9,9 @@ namespace myr
 	public:
 		RenderTarget(const Color &clearColor, const Rect &rect, Renderer *renderer);
 		~RenderTarget() override;
-		void draw();
+		void draw(
+			const int x,
+			const int y);
 		using DefaultRenderTarget::setRect;
 
 	private:

@@ -18,6 +18,7 @@ namespace myr
 		friend class Shader;
 		friend class Sprite;
 		friend class RenderSprites;
+		friend class RenderRenderTargets;
 		friend class RenderTarget;
 
 	public:

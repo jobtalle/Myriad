@@ -1,5 +1,6 @@
 #include "renderTarget.h"
 #include "../renderer/renderer.h"
+#include "systems/sprites/spriteAttributes.h"
 
 #include <iostream> // TODO: Debug
 
@@ -14,6 +15,20 @@ myr::RenderTarget::RenderTarget(const Color &clearColor, const Rect &rect, Rende
 myr::RenderTarget::~RenderTarget()
 {
 	deleteFBO();
+}
+
+void myr::RenderTarget::draw(
+	const int x,
+	const int y)
+{
+	SpriteAttributes attributes(
+		Vector(0, 0),
+		Vector(1, 1),
+		Vector(x, y),
+		Vector(getRect().getWidth(), getRect().getHeight()),
+		Vector(0, 0));
+
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &attributes);
 }
 
 void myr::RenderTarget::generateFBO()

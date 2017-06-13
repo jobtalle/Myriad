@@ -1,11 +1,12 @@
 #pragma once
 
-#include "../sprites/renderSprites.h"
+#include "../renderSystem.h"
 
 namespace myr
 {
-	class RenderRenderTargets final : public RenderSprites
+	class RenderRenderTargets final : public RenderSystem
 	{
 	public:
+		
 	};
 }

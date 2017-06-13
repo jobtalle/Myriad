@@ -20,6 +20,7 @@ namespace myr
 	{
 		friend class Renderer;
 		friend class Sprite;
+		friend class RenderTarget;
 
 	public:
 		DefaultRenderTarget(

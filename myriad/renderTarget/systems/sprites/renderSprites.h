@@ -8,7 +8,7 @@
 
 namespace myr
 {
-	class RenderSprites : public RenderSystem
+	class RenderSprites final : public RenderSystem
 	{
 	public:
 		RenderSprites();
