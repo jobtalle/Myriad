@@ -1,6 +1,6 @@
 #include "renderTarget.h"
 #include "../renderer/renderer.h"
-#include "systems/sprites/spriteAttributes.h"
+#include "systems/renderTargets/renderTargetAttributes.h"
 
 #include <iostream> // TODO: Debug
 
@@ -21,12 +21,14 @@ void myr::RenderTarget::draw(
 	const int x,
 	const int y)
 {
-	SpriteAttributes attributes(
-		Vector(0, 0),
-		Vector(1, 1),
-		Vector(x, y),
-		Vector(getRect().getWidth(), getRect().getHeight()),
-		Vector(0, 0));
+	RenderTargetAttributes attributes(
+		SpriteAttributes(
+			Vector(0, 1),
+			Vector(1, -1),
+			Vector(x, y),
+			Vector(getRect().getWidth(), getRect().getHeight()),
+			Vector(0, 0)),
+		texture);
 
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &attributes);
 }
@@ -65,4 +67,9 @@ void myr::RenderTarget::resize()
 		GL_RGBA,
 		GL_UNSIGNED_BYTE,
 		NULL);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 }

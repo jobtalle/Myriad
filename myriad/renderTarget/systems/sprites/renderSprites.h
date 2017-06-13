@@ -10,22 +10,27 @@ namespace myr
 {
 	class RenderSprites final : public RenderSystem
 	{
+		friend class RenderRenderTargets;
+
 	public:
 		RenderSprites();
-		virtual ~RenderSprites();
+		~RenderSprites();
 		void render(Shader *shader) override;
 		void push(const void *element) override;
-		size_t getBufferIndex() const override;
 
 		static const char *getShaderVertex();
 		static const char *getShaderFragment();
 		static const std::vector<std::string> getShaderUniforms();
 
 	protected:
+		size_t getBufferIndex() const override;
 		size_t getBufferSizeof() const override;
 		const void *getBufferData() const override;
 
 	private:
+		void configureQuadAttribs() const;
+		void configureSpriteAttribs() const;
+
 		static const size_t INSTANCE_CAPACITY_INITIAL = 8;
 		static const char *UNIFORM_ATLAS;
 

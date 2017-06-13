@@ -12,25 +12,11 @@ myr::RenderSprites::RenderSprites()
 	glBindBuffer(GL_ARRAY_BUFFER, quad);
 	glBufferData(GL_ARRAY_BUFFER, getQuad().size() * sizeof(Vector), getQuad().data(), GL_STATIC_DRAW);
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vector), NULL);
+	configureQuadAttribs();
 
 	bindBuffer();
 
-	glEnableVertexAttribArray(1);
-	glVertexAttribDivisor(1, 1);
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
-		(GLvoid*)offsetof(SpriteAttributes, attributeAtlas));
-
-	glEnableVertexAttribArray(2);
-	glVertexAttribDivisor(2, 1);
-	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
-		(GLvoid*)offsetof(SpriteAttributes, attributeScaleRotate));
-
-	glEnableVertexAttribArray(3);
-	glVertexAttribDivisor(3, 1);
-	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
-		(GLvoid*)offsetof(SpriteAttributes, attributeTransform));
+	configureSpriteAttribs();
 
 	vaoRelease();
 	
@@ -82,4 +68,28 @@ size_t myr::RenderSprites::getBufferSizeof() const
 const void *myr::RenderSprites::getBufferData() const
 {
 	return instances;
+}
+
+void myr::RenderSprites::configureQuadAttribs() const
+{
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vector), NULL);
+}
+
+void myr::RenderSprites::configureSpriteAttribs() const
+{
+	glEnableVertexAttribArray(1);
+	glVertexAttribDivisor(1, 1);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
+		(GLvoid*)offsetof(SpriteAttributes, attributeAtlas));
+
+	glEnableVertexAttribArray(2);
+	glVertexAttribDivisor(2, 1);
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
+		(GLvoid*)offsetof(SpriteAttributes, attributeScaleRotate));
+
+	glEnableVertexAttribArray(3);
+	glVertexAttribDivisor(3, 1);
+	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(SpriteAttributes),
+		(GLvoid*)offsetof(SpriteAttributes, attributeTransform));
 }

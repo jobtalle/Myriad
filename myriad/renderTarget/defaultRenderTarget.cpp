@@ -100,7 +100,7 @@ void myr::DefaultRenderTarget::clear() const
 void myr::DefaultRenderTarget::createRenderSystems()
 {
 	systems[RENDER_SYSTEM_SPRITES].reset(new RenderSprites());
-	systems[RENDER_SYSTEM_RENDER_TARGETS].reset(new RenderRenderTargets());
+	systems[RENDER_SYSTEM_RENDER_TARGETS].reset(new RenderRenderTargets((RenderSprites*)systems[RENDER_SYSTEM_SPRITES].get()));
 
 	for(size_t i = 0; i < RENDER_SYSTEM_COUNT; ++i)
 		shaders[i] = getRenderer()->getDefaultShader(static_cast<RenderSystems>(i));
