@@ -8,10 +8,15 @@ namespace myr
 	{
 	public:
 		RenderTarget(const Color &clearColor, const Rect &rect, Renderer *renderer);
+		~RenderTarget() override;
+		void draw();
 		using DefaultRenderTarget::setRect;
 
 	private:
 		void generateFBO();
 		void deleteFBO();
+		void resize();
+
+		GLuint texture;
 	};
 }

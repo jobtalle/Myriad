@@ -18,6 +18,7 @@ namespace myr
 		friend class Shader;
 		friend class Sprite;
 		friend class RenderSprites;
+		friend class RenderTarget;
 
 	public:
 		Renderer(const Color &clearColor, const Rect &rect);
@@ -32,7 +33,8 @@ namespace myr
 		enum TextureChannels
 		{
 			ATLAS,
-			RENDER_TARGET
+			RENDER_TARGET,
+			INTERMEDIATE
 		};
 
 		struct {

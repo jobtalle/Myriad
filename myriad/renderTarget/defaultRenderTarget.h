@@ -26,12 +26,12 @@ namespace myr
 			const Color &clearColor,
 			const Rect &rect,
 			Renderer *renderer);
+		virtual ~DefaultRenderTarget();
 		Rect getRect() const;
 		Transform getTransform() const;
 		void setTransform(const Transform &transform);
 		void bind();
 		void clear() const;
-		void draw(); // TODO
 
 	protected:
 		Rect rect;
@@ -52,6 +52,7 @@ namespace myr
 		Transform transform;
 		unsigned char flags;
 		
+		virtual void resize();
 		void render(const RenderSystems system, const void *element);
 		void render();
 

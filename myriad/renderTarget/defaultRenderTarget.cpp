@@ -22,9 +22,16 @@ myr::DefaultRenderTarget::DefaultRenderTarget(
 	Renderer *renderer)
 :fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer), currentSystem(RENDER_SYSTEM_NONE) {}
 
+myr::DefaultRenderTarget::~DefaultRenderTarget()
+{
+	
+}
+
 void myr::DefaultRenderTarget::setRect(const Rect &rect)
 {
 	this->rect = rect;
+
+	resize();
 }
 
 myr::Rect myr::DefaultRenderTarget::getRect() const
@@ -90,6 +97,20 @@ void myr::DefaultRenderTarget::clear() const
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+void myr::DefaultRenderTarget::createRenderSystems()
+{
+	systems[RENDER_SYSTEM_SPRITES].reset(new RenderSprites());
+	systems[RENDER_SYSTEM_RENDER_TARGETS].reset(new RenderRenderTargets());
+
+	for(size_t i = 0; i < RENDER_SYSTEM_COUNT; ++i)
+		shaders[i] = getRenderer()->getDefaultShader(static_cast<RenderSystems>(i));
+}
+
+void myr::DefaultRenderTarget::resize()
+{
+
+}
+
 void myr::DefaultRenderTarget::render(const RenderSystems system, const void *element)
 {
 	if(currentSystem != system)
@@ -109,13 +130,4 @@ void myr::DefaultRenderTarget::render()
 		systems[currentSystem].get()->render(shaders[currentSystem]);
 		currentSystem = RENDER_SYSTEM_NONE;
 	}
-}
-
-void myr::DefaultRenderTarget::createRenderSystems()
-{
-	systems[RENDER_SYSTEM_SPRITES].reset(new RenderSprites());
-	systems[RENDER_SYSTEM_RENDER_TARGETS].reset(new RenderRenderTargets());
-
-	for(size_t i = 0; i < RENDER_SYSTEM_COUNT; ++i)
-		shaders[i] = getRenderer()->getDefaultShader(static_cast<RenderSystems>(i));
 }
