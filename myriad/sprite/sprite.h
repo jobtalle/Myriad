@@ -50,13 +50,7 @@ namespace myr
 		int originX;
 		int originY;
 		Vector origin;
-		uint8_t flags;
 
 		void load();
-
-		enum flags
-		{
-			LOADED = 0x01
-		};
 	};
 }

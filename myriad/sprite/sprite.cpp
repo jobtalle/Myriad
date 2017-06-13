@@ -8,20 +8,19 @@ myr::Sprite::Sprite(
 	SpriteDecoder *decoder,
 	const int originX,
 	const int originY)
-	:flags(0), name(name), decoder(decoder), originX(originX), originY(originY), origin(0, 0) {}
+	:name(name), decoder(decoder), originX(originX), originY(originY), origin(0, 0)
+{
+	load();
+}
 
 myr::Sprite::~Sprite()
 {
-	if(flags & LOADED)
-		myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().release(name);
+	myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().release(name);
 }
 
 void myr::Sprite::draw(
 	const Transform &transform)
 {
-	if(!(flags & LOADED))
-		load();
-
 	SpriteAttributes attributes(
 		location.location,
 		location.size,
@@ -36,9 +35,6 @@ void myr::Sprite::draw(
 	const Transform &transform,
 	const Vector &scale)
 {
-	if(!(flags & LOADED))
-		load();
-
 	SpriteAttributes attributes(
 		location.location,
 		location.size,
@@ -53,9 +49,6 @@ void myr::Sprite::draw(
 	const int x,
 	const int y)
 {
-	if(!(flags & LOADED))
-		load();
-
 	SpriteAttributes attributes(
 		location.location,
 		location.size,
@@ -71,9 +64,6 @@ void myr::Sprite::draw(
 	const int y,
 	const Vector &scale)
 {
-	if(!(flags & LOADED))
-		load();
-
 	SpriteAttributes attributes(
 		location.location,
 		location.size,
@@ -90,9 +80,6 @@ void myr::Sprite::draw(
 	const Vector &scale,
 	const float angle)
 {
-	if(!(flags & LOADED))
-		load();
-
 	SpriteAttributes attributes(
 		location.location,
 		location.size,
@@ -132,8 +119,6 @@ int myr::Sprite::getOriginY() const
 
 void myr::Sprite::load()
 {
-	flags |= LOADED;
-
 	width = decoder->getWidth();
 	height = decoder->getHeight();
 	origin = Vector(float(originX) / width, float(originY) / height);

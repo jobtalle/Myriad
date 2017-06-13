@@ -30,6 +30,8 @@ myr::Renderer::Renderer(const Color &clearColor, const Rect &rect, const unsigne
 	createDefaultShaders();
 
 	renderTarget.createRenderSystems();
+
+	renderTarget.bind();
 }
 
 myr::Renderer::~Renderer()
