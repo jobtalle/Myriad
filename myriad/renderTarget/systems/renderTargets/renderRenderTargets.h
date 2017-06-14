@@ -22,7 +22,8 @@ namespace myr
 	private:
 		static const size_t INSTANCE_CAPACITY_INITIAL = 1;
 
-		RenderTargetAttributes *instances;
+		SpriteAttributes *instances;
+		GLuint *textures;
 		size_t instanceCount;
 		size_t instanceCapacity;
 	};

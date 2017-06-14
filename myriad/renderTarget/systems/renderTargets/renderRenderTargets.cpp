@@ -18,12 +18,14 @@ myr::RenderRenderTargets::RenderRenderTargets(const RenderSprites *renderSprites
 
 	vaoRelease();
 
-	instances = (RenderTargetAttributes*)malloc(sizeof(RenderTargetAttributes)* instanceCapacity);
+	instances = (SpriteAttributes*)malloc(sizeof(SpriteAttributes)* instanceCapacity);
+	textures = (GLuint*)malloc(sizeof(GLuint)* instanceCapacity);
 }
 
 myr::RenderRenderTargets::~RenderRenderTargets()
 {
 	free(instances);
+	free(textures);
 }
 
 void myr::RenderRenderTargets::render(Shader *shader)
@@ -37,11 +39,11 @@ void myr::RenderRenderTargets::render(Shader *shader)
 
 	for(size_t i = 0; i < instanceCount; ++i)
 	{
-		glBindTexture(GL_TEXTURE_2D, instances[i].texture);
+		glBindTexture(GL_TEXTURE_2D, textures[i]);
 
 		const size_t first = i;
 
-		while(i + 1 < instanceCount && instances[i + 1].texture == instances[first].texture)
+		while(i + 1 < instanceCount && textures[i + 1] == textures[first])
 			++i;
 		
 		bindBuffer();
@@ -54,8 +56,7 @@ void myr::RenderRenderTargets::render(Shader *shader)
 			glBufferData(GL_ARRAY_BUFFER, sizeof(SpriteAttributes) * bufferCapacity, NULL, GL_DYNAMIC_DRAW);
 		}
 
-		for(size_t j = 0; j < batchSize; ++j)
-			glBufferSubData(GL_ARRAY_BUFFER, sizeof(SpriteAttributes)* (first + j), sizeof(SpriteAttributes), &instances[first + j].spriteAttributes);
+		glBufferSubData(GL_ARRAY_BUFFER, sizeof(SpriteAttributes)* first, sizeof(SpriteAttributes) * batchSize, instances + first);
 
 		glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, GLsizei(batchSize));
 	}
@@ -71,10 +72,12 @@ void myr::RenderRenderTargets::push(const void *element)
 	{
 		instanceCapacity <<= 1;
 
-		instances = (RenderTargetAttributes*)realloc(instances, instanceCapacity * sizeof(RenderTargetAttributes));
+		instances = (SpriteAttributes*)realloc(instances, instanceCapacity * sizeof(SpriteAttributes));
+		textures = (GLuint*)realloc(textures, instanceCapacity * sizeof(GLuint));
 	}
 
-	instances[instanceCount++] = *((RenderTargetAttributes*)element);
+	textures[instanceCount] = ((RenderTargetAttributes*)element)->texture;
+	instances[instanceCount++] = ((RenderTargetAttributes*)element)->spriteAttributes;
 }
 
 size_t myr::RenderRenderTargets::getBufferIndex() const
