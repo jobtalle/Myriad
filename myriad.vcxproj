@@ -135,6 +135,7 @@
     <ClInclude Include="myriad\renderTarget\systems\renderSystems.h" />
     <ClInclude Include="myriad\renderTarget\systems\renderTargets\renderRenderTargets.h" />
     <ClInclude Include="myriad\renderTarget\systems\renderTargets\renderTargetAttributes.h" />
+    <ClInclude Include="myriad\sprite\quadRenderer.h" />
     <ClInclude Include="myriad\renderTarget\systems\sprites\renderSprites.h" />
     <ClInclude Include="myriad\renderTarget\systems\sprites\spriteAttributes.h" />
     <ClInclude Include="myriad\sprite\spriteDecoder.h" />

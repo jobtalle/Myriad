@@ -42,7 +42,6 @@ void myr::RenderRenderTargets::render(Shader *shader)
 		glBindTexture(GL_TEXTURE_2D, textures[i]);
 
 		const size_t first = i;
-
 		while(i + 1 < instanceCount && textures[i + 1] == textures[first])
 			++i;
 		
@@ -57,7 +56,6 @@ void myr::RenderRenderTargets::render(Shader *shader)
 		}
 
 		glBufferSubData(GL_ARRAY_BUFFER, sizeof(SpriteAttributes)* first, sizeof(SpriteAttributes) * batchSize, instances + first);
-
 		glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, GLsizei(batchSize));
 	}
 

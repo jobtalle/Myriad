@@ -1,17 +1,32 @@
 #pragma once
 
 #include "defaultRenderTarget.h"
+#include "sprite/quadRenderer.h"
 
 namespace myr
 {
-	class RenderTarget final : public DefaultRenderTarget
+	class RenderTarget final : public DefaultRenderTarget, public QuadRenderer
 	{
 	public:
 		RenderTarget(const Color &clearColor, const Rect &rect, Renderer *renderer);
 		~RenderTarget() override;
 		void draw(
+			const Transform &transform) override;
+		void draw(
+			const Transform &transform,
+			const Vector &scale) override;
+		void draw(
 			const int x,
-			const int y);
+			const int y) override;
+		void draw(
+			const int x,
+			const int y,
+			const Vector &scale) override;
+		void draw(
+			const int x,
+			const int y,
+			const Vector &scale,
+			const float angle) override;
 		using DefaultRenderTarget::setRect;
 
 	private:

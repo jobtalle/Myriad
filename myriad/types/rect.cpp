@@ -16,6 +16,11 @@ uint16_t myr::Rect::getHeight() const
 	return height;
 }
 
+myr::Vector myr::Rect::getSize() const
+{
+	return Vector(width, height);
+}
+
 void myr::Rect::setWidth(const uint16_t width)
 {
 	this->width = width;

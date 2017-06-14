@@ -18,19 +18,76 @@ myr::RenderTarget::~RenderTarget()
 }
 
 void myr::RenderTarget::draw(
+	const Transform &transform)
+{
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
+		SpriteAttributes(
+			Vector(0, 1),
+			Vector(1, -1),
+			rect.getSize(),
+			Vector(0, 0),
+			transform),
+		texture));
+}
+
+void myr::RenderTarget::draw(
+	const Transform &transform,
+	const Vector &scale)
+{
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
+		SpriteAttributes(
+			Vector(0, 1),
+			Vector(1, -1),
+			rect.getSize() * scale,
+			Vector(0, 0),
+			transform),
+		texture));
+}
+
+void myr::RenderTarget::draw(
 	const int x,
 	const int y)
 {
-	RenderTargetAttributes attributes(
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
 		SpriteAttributes(
 			Vector(0, 1),
 			Vector(1, -1),
 			Vector(x, y),
-			Vector(getRect().getWidth(), getRect().getHeight()),
+			rect.getSize(),
 			Vector(0, 0)),
-		texture);
+		texture));
+}
 
-	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &attributes);
+void myr::RenderTarget::draw(
+	const int x,
+	const int y,
+	const Vector &scale)
+{
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
+		SpriteAttributes(
+			Vector(0, 1),
+			Vector(1, -1),
+			Vector(x, y),
+			rect.getSize() * scale,
+			Vector(0, 0)),
+		texture));
+}
+
+void myr::RenderTarget::draw(
+	const int x,
+	const int y,
+	const Vector &scale,
+	const float angle)
+{
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
+		SpriteAttributes(
+			Vector(0, 1),
+			Vector(1, -1),
+			Vector(x, y),
+			rect.getSize() * scale,
+			Vector(0, 0),
+			angle),
+		texture));
 }
 
 void myr::RenderTarget::generateFBO()

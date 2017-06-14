@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#include "vector.h"
+
 namespace myr
 {
 	class Rect final
@@ -10,6 +12,7 @@ namespace myr
 		Rect(const uint16_t width, const uint16_t height);
 		uint16_t getWidth() const;
 		uint16_t getHeight() const;
+		Vector getSize() const;
 		void setWidth(const uint16_t width);
 		void setHeight(const uint16_t height);
 

@@ -1,7 +1,6 @@
 #include "sprite.h"
 #include "renderer/renderer.h"
 #include "renderTarget/renderTarget.h"
-#include "renderTarget/systems/sprites/spriteAttributes.h"
 
 myr::Sprite::Sprite(
 	const std::string &name,
@@ -21,42 +20,36 @@ myr::Sprite::~Sprite()
 void myr::Sprite::draw(
 	const Transform &transform)
 {
-	SpriteAttributes attributes(
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &SpriteAttributes(
 		location.location,
 		location.size,
 		Vector(width, height),
 		origin,
-		transform);
-
-	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
+		transform));
 }
 
 void myr::Sprite::draw(
 	const Transform &transform,
 	const Vector &scale)
 {
-	SpriteAttributes attributes(
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &SpriteAttributes(
 		location.location,
 		location.size,
 		Vector(width * scale.x, height * scale.y),
 		origin,
-		transform);
-
-	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
+		transform));
 }
 
 void myr::Sprite::draw(
 	const int x,
 	const int y)
 {
-	SpriteAttributes attributes(
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &SpriteAttributes(
 		location.location,
 		location.size,
 		Vector(x, y),
 		Vector(width, height),
-		origin);
-
-	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
+		origin));
 }
 
 void myr::Sprite::draw(
@@ -64,14 +57,12 @@ void myr::Sprite::draw(
 	const int y,
 	const Vector &scale)
 {
-	SpriteAttributes attributes(
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &SpriteAttributes(
 		location.location,
 		location.size,
 		Vector(x, y),
 		Vector(width * scale.x, height * scale.y),
-		origin);
-
-	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
+		origin));
 }
 
 void myr::Sprite::draw(
@@ -80,15 +71,13 @@ void myr::Sprite::draw(
 	const Vector &scale,
 	const float angle)
 {
-	SpriteAttributes attributes(
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &SpriteAttributes(
 		location.location,
 		location.size,
 		Vector(x, y),
 		Vector(width * scale.x, height * scale.y),
 		origin,
-		angle);
-
-	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &attributes);
+		angle));
 }
 
 void myr::Sprite::setOrigin(const int originX, const int originY)

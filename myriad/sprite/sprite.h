@@ -4,12 +4,12 @@
 #include <memory>
 
 #include "renderer/atlas.h"
-#include "types/transform.h"
 #include "spriteDecoder.h"
+#include "quadRenderer.h"
 
 namespace myr
 {
-	class Sprite final
+	class Sprite final : public QuadRenderer
 	{
 	public:
 		Sprite(
@@ -19,22 +19,22 @@ namespace myr
 			const int originY = 0);
 		~Sprite();
 		void draw(
-			const Transform &transform);
+			const Transform &transform) override;
 		void draw(
 			const Transform &transform,
-			const Vector &scale);
+			const Vector &scale) override;
 		void draw(
 			const int x,
-			const int y);
+			const int y) override;
 		void draw(
 			const int x,
 			const int y,
-			const Vector &scale);
+			const Vector &scale) override;
 		void draw(
 			const int x,
 			const int y,
 			const Vector &scale,
-			const float angle);
+			const float angle) override;
 		void setOrigin(const int originX, const int originY);
 		short int getWidth() const;
 		short int getHeight() const;
