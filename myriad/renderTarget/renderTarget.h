@@ -1,7 +1,7 @@
 #pragma once
 
 #include "defaultRenderTarget.h"
-#include "sprite/quad.h"
+#include "quad/quad.h"
 
 namespace myr
 {

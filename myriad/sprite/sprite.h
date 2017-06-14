@@ -5,7 +5,7 @@
 
 #include "renderer/atlas.h"
 #include "spriteDecoder.h"
-#include "quad.h"
+#include "quad/quad.h"
 
 namespace myr
 {
