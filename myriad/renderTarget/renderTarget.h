@@ -1,11 +1,11 @@
 #pragma once
 
 #include "defaultRenderTarget.h"
-#include "sprite/quadRenderer.h"
+#include "sprite/quad.h"
 
 namespace myr
 {
-	class RenderTarget final : public DefaultRenderTarget, public QuadRenderer
+	class RenderTarget final : public DefaultRenderTarget, public Quad
 	{
 	public:
 		RenderTarget(const Color &clearColor, const Rect &rect, Renderer *renderer);

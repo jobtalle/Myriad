@@ -6,7 +6,7 @@
 
 namespace myr
 {
-	class QuadRenderer
+	class Quad
 	{
 	public:
 		virtual void draw(

@@ -5,11 +5,11 @@
 
 #include "renderer/atlas.h"
 #include "spriteDecoder.h"
-#include "quadRenderer.h"
+#include "quad.h"
 
 namespace myr
 {
-	class Sprite final : public QuadRenderer
+	class Sprite final : public Quad
 	{
 	public:
 		Sprite(
