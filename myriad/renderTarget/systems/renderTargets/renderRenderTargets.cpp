@@ -39,9 +39,25 @@ void myr::RenderRenderTargets::render(Shader *shader)
 	{
 		glBindTexture(GL_TEXTURE_2D, instances[i].texture);
 
+		const size_t first = i;
+
+		while(i + 1 < instanceCount && instances[i + 1].texture == instances[first].texture)
+			++i;
+		
 		bindBuffer();
-		glBufferData(GL_ARRAY_BUFFER, sizeof(SpriteAttributes), &instances[i].spriteAttributes, GL_DYNAMIC_DRAW);
-		glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, 1);
+
+		const size_t batchSize = i - first + 1;
+		if(batchSize > bufferCapacity)
+		{
+			bufferCapacity = batchSize;
+
+			glBufferData(GL_ARRAY_BUFFER, sizeof(SpriteAttributes) * bufferCapacity, NULL, GL_DYNAMIC_DRAW);
+		}
+
+		for(size_t j = 0; j < batchSize; ++j)
+			glBufferSubData(GL_ARRAY_BUFFER, sizeof(SpriteAttributes)* (first + j), sizeof(SpriteAttributes), &instances[first + j].spriteAttributes);
+
+		glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, GLsizei(batchSize));
 	}
 
 	instanceCount = 0;

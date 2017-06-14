@@ -8,6 +8,8 @@ namespace myr
 {
 	class RenderSystem
 	{
+		friend class RenderRenderTargets;
+
 	public:
 		RenderSystem();
 		virtual ~RenderSystem();
