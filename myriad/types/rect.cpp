@@ -16,7 +16,7 @@ uint16_t myr::Rect::getHeight() const
 	return height;
 }
 
-myr::Vector myr::Rect::getSize() const
+myr::Vector myr::Rect::toVector() const
 {
 	return Vector(width, height);
 }
