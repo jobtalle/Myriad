@@ -10,21 +10,21 @@ namespace myr
 	{
 	public:
 		virtual void draw(
-			const Transform &transform) = 0;
+			const Transform &transform) const = 0;
 		virtual void draw(
 			const Transform &transform,
-			const Vector &scale) = 0;
+			const Vector &scale) const = 0;
 		virtual void draw(
 			const int x,
-			const int y) = 0;
+			const int y) const = 0;
 		virtual void draw(
 			const int x,
 			const int y,
-			const Vector &scale) = 0;
+			const Vector &scale) const = 0;
 		virtual void draw(
 			const int x,
 			const int y,
 			const Vector &scale,
-			const float angle) = 0;
+			const float angle) const = 0;
 	};
 }

@@ -11,22 +11,22 @@ namespace myr
 		RenderTarget(const Color &clearColor, const Rect &rect, Renderer *renderer);
 		~RenderTarget() override;
 		void draw(
-			const Transform &transform) override;
+			const Transform &transform) const override;
 		void draw(
 			const Transform &transform,
-			const Vector &scale) override;
+			const Vector &scale) const override;
 		void draw(
 			const int x,
-			const int y) override;
+			const int y) const override;
 		void draw(
 			const int x,
 			const int y,
-			const Vector &scale) override;
+			const Vector &scale) const override;
 		void draw(
 			const int x,
 			const int y,
 			const Vector &scale,
-			const float angle) override;
+			const float angle) const override;
 		using DefaultRenderTarget::setRect;
 
 	private:

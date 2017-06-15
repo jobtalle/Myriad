@@ -19,22 +19,22 @@ namespace myr
 			const int originY = 0);
 		~Sprite();
 		void draw(
-			const Transform &transform) override;
+			const Transform &transform) const override;
 		void draw(
 			const Transform &transform,
-			const Vector &scale) override;
+			const Vector &scale) const override;
 		void draw(
 			const int x,
-			const int y) override;
+			const int y) const override;
 		void draw(
 			const int x,
 			const int y,
-			const Vector &scale) override;
+			const Vector &scale) const override;
 		void draw(
 			const int x,
 			const int y,
 			const Vector &scale,
-			const float angle) override;
+			const float angle) const override;
 		void setOrigin(const int originX, const int originY);
 		short int getWidth() const;
 		short int getHeight() const;

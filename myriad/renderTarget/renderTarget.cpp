@@ -18,7 +18,7 @@ myr::RenderTarget::~RenderTarget()
 }
 
 void myr::RenderTarget::draw(
-	const Transform &transform)
+	const Transform &transform) const
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
 		SpriteAttributes(
@@ -32,7 +32,7 @@ void myr::RenderTarget::draw(
 
 void myr::RenderTarget::draw(
 	const Transform &transform,
-	const Vector &scale)
+	const Vector &scale) const
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
 		SpriteAttributes(
@@ -46,7 +46,7 @@ void myr::RenderTarget::draw(
 
 void myr::RenderTarget::draw(
 	const int x,
-	const int y)
+	const int y) const
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
 		SpriteAttributes(
@@ -61,7 +61,7 @@ void myr::RenderTarget::draw(
 void myr::RenderTarget::draw(
 	const int x,
 	const int y,
-	const Vector &scale)
+	const Vector &scale) const
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
 		SpriteAttributes(
@@ -77,7 +77,7 @@ void myr::RenderTarget::draw(
 	const int x,
 	const int y,
 	const Vector &scale,
-	const float angle)
+	const float angle) const
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
 		SpriteAttributes(
