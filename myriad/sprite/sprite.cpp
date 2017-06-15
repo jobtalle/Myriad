@@ -23,7 +23,7 @@ void myr::Sprite::draw(
 		location.location,
 		location.size,
 		getSize().getSize(),
-		origin,
+		getOrigin(),
 		transform));
 }
 
@@ -35,7 +35,7 @@ void myr::Sprite::draw(
 		location.location,
 		location.size,
 		getSize().getSize() * scale,
-		origin,
+		getOrigin(),
 		transform));
 }
 
@@ -48,7 +48,7 @@ void myr::Sprite::draw(
 		location.size,
 		Vector(x, y),
 		getSize().getSize(),
-		origin));
+		getOrigin()));
 }
 
 void myr::Sprite::draw(
@@ -61,7 +61,7 @@ void myr::Sprite::draw(
 		location.size,
 		Vector(x, y),
 		getSize().getSize() * scale,
-		origin));
+		getOrigin()));
 }
 
 void myr::Sprite::draw(
@@ -75,7 +75,7 @@ void myr::Sprite::draw(
 		location.size,
 		Vector(x, y),
 		getSize().getSize() * scale,
-		origin,
+		getOrigin(),
 		angle));
 }
 

@@ -36,9 +36,10 @@ namespace myr
 		virtual void setOrigin(const Vector &origin);
 
 	protected:
+		virtual void setSize(const Rect &size);
+
+	private:
 		Vector origin;
 		Rect size;
-
-		virtual void setSize(const Rect &size);
 	};
 }
