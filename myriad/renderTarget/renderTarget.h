@@ -27,11 +27,12 @@ namespace myr
 			const int y,
 			const Vector &scale,
 			const float angle) const override;
-		using DefaultRenderTarget::setRect;
+		void setSize(const Rect &size) override;
 
 	private:
 		void generateFBO();
 		void deleteFBO();
+		Rect getResolution() const override;
 		void resize();
 
 		GLuint texture;

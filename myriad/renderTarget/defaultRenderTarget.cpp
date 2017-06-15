@@ -18,25 +18,13 @@ myr::DefaultRenderTarget *myr::DefaultRenderTarget::getCurrent()
 
 myr::DefaultRenderTarget::DefaultRenderTarget(
 	const Color &clearColor,
-	const Rect &rect,
+	const Rect &size,
 	Renderer *renderer)
-:fbo(0), flags(0), rect(rect), clearColor(clearColor), renderer(renderer), currentSystem(RENDER_SYSTEM_NONE) {}
+	:fbo(0), flags(0), clearColor(clearColor), renderer(renderer), currentSystem(RENDER_SYSTEM_NONE) {}
 
 myr::DefaultRenderTarget::~DefaultRenderTarget()
 {
 	
-}
-
-void myr::DefaultRenderTarget::setRect(const Rect &rect)
-{
-	this->rect = rect;
-
-	resize();
-}
-
-myr::Rect myr::DefaultRenderTarget::getRect() const
-{
-	return rect;
 }
 
 myr::Transform myr::DefaultRenderTarget::getTransform() const
@@ -67,9 +55,9 @@ void myr::DefaultRenderTarget::bind()
 	renderer->bind();
 
 	flags |= BOUND;
-	
+
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
-	glViewport(0, 0, rect.getWidth(), rect.getHeight());
+	glViewport(0, 0, getResolution().getWidth(), getResolution().getHeight());
 }
 
 void myr::DefaultRenderTarget::unbind()
@@ -106,6 +94,11 @@ void myr::DefaultRenderTarget::createRenderSystems()
 		shaders[i] = getRenderer()->getDefaultShader(static_cast<RenderSystems>(i));
 }
 
+myr::Rect myr::DefaultRenderTarget::getResolution() const
+{
+	return renderer->getSize();
+}
+
 void myr::DefaultRenderTarget::resize()
 {
 
@@ -115,7 +108,7 @@ void myr::DefaultRenderTarget::render(const RenderSystems system, const void *el
 {
 	if(currentSystem != system)
 		if(currentSystem == RENDER_SYSTEM_NONE)
-			getRenderer()->setSharedUniforms(getRect(), getTransform());
+			getRenderer()->setSharedUniforms(getResolution(), getTransform());
 		else
 			systems[currentSystem].get()->render(shaders[currentSystem]);
 

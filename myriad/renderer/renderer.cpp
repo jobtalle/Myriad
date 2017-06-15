@@ -22,8 +22,8 @@ void myr::initialize()
 myr::Renderer::Renderer(const Color &clearColor, const Rect &rect)
 :Renderer(clearColor, rect, Atlas::DEFAULT_ATOM) {}
 
-myr::Renderer::Renderer(const Color &clearColor, const Rect &rect, const unsigned char atom)
-:renderTarget(clearColor, rect, this), rect(rect), atlas(ATLAS, atom)
+myr::Renderer::Renderer(const Color &clearColor, const Rect &size, const unsigned char atom)
+:renderTarget(clearColor, size, this), size(size), atlas(ATLAS, atom)
 {
 	initializeUbo();
 
@@ -51,14 +51,14 @@ void myr::Renderer::render()
 #endif
 }
 
-void myr::Renderer::setRect(const Rect &rect)
+void myr::Renderer::setSize(const Rect &size)
 {
-	renderTarget.setRect(rect);
+	this->size = size;
 }
 
-myr::Rect myr::Renderer::getRect() const
+myr::Rect myr::Renderer::getSize() const
 {
-	return rect;
+	return size;
 }
 
 myr::DefaultRenderTarget &myr::Renderer::getDefaultRenderTarget()

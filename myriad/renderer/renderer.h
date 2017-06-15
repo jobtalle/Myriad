@@ -26,8 +26,8 @@ namespace myr
 		Renderer(const Color &clearColor, const Rect &rect, const unsigned char atom);
 		~Renderer();
 		void render();
-		void setRect(const Rect &rect);
-		Rect getRect() const;
+		void setSize(const Rect &size);
+		Rect getSize() const;
 		DefaultRenderTarget &getDefaultRenderTarget();
 
 	private:
@@ -48,7 +48,7 @@ namespace myr
 
 		DefaultRenderTarget renderTarget;
 		Atlas atlas;
-		Rect rect;
+		Rect size;
 		std::shared_ptr<Shader> shaders[RENDER_SYSTEM_COUNT];
 
 		void bind();

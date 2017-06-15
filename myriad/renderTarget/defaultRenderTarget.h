@@ -25,20 +25,17 @@ namespace myr
 	public:
 		DefaultRenderTarget(
 			const Color &clearColor,
-			const Rect &rect,
+			const Rect &size,
 			Renderer *renderer);
 		virtual ~DefaultRenderTarget();
-		Rect getRect() const;
 		Transform getTransform() const;
 		void setTransform(const Transform &transform);
 		void bind();
 		void clear() const;
 
 	protected:
-		Rect rect;
 		GLuint fbo;
 
-		void setRect(const Rect &rect);
 		void unbind();
 		Renderer *getRenderer() const;
 		static DefaultRenderTarget *getCurrent();
@@ -53,6 +50,7 @@ namespace myr
 		Transform transform;
 		unsigned char flags;
 		
+		virtual Rect getResolution() const;
 		virtual void resize();
 		void render(const RenderSystems system, const void *element);
 		void render();

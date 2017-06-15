@@ -24,7 +24,7 @@ void myr::RenderTarget::draw(
 		SpriteAttributes(
 			Vector(0, 1),
 			Vector(1, -1),
-			rect.getSize(),
+			getSize().getSize(),
 			Vector(0, 0),
 			transform),
 		texture));
@@ -38,7 +38,7 @@ void myr::RenderTarget::draw(
 		SpriteAttributes(
 			Vector(0, 1),
 			Vector(1, -1),
-			rect.getSize() * scale,
+			getSize().getSize() * scale,
 			Vector(0, 0),
 			transform),
 		texture));
@@ -53,7 +53,7 @@ void myr::RenderTarget::draw(
 			Vector(0, 1),
 			Vector(1, -1),
 			Vector(x, y),
-			rect.getSize(),
+			getSize().getSize(),
 			Vector(0, 0)),
 		texture));
 }
@@ -68,7 +68,7 @@ void myr::RenderTarget::draw(
 			Vector(0, 1),
 			Vector(1, -1),
 			Vector(x, y),
-			rect.getSize() * scale,
+			getSize().getSize() * scale,
 			Vector(0, 0)),
 		texture));
 }
@@ -84,10 +84,17 @@ void myr::RenderTarget::draw(
 			Vector(0, 1),
 			Vector(1, -1),
 			Vector(x, y),
-			rect.getSize() * scale,
+			getSize().getSize() * scale,
 			Vector(0, 0),
 			angle),
 		texture));
+}
+
+void myr::RenderTarget::setSize(const Rect &size)
+{
+	Quad::setSize(size);
+
+	resize();
 }
 
 void myr::RenderTarget::generateFBO()
@@ -109,6 +116,11 @@ void myr::RenderTarget::deleteFBO()
 	glDeleteTextures(1, &texture);
 }
 
+myr::Rect myr::RenderTarget::getResolution() const
+{
+	return getSize();
+}
+
 void myr::RenderTarget::resize()
 {
 	glActiveTexture(GL_TEXTURE0 + Renderer::TextureChannels::INTERMEDIATE);
@@ -118,8 +130,8 @@ void myr::RenderTarget::resize()
 		GL_TEXTURE_2D,
 		0,
 		GL_RGBA8,
-		rect.getWidth(),
-		rect.getHeight(),
+		getSize().getWidth(),
+		getSize().getHeight(),
 		0,
 		GL_RGBA,
 		GL_UNSIGNED_BYTE,

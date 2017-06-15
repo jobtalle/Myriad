@@ -33,12 +33,12 @@ namespace myr
 
 		Vector getOrigin() const;
 		Rect getSize() const;
-		void setOrigin(const Vector &origin);
+		virtual void setOrigin(const Vector &origin);
 
 	protected:
 		Vector origin;
 		Rect size;
 
-		void setSize(const Rect &size);
+		virtual void setSize(const Rect &size);
 	};
 }
