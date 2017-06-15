@@ -5,9 +5,8 @@
 myr::Sprite::Sprite(
 	const std::string &name,
 	SpriteDecoder *decoder,
-	const int originX,
-	const int originY)
-	:name(name), decoder(decoder), originX(originX), originY(originY), origin(0, 0)
+	const Vector &origin)
+	:name(name), decoder(decoder), Quad(origin)
 {
 	load();
 }
@@ -23,7 +22,7 @@ void myr::Sprite::draw(
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &SpriteAttributes(
 		location.location,
 		location.size,
-		Vector(width, height),
+		getSize().getSize(),
 		origin,
 		transform));
 }
@@ -35,7 +34,7 @@ void myr::Sprite::draw(
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_SPRITES, &SpriteAttributes(
 		location.location,
 		location.size,
-		Vector(width * scale.x, height * scale.y),
+		getSize().getSize() * scale,
 		origin,
 		transform));
 }
@@ -48,7 +47,7 @@ void myr::Sprite::draw(
 		location.location,
 		location.size,
 		Vector(x, y),
-		Vector(width, height),
+		getSize().getSize(),
 		origin));
 }
 
@@ -61,7 +60,7 @@ void myr::Sprite::draw(
 		location.location,
 		location.size,
 		Vector(x, y),
-		Vector(width * scale.x, height * scale.y),
+		getSize().getSize() * scale,
 		origin));
 }
 
@@ -75,42 +74,14 @@ void myr::Sprite::draw(
 		location.location,
 		location.size,
 		Vector(x, y),
-		Vector(width * scale.x, height * scale.y),
+		getSize().getSize() * scale,
 		origin,
 		angle));
 }
 
-void myr::Sprite::setOrigin(const int originX, const int originY)
-{
-	this->originX = originX;
-	this->originY = originY;
-}
-
-short int myr::Sprite::getWidth() const
-{
-	return width;
-}
-
-short int myr::Sprite::getHeight() const
-{
-	return height;
-}
-
-int myr::Sprite::getOriginX() const
-{
-	return originX;
-}
-
-int myr::Sprite::getOriginY() const
-{
-	return originY;
-}
-
 void myr::Sprite::load()
 {
-	width = decoder->getWidth();
-	height = decoder->getHeight();
-	origin = Vector(float(originX) / width, float(originY) / height);
+	setSize(Rect(decoder->getWidth(), decoder->getHeight()));
 	location = myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(
 		name,
 		decoder->getWidth(),

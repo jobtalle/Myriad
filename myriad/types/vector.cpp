@@ -67,3 +67,17 @@ myr::Vector myr::Vector::operator*(const float factor)
 		x * factor,
 		y * factor);
 }
+
+myr::Vector myr::Vector::operator/(const Vector &other)
+{
+	return Vector(
+		x / other.x,
+		y / other.y);
+}
+
+myr::Vector myr::Vector::operator/(const float factor)
+{
+	return Vector(
+		x / factor,
+		y / factor);
+}

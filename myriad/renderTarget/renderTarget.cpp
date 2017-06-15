@@ -5,7 +5,7 @@
 #include <iostream> // TODO: Debug
 
 myr::RenderTarget::RenderTarget(const Color &clearColor, const Rect &rect, Renderer *renderer)
-	:DefaultRenderTarget(clearColor, rect, renderer)
+	:DefaultRenderTarget(clearColor, rect, renderer), Quad(rect, Vector(0, 0))
 {
 	createRenderSystems();
 

@@ -21,5 +21,7 @@ namespace myr
 		Vector operator-(const Vector &other);
 		Vector operator*(const Vector &other);
 		Vector operator*(const float factor);
+		Vector operator/(const Vector &other);
+		Vector operator/(const float factor);
 	};
 }
