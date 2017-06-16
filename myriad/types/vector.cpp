@@ -2,6 +2,9 @@
 
 #include "vector.h"
 
+myr::Vector::Vector()
+	:x(0), y(0) {}
+
 myr::Vector::Vector(const float both)
 	:x(both), y(both) {}
 

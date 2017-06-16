@@ -8,6 +8,7 @@ namespace myr
 		float x;
 		float y;
 
+		Vector();
 		Vector(const float both);
 		Vector(const float x, const float y);
 		Vector(const int both);

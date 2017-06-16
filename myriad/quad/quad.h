@@ -37,9 +37,13 @@ namespace myr
 
 	protected:
 		virtual void setSize(const Rect &size);
+		const Vector &getOriginFactor() const;
 
 	private:
 		Vector origin;
+		Vector originFactor;
 		Rect size;
+
+		void calculateOriginFactor();
 	};
 }

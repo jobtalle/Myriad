@@ -25,7 +25,7 @@ void myr::RenderTarget::draw(
 			Vector(0, 1),
 			Vector(1, -1),
 			getSize().toVector(),
-			getOrigin(),
+			getOriginFactor(),
 			transform),
 		texture));
 }
@@ -39,7 +39,7 @@ void myr::RenderTarget::draw(
 			Vector(0, 1),
 			Vector(1, -1),
 			getSize().toVector() * scale,
-			getOrigin(),
+			getOriginFactor(),
 			transform),
 		texture));
 }
@@ -54,7 +54,7 @@ void myr::RenderTarget::draw(
 			Vector(1, -1),
 			Vector(x, y),
 			getSize().toVector(),
-			getOrigin()),
+			getOriginFactor()),
 		texture));
 }
 
@@ -69,7 +69,7 @@ void myr::RenderTarget::draw(
 			Vector(1, -1),
 			Vector(x, y),
 			getSize().toVector() * scale,
-			getOrigin()),
+			getOriginFactor()),
 		texture));
 }
 
@@ -85,7 +85,7 @@ void myr::RenderTarget::draw(
 			Vector(1, -1),
 			Vector(x, y),
 			getSize().toVector() * scale,
-			getOrigin(),
+			getOriginFactor(),
 			angle),
 		texture));
 }
