@@ -8,8 +8,11 @@ namespace myr
 		float x;
 		float y;
 
+		Vector(const float both);
 		Vector(const float x, const float y);
+		Vector(const int both);
 		Vector(const int x, const int y);
+		Vector(const unsigned int both);
 		Vector(const unsigned int x, const unsigned int y);
 
 		float dot(const Vector &other);

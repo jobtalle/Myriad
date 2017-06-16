@@ -2,11 +2,20 @@
 
 #include "vector.h"
 
-myr::Vector::Vector(const float x = 0, const float y = 0)
+myr::Vector::Vector(const float both)
+	:x(both), y(both) {}
+
+myr::Vector::Vector(const float x, const float y)
 	:x(x), y(y) {}
+
+myr::Vector::Vector(const int both)
+	:x(float(both)), y(float(both)) {}
 
 myr::Vector::Vector(const int x, const int y)
 	:x(float(x)), y(float(y)) {}
+
+myr::Vector::Vector(const unsigned int both)
+	:x(float(both)), y(float(both)) {}
 
 myr::Vector::Vector(const unsigned int x, const unsigned int y)
 :x(float(x)), y(float(y)) {}
