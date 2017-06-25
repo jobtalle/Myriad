@@ -42,13 +42,13 @@ namespace myr
 		void animate(const float seconds);
 
 	private:
-		std::string name;
+		std::vector<std::string> names;
 		std::vector<Atlas::Location> locations;
 		std::auto_ptr<float> frameDurations;
 		unsigned int frame;
 		float frameCounter;
 
-		void load(myr::SpriteDecoder &decoder);
+		void load(const std::string name, SpriteDecoder &decoder);
 		const Atlas::Location &getLocation() const;
 	};
 }

@@ -10,14 +10,15 @@ myr::Sprite::Sprite(
 	const std::string &name,
 	SpriteDecoder &decoder,
 	const Vector &origin)
-	:name(name), Quad(origin), frame(0)
+	:Quad(origin), frame(0)
 {
-	load(decoder);
+	load(name, decoder);
 }
 
 myr::Sprite::~Sprite()
 {
-	myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().release(name);
+	for(const auto name : names)
+		myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().release(name);
 }
 
 void myr::Sprite::draw(
@@ -118,7 +119,7 @@ void myr::Sprite::animate(const float seconds)
 	}
 }
 
-void myr::Sprite::load(myr::SpriteDecoder &decoder)
+void myr::Sprite::load(const std::string name, myr::SpriteDecoder &decoder)
 {
 	setSize(Rect(decoder.getWidth(), decoder.getHeight()));
 	locations.push_back(myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(
