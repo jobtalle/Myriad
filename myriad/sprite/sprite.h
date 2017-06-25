@@ -36,11 +36,17 @@ namespace myr
 			const float angle) const override;
 		void setOrigin(const int originX, const int originY);
 
+		unsigned int getFrame() const;
+		unsigned int getFrames() const;
+		void animate(const float seconds);
+
 	private:
 		std::string name;
 		std::unique_ptr<SpriteDecoder> decoder;
-		myr::Atlas::Location location;
+		std::vector<Atlas::Location> locations;
+		float frame;
 
 		void load();
+		const Atlas::Location &getLocation() const;
 	};
 }
