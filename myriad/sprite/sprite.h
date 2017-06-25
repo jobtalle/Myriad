@@ -44,7 +44,9 @@ namespace myr
 	private:
 		std::string name;
 		std::vector<Atlas::Location> locations;
-		float frame;
+		std::auto_ptr<float> frameDurations;
+		unsigned int frame;
+		float frameCounter;
 
 		void load(myr::SpriteDecoder &decoder);
 		const Atlas::Location &getLocation() const;

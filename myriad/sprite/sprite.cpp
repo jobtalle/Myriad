@@ -2,6 +2,10 @@
 #include "renderer/renderer.h"
 #include "renderTarget/renderTarget.h"
 
+#ifdef _DEBUG
+#include <cassert>
+#endif
+
 myr::Sprite::Sprite(
 	const std::string &name,
 	SpriteDecoder &decoder,
@@ -81,7 +85,7 @@ void myr::Sprite::draw(
 
 unsigned int myr::Sprite::getFrame() const
 {
-	return (unsigned int)frame;
+	return frame;
 }
 
 unsigned int myr::Sprite::getFrames() const
@@ -91,15 +95,27 @@ unsigned int myr::Sprite::getFrames() const
 
 void myr::Sprite::setFrame(const unsigned int frame)
 {
-	this->frame = (float)frame;
+#ifdef _DEBUG
+	assert(frame < getFrames());
+#endif
+
+	this->frame = frame;
 }
 
 void myr::Sprite::animate(const float seconds)
 {
-	frame += seconds;
+	if(getFrames() > 1)
+	{
+		frameCounter += seconds;
 
-	while((unsigned int)frame > getFrames())
-		frame -= getFrames();
+		while(frameCounter > frameDurations.get()[getFrame()])
+		{
+			frameCounter -= frameDurations.get()[getFrame()];
+
+			if(++frame == getFrames())
+				frame = 0;
+		}
+	}
 }
 
 void myr::Sprite::load(myr::SpriteDecoder &decoder)
@@ -110,6 +126,7 @@ void myr::Sprite::load(myr::SpriteDecoder &decoder)
 		decoder.getWidth(),
 		decoder.getHeight(),
 		decoder.getPixels()));
+	frameDurations.reset(decoder.getFrameDurations());
 }
 
 const myr::Atlas::Location &myr::Sprite::getLocation() const
