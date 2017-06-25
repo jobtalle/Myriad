@@ -38,6 +38,7 @@ namespace myr
 
 		unsigned int getFrame() const;
 		unsigned int getFrames() const;
+		void setFrame(const unsigned int frame);
 		void animate(const float seconds);
 
 	private:

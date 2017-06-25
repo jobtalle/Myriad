@@ -89,6 +89,11 @@ unsigned int myr::Sprite::getFrames() const
 	return (unsigned int)locations.size();
 }
 
+void myr::Sprite::setFrame(const unsigned int frame)
+{
+	this->frame = (float)frame;
+}
+
 void myr::Sprite::animate(const float seconds)
 {
 	frame += seconds;
