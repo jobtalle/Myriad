@@ -122,6 +122,7 @@ void myr::Sprite::animate(const float seconds)
 void myr::Sprite::load(const std::string name, myr::SpriteDecoder &decoder)
 {
 	setSize(Rect(decoder.getWidth(), decoder.getHeight()));
+	names.push_back(name);
 	locations.push_back(myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(
 		name,
 		decoder.getWidth(),
