@@ -4,11 +4,11 @@
 
 myr::Sprite::Sprite(
 	const std::string &name,
-	SpriteDecoder *decoder,
+	SpriteDecoder &decoder,
 	const Vector &origin)
-	:name(name), decoder(decoder), Quad(origin), frame(0)
+	:name(name), Quad(origin), frame(0)
 {
-	load();
+	load(decoder);
 }
 
 myr::Sprite::~Sprite()
@@ -102,14 +102,14 @@ void myr::Sprite::animate(const float seconds)
 		frame -= getFrames();
 }
 
-void myr::Sprite::load()
+void myr::Sprite::load(myr::SpriteDecoder &decoder)
 {
-	setSize(Rect(decoder->getWidth(), decoder->getHeight()));
+	setSize(Rect(decoder.getWidth(), decoder.getHeight()));
 	locations.push_back(myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(
 		name,
-		decoder->getWidth(),
-		decoder->getHeight(),
-		decoder->getPixels()));
+		decoder.getWidth(),
+		decoder.getHeight(),
+		decoder.getPixels()));
 }
 
 const myr::Atlas::Location &myr::Sprite::getLocation() const

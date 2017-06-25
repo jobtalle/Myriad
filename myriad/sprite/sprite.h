@@ -14,7 +14,7 @@ namespace myr
 	public:
 		Sprite(
 			const std::string &name,
-			SpriteDecoder *decoder,
+			SpriteDecoder &decoder,
 			const Vector &origin = Vector(0, 0));
 		~Sprite();
 		void draw(
@@ -43,11 +43,10 @@ namespace myr
 
 	private:
 		std::string name;
-		std::unique_ptr<SpriteDecoder> decoder;
 		std::vector<Atlas::Location> locations;
 		float frame;
 
-		void load();
+		void load(myr::SpriteDecoder &decoder);
 		const Atlas::Location &getLocation() const;
 	};
 }
