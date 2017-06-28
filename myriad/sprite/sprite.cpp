@@ -111,12 +111,17 @@ void myr::Sprite::animate(const float seconds)
 	{
 		frameCounter += seconds;
 
-		while(frameCounter > frameDurations.get()[getFrame()])
+		if(frameCounter > frameDurations.get()[getFrame()])
 		{
-			frameCounter -= frameDurations.get()[getFrame()];
+			while(frameCounter > frameDurations.get()[getFrame()])
+			{
+				frameCounter -= frameDurations.get()[getFrame()];
 
-			if(++frame == getFrames())
-				frame = 0;
+				if(++frame == getFrames())
+					frame = 0;
+			}
+
+			frameCounter = 0;
 		}
 	}
 }
