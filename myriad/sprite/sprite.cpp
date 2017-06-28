@@ -2,6 +2,8 @@
 #include "renderer/renderer.h"
 #include "renderTarget/renderTarget.h"
 
+#include <string>
+
 #ifdef _DEBUG
 #include <cassert>
 #endif
@@ -123,18 +125,23 @@ void myr::Sprite::load(const std::string name, myr::SpriteDecoder &decoder)
 {
 	setSize(Rect(decoder.getFrameWidth(), decoder.getFrameHeight()));
 
-	names.push_back(name);
-	locations.push_back(myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(
-		name,
-		decoder.getWidth(),
-		decoder.getHeight(),
-		decoder.getPixels()));
-
-	if(getFrames() > 1)
+	if(decoder.getFrameCount() > 1)
 	{
-		frameDurations.reset(new float[getFrames()]);
+		frameDurations.reset(new float[decoder.getFrameCount()]);
 
-		memcpy(frameDurations.get(), decoder.getFrameDurations(), sizeof(float)* getFrames());
+		memcpy(frameDurations.get(), decoder.getFrameDurations(), sizeof(float)* decoder.getFrameCount());
+	}
+
+	for(unsigned int frame = 0; frame < decoder.getFrameCount(); ++frame)
+	{
+		const std::string frameName = std::to_string(frame) + '_' + name;
+
+		names.push_back(frameName);
+		locations.push_back(myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(
+			frameName,
+			decoder.getFrameWidth(),
+			decoder.getFrameHeight(),
+			decoder.getPixels(frame)));
 	}
 }
 

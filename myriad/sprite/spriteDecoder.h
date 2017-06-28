@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cstdint>
+#include <memory>
 
 namespace myr
 {
@@ -14,7 +14,7 @@ namespace myr
 		virtual unsigned int getFrameWidth() const = 0;
 		virtual unsigned int getFrameHeight() const = 0;
 		virtual float *getFrameDurations() const = 0;
-		virtual const char *getPixels() const = 0;
+		virtual const char *getPixels(const unsigned int frame) const = 0;
 
 	protected:
 		SpriteDecoder() {};
