@@ -12,15 +12,15 @@ myr::Sprite::Sprite(
 	const std::string &name,
 	SpriteDecoder &decoder,
 	const Vector &origin)
-	:Quad(origin), frame(0)
+	:Quad(origin), currentFrame(0)
 {
 	load(name, decoder);
 }
 
 myr::Sprite::~Sprite()
 {
-	for(const auto name : names)
-		myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().release(name);
+	for(const auto frame : frames)
+		myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().release(frame.name);
 }
 
 void myr::Sprite::draw(
@@ -88,12 +88,12 @@ void myr::Sprite::draw(
 
 unsigned int myr::Sprite::getFrame() const
 {
-	return frame;
+	return currentFrame;
 }
 
 unsigned int myr::Sprite::getFrames() const
 {
-	return (unsigned int)locations.size();
+	return (unsigned int)frames.size();
 }
 
 void myr::Sprite::setFrame(const unsigned int frame)
@@ -102,7 +102,7 @@ void myr::Sprite::setFrame(const unsigned int frame)
 	assert(frame < getFrames());
 #endif
 
-	this->frame = frame;
+	this->currentFrame = frame;
 }
 
 void myr::Sprite::animate(const float seconds)
@@ -111,14 +111,14 @@ void myr::Sprite::animate(const float seconds)
 	{
 		frameCounter += seconds;
 
-		if(frameCounter > frameDurations.get()[getFrame()] + seconds * 0.5f)
+		if(frameCounter > frames[getFrame()].duration + seconds * 0.5f)
 		{
-			while(frameCounter > frameDurations.get()[getFrame()])
+			while(frameCounter > frames[getFrame()].duration)
 			{
-				frameCounter -= frameDurations.get()[getFrame()];
+				frameCounter -= frames[getFrame()].duration;
 
-				if(++frame == getFrames())
-					frame = 0;
+				if(++currentFrame == getFrames())
+					currentFrame = 0;
 			}
 
 			frameCounter = 0;
@@ -130,27 +130,25 @@ void myr::Sprite::load(const std::string name, myr::SpriteDecoder &decoder)
 {
 	setSize(Rect(decoder.getFrameWidth(), decoder.getFrameHeight()));
 
-	if(decoder.getFrameCount() > 1)
-	{
-		frameDurations.reset(new float[decoder.getFrameCount()]);
-
-		memcpy(frameDurations.get(), decoder.getFrameDurations(), sizeof(float)* decoder.getFrameCount());
-	}
-
 	for(unsigned int frame = 0; frame < decoder.getFrameCount(); ++frame)
 	{
 		const std::string frameName = std::to_string(frame) + '_' + name;
-
-		names.push_back(frameName);
-		locations.push_back(myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(
+		const float duration = decoder.getFrameCount() > 1?decoder.getFrameDurations()[frame]:0;
+		const FrameData frameData(
 			frameName,
-			decoder.getFrameWidth(),
-			decoder.getFrameHeight(),
-			decoder.getPixels(frame)));
+			myr::RenderTarget::getCurrent()->getRenderer()->getAtlas().query(
+				frameName,
+				decoder.getFrameWidth(),
+				decoder.getFrameHeight(),
+				decoder.getPixels(frame)),
+			duration);
+
+
+		frames.push_back(frameData);
 	}
 }
 
 const myr::Atlas::Location &myr::Sprite::getLocation() const
 {
-	return locations[getFrame()];
+	return frames[getFrame()].location;
 }

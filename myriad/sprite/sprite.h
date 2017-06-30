@@ -42,10 +42,21 @@ namespace myr
 		void animate(const float seconds);
 
 	private:
-		std::vector<std::string> names;
-		std::vector<Atlas::Location> locations;
-		std::auto_ptr<float> frameDurations;
-		unsigned int frame;
+		struct FrameData
+		{
+			FrameData(
+				const std::string name,
+				const Atlas::Location location,
+				const float duration)
+				:name(name), location(location), duration(duration) {}
+
+			std::string name;
+			Atlas::Location location;
+			float duration;
+		};
+
+		std::vector<FrameData> frames;
+		unsigned int currentFrame;
 		float frameCounter;
 
 		void load(const std::string name, SpriteDecoder &decoder);
