@@ -1,25 +1,23 @@
 #pragma once
 
-#include <cmath> // TODO: Debug?
+#include <cmath> // TODO: Redundant if LUT is used
 #include <cstdint>
 
 #include "types/vector.h"
 #include "types/transform.h"
-
-#include <iostream> // TODO: Debug
+#include "renderer/atlas.h"
 
 namespace myr
 {
 	struct SpriteAttributes
 	{
 		SpriteAttributes(
-			const Vector atlasPosition,
-			const Vector atlasSize,
-			const Vector size,
-			const Vector origin,
-			const Transform transform)
-			:atlasPosition(atlasPosition),
-			atlasSize(atlasSize),
+			const myr::Atlas::Location &location,
+			const Vector &size,
+			const Vector &origin,
+			const Transform &transform)
+			:atlasPosition(location.location),
+			atlasSize(location.size),
 			position(transform.row0[2], transform.row1[2]),
 			origin(origin)
 		{
@@ -30,13 +28,12 @@ namespace myr
 		}
 
 		SpriteAttributes(
-			const Vector atlasPosition,
-			const Vector atlasSize,
-			const Vector position,
-			const Vector size,
-			const Vector origin)
-			:atlasPosition(atlasPosition),
-			atlasSize(atlasSize),
+			const myr::Atlas::Location &location,
+			const Vector &position,
+			const Vector &size,
+			const Vector &origin)
+			:atlasPosition(location.location),
+			atlasSize(location.size),
 			position(position),
 			origin(origin)
 		{
@@ -47,14 +44,13 @@ namespace myr
 		}
 
 		SpriteAttributes(
-			const Vector atlasPosition,
-			const Vector atlasSize,
-			const Vector position,
-			const Vector size,
-			const Vector origin,
+			const myr::Atlas::Location &location,
+			const Vector &position,
+			const Vector &size,
+			const Vector &origin,
 			const float angle)
-			:atlasPosition(atlasPosition),
-			atlasSize(atlasSize),
+			:atlasPosition(location.location),
+			atlasSize(location.size),
 			position(position),
 			origin(origin)
 		{

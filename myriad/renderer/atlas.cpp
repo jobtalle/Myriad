@@ -8,8 +8,8 @@
 #include <cassert>
 #endif
 
-myr::Atlas::Location::Location(const unsigned char atlasIndex, const Vector &location, const Vector &size)
-	:atlasIndex(atlasIndex), location(location), size(size) {}
+myr::Atlas::Location::Location(const Vector &location, const Vector &size, const unsigned char atlasIndex)
+	:location(location), size(size), atlasIndex(atlasIndex) {}
 
 myr::Atlas::Entry::Entry(const QuadSpace::Node node, const unsigned short width, const unsigned short height)
 	:node(node), width(width), height(height), usageCount(1) {}
@@ -120,13 +120,13 @@ void myr::Atlas::blit(const struct Entry *entry, const char *bytes)
 myr::Atlas::Location myr::Atlas::entryToLocation(const struct Entry *entry) const
 {
 	return Location(
-		0,
 		Vector(
 			float(entry->node.getX()) / QuadSpace::dimensions,
 			float(entry->node.getY()) / QuadSpace::dimensions),
 		Vector(
 			float(entry->width) / (atom * QuadSpace::dimensions),
-			float(entry->height) / (atom * QuadSpace::dimensions)));
+			float(entry->height) / (atom * QuadSpace::dimensions)),
+		0);
 }
 
 unsigned char myr::Atlas::quadSpaceLevel(const unsigned int maxDim) const

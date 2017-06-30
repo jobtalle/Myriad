@@ -22,8 +22,7 @@ void myr::RenderTarget::draw(
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
 		SpriteAttributes(
-			Vector(0, 1),
-			Vector(1, -1),
+			Atlas::Location(Vector(0, 1), Vector(1, -1)),
 			getSize().toVector(),
 			getOriginFactor(),
 			transform),
@@ -36,8 +35,7 @@ void myr::RenderTarget::draw(
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
 		SpriteAttributes(
-			Vector(0, 1),
-			Vector(1, -1),
+			Atlas::Location(Vector(0, 1), Vector(1, -1)),
 			getSize().toVector() * scale,
 			getOriginFactor(),
 			transform),
@@ -50,8 +48,7 @@ void myr::RenderTarget::draw(
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
 		SpriteAttributes(
-			Vector(0, 1),
-			Vector(1, -1),
+			Atlas::Location(Vector(0, 1), Vector(1, -1)),
 			Vector(x, y),
 			getSize().toVector(),
 			getOriginFactor()),
@@ -65,8 +62,7 @@ void myr::RenderTarget::draw(
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
 		SpriteAttributes(
-			Vector(0, 1),
-			Vector(1, -1),
+			Atlas::Location(Vector(0, 1), Vector(1, -1)),
 			Vector(x, y),
 			getSize().toVector() * scale,
 			getOriginFactor()),
@@ -81,8 +77,7 @@ void myr::RenderTarget::draw(
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_RENDER_TARGETS, &RenderTargetAttributes(
 		SpriteAttributes(
-			Vector(0, 1),
-			Vector(1, -1),
+			Atlas::Location(Vector(0, 1), Vector(1, -1)),
 			Vector(x, y),
 			getSize().toVector() * scale,
 			getOriginFactor(),

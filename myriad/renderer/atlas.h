@@ -16,14 +16,14 @@ namespace myr
 	public:
 		struct Location
 		{
+			Location(
+				const Vector &location = Vector(0, 0),
+				const Vector &size = Vector(0, 0),
+				const unsigned char atlasIndex = 0);
+
 			unsigned char atlasIndex;
 			Vector location;
 			Vector size;
-
-			Location(
-				const unsigned char atlasIndex = 0,
-				const Vector &location = Vector(0, 0),
-				const Vector &size = Vector(0, 0));
 		};
 
 		static const unsigned char DEFAULT_ATOM = 16;
