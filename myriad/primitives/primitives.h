@@ -4,7 +4,7 @@
 
 namespace myr
 {
-	class Primitives : Lines
+	class Primitives final : public Lines
 	{
 
 	};
