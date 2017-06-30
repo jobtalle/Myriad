@@ -160,6 +160,7 @@
     <ClCompile Include="myriad\quad\quad.cpp" />
     <ClCompile Include="myriad\renderer\atlas.cpp" />
     <ClCompile Include="myriad\renderTarget\defaultRenderTarget.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\lines\lineShaders.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\lines\renderLines.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\renderSystem.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\renderTargets\renderRenderTargets.cpp" />
