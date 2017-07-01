@@ -11,10 +11,14 @@ namespace myr
 			const Vector &start,
 			const Vector &end,
 			const Color &color)
-			:start(start), end(end), color(color)
-		{
+			:start(start), end(end), color1(color), color2(color) {}
 
-		}
+		LineAttributes(
+			const Vector &start,
+			const Vector &end,
+			const Color &color1,
+			const Color &color2)
+			:start(start), end(end), color1(color1), color2(color2) {}
 
 		union {
 			struct {
@@ -27,10 +31,18 @@ namespace myr
 
 		union {
 			struct {
-				Color color;
+				Color color1;
 			};
 
-			float attributeColor[4];
+			float attributeColor1[4];
+		};
+
+		union {
+			struct {
+				Color color2;
+			};
+
+			float attributeColor2[4];
 		};
 	};
 }

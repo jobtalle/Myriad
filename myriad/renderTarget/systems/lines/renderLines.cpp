@@ -43,5 +43,10 @@ void myr::RenderLines::configureInstanceAttribs() const
 	glEnableVertexAttribArray(2);
 	glVertexAttribDivisor(2, 1);
 	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(LineAttributes),
-		(GLvoid*)offsetof(LineAttributes, attributeColor));
+		(GLvoid*)offsetof(LineAttributes, attributeColor1));
+
+	glEnableVertexAttribArray(3);
+	glVertexAttribDivisor(3, 1);
+	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(LineAttributes),
+		(GLvoid*)offsetof(LineAttributes, attributeColor2));
 }
