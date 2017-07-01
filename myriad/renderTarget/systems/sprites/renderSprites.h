@@ -28,8 +28,8 @@ namespace myr
 		const void *getBufferData() const override;
 
 	private:
-		void configureQuadAttribs() const;
-		void configureSpriteAttribs() const;
+		void configureBufferAttribs() const;
+		void configureInstanceAttribs() const;
 		static const std::vector<Vector> getQuad();
 
 		static const char *UNIFORM_ATLAS;

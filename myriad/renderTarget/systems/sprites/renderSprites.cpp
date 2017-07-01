@@ -12,11 +12,11 @@ myr::RenderSprites::RenderSprites()
 	glBindBuffer(GL_ARRAY_BUFFER, quad);
 	glBufferData(GL_ARRAY_BUFFER, getQuad().size() * sizeof(Vector), getQuad().data(), GL_STATIC_DRAW);
 
-	configureQuadAttribs();
+	configureBufferAttribs();
 
 	bindBuffer();
 
-	configureSpriteAttribs();
+	configureInstanceAttribs();
 
 	vaoRelease();
 	
@@ -70,13 +70,13 @@ const void *myr::RenderSprites::getBufferData() const
 	return instances;
 }
 
-void myr::RenderSprites::configureQuadAttribs() const
+void myr::RenderSprites::configureBufferAttribs() const
 {
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vector), NULL);
 }
 
-void myr::RenderSprites::configureSpriteAttribs() const
+void myr::RenderSprites::configureInstanceAttribs() const
 {
 	glEnableVertexAttribArray(1);
 	glVertexAttribDivisor(1, 1);

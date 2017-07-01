@@ -23,8 +23,8 @@ namespace myr
 		const void *getBufferData() const override;
 
 	private:
-		void configureLineAttribs() const;
-		void configureLineInstanceAttribs() const;
+		void configureBufferAttribs() const;
+		void configureInstanceAttribs() const;
 		static const std::vector<float> getLine();
 
 		GLuint line;

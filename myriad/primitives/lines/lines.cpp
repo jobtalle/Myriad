@@ -7,5 +7,5 @@ void myr::Lines::drawLine(const myr::Vector &start, const myr::Vector &end)
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_LINES, &LineAttributes(
 		start,
 		end,
-		myr::Color(1, 0, 0)));
+		myr::Color(0, 0, 1)));
 }

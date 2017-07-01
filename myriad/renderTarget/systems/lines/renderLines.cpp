@@ -9,11 +9,11 @@ myr::RenderLines::RenderLines()
 	glBindBuffer(GL_ARRAY_BUFFER, line);
 	glBufferData(GL_ARRAY_BUFFER, getLine().size() * sizeof(float), getLine().data(), GL_STATIC_DRAW);
 
-	configureLineAttribs();
+	configureBufferAttribs();
 
 	bindBuffer();
 
-	configureLineInstanceAttribs();
+	configureInstanceAttribs();
 
 	vaoRelease();
 
@@ -65,13 +65,13 @@ const void *myr::RenderLines::getBufferData() const
 	return instances;
 }
 
-void myr::RenderLines::configureLineAttribs() const
+void myr::RenderLines::configureBufferAttribs() const
 {
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 1, GL_FLOAT, GL_FALSE, sizeof(float), NULL);
 }
 
-void myr::RenderLines::configureLineInstanceAttribs() const
+void myr::RenderLines::configureInstanceAttribs() const
 {
 	glEnableVertexAttribArray(1);
 	glVertexAttribDivisor(1, 1);

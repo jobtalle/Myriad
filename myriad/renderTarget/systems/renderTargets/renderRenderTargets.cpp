@@ -10,11 +10,11 @@ myr::RenderRenderTargets::RenderRenderTargets(const RenderSprites *renderSprites
 
 	glBindBuffer(GL_ARRAY_BUFFER, renderSprites->quad);
 
-	renderSprites->configureQuadAttribs();
+	renderSprites->configureBufferAttribs();
 
 	bindBuffer();
 
-	renderSprites->configureSpriteAttribs();
+	renderSprites->configureInstanceAttribs();
 
 	vaoRelease();
 
