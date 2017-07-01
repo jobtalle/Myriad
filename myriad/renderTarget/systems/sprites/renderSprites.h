@@ -31,11 +31,11 @@ namespace myr
 	private:
 		void configureBufferAttribs() const;
 		void configureInstanceAttribs() const;
-		static const std::vector<Vector> getQuad();
 
 		static const char *UNIFORM_ATLAS;
 
 		static GLuint buffer;
+		static const std::vector<Vector> getQuad();
 		static void createBuffer();
 		static void freeBuffer();
 

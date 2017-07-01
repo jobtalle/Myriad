@@ -53,13 +53,3 @@ const std::vector<std::string> myr::RenderSprites::getShaderUniforms()
 		RenderSprites::UNIFORM_ATLAS
 	});
 }
-
-const std::vector<myr::Vector> myr::RenderSprites::getQuad()
-{
-	return std::vector<Vector>({
-		Vector(0, 0),
-		Vector(0, 1),
-		Vector(1, 1),
-		Vector(1, 0)
-	});
-}

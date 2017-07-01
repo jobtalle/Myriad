@@ -45,11 +45,3 @@ const std::vector<std::string> myr::RenderLines::getShaderUniforms()
 {
 	return std::vector<std::string>();
 }
-
-const std::vector<float> myr::RenderLines::getLine()
-{
-	return std::vector<float>({
-		0,
-		1
-	});
-}

@@ -2,6 +2,14 @@
 
 GLuint myr::RenderLines::buffer;
 
+const std::vector<float> myr::RenderLines::getLine()
+{
+	return std::vector<float>({
+		0,
+		1
+	});
+}
+
 void myr::RenderLines::createBuffer()
 {
 	glGenBuffers(1, &buffer);

@@ -28,9 +28,9 @@ namespace myr
 
 		void configureBufferAttribs() const;
 		void configureInstanceAttribs() const;
-		static const std::vector<float> getLine();
 
 		static GLuint buffer;
+		static const std::vector<float> getLine();
 		static void createBuffer();
 		static void freeBuffer();
 
