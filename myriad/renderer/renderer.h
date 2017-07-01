@@ -54,6 +54,8 @@ namespace myr
 		void bind();
 		Atlas &getAtlas();
 		Shader *getDefaultShader(const enum RenderSystems system) const;
+		void createBuffers() const;
+		void freeBuffers() const;
 		void createDefaultShaders();
 		void initializeUbo();
 		void freeUbo();

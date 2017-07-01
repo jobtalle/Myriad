@@ -28,6 +28,7 @@ myr::Renderer::Renderer(const Color &clearColor, const Rect &size, const unsigne
 {
 	initializeUbo();
 
+	createBuffers();
 	createDefaultShaders();
 
 	renderTarget.createRenderSystems();
@@ -37,6 +38,8 @@ myr::Renderer::Renderer(const Color &clearColor, const Rect &size, const unsigne
 
 myr::Renderer::~Renderer()
 {
+	freeBuffers();
+
 	freeUbo();
 }
 
@@ -85,6 +88,18 @@ void myr::Renderer::bind()
 myr::Shader *myr::Renderer::getDefaultShader(const enum RenderSystems system) const
 {
 	return shaders[system].get();
+}
+
+void myr::Renderer::createBuffers() const
+{
+	RenderSprites::createBuffer();
+	RenderLines::createBuffer();
+}
+
+void myr::Renderer::freeBuffers() const
+{
+	RenderSprites::freeBuffer();
+	RenderLines::freeBuffer();
 }
 
 void myr::Renderer::createDefaultShaders()

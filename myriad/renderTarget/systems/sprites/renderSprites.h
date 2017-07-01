@@ -11,6 +11,7 @@ namespace myr
 	class RenderSprites final : public RenderSystem
 	{
 		friend class RenderRenderTargets;
+		friend class Renderer;
 
 	public:
 		RenderSprites();
@@ -34,7 +35,10 @@ namespace myr
 
 		static const char *UNIFORM_ATLAS;
 
-		GLuint quad;
+		static GLuint buffer;
+		static void createBuffer();
+		static void freeBuffer();
+
 		SpriteAttributes *instances;
 		size_t instanceCount;
 		size_t instanceCapacity;

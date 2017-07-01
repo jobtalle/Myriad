@@ -5,10 +5,6 @@ myr::RenderLines::RenderLines()
 {
 	vaoBind();
 
-	glGenBuffers(1, &line);
-	glBindBuffer(GL_ARRAY_BUFFER, line);
-	glBufferData(GL_ARRAY_BUFFER, getLine().size() * sizeof(float), getLine().data(), GL_STATIC_DRAW);
-
 	configureBufferAttribs();
 
 	bindBuffer();
@@ -23,8 +19,6 @@ myr::RenderLines::RenderLines()
 myr::RenderLines::~RenderLines()
 {
 	free(instances);
-
-	glDeleteBuffers(1, &line);
 }
 
 void myr::RenderLines::render(Shader *shader)
@@ -67,6 +61,8 @@ const void *myr::RenderLines::getBufferData() const
 
 void myr::RenderLines::configureBufferAttribs() const
 {
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 1, GL_FLOAT, GL_FALSE, sizeof(float), NULL);
 }

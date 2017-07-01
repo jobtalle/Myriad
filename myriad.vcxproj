@@ -160,11 +160,13 @@
     <ClCompile Include="myriad\quad\quad.cpp" />
     <ClCompile Include="myriad\renderer\atlas.cpp" />
     <ClCompile Include="myriad\renderTarget\defaultRenderTarget.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\lines\lineBuffer.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\lines\lineShaders.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\lines\renderLines.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\renderSystem.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\renderTargets\renderRenderTargets.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\sprites\renderSprites.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\sprites\spriteBuffer.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\sprites\spriteShaders.cpp" />
     <ClCompile Include="myriad\types\rect.cpp" />
     <ClCompile Include="myriad\shader\shader.cpp" />

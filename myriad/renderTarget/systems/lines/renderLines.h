@@ -7,6 +7,8 @@ namespace myr
 {
 	class RenderLines final : public RenderSystem
 	{
+		friend class Renderer;
+
 	public:
 		RenderLines();
 		~RenderLines();
@@ -23,11 +25,15 @@ namespace myr
 		const void *getBufferData() const override;
 
 	private:
+
 		void configureBufferAttribs() const;
 		void configureInstanceAttribs() const;
 		static const std::vector<float> getLine();
 
-		GLuint line;
+		static GLuint buffer;
+		static void createBuffer();
+		static void freeBuffer();
+
 		LineAttributes *instances;
 		size_t instanceCount;
 		size_t instanceCapacity;

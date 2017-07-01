@@ -8,8 +8,6 @@ myr::RenderRenderTargets::RenderRenderTargets(const RenderSprites *renderSprites
 {
 	vaoBind();
 
-	glBindBuffer(GL_ARRAY_BUFFER, renderSprites->quad);
-
 	renderSprites->configureBufferAttribs();
 
 	bindBuffer();

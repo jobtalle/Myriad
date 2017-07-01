@@ -8,10 +8,6 @@ myr::RenderSprites::RenderSprites()
 {
 	vaoBind();
 
-	glGenBuffers(1, &quad);
-	glBindBuffer(GL_ARRAY_BUFFER, quad);
-	glBufferData(GL_ARRAY_BUFFER, getQuad().size() * sizeof(Vector), getQuad().data(), GL_STATIC_DRAW);
-
 	configureBufferAttribs();
 
 	bindBuffer();
@@ -26,8 +22,6 @@ myr::RenderSprites::RenderSprites()
 myr::RenderSprites::~RenderSprites()
 {
 	free(instances);
-
-	glDeleteBuffers(1, &quad);
 }
 
 void myr::RenderSprites::render(Shader *shader)
@@ -72,6 +66,8 @@ const void *myr::RenderSprites::getBufferData() const
 
 void myr::RenderSprites::configureBufferAttribs() const
 {
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vector), NULL);
 }
