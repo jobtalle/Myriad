@@ -1,6 +1,7 @@
 #include "renderer/opengl/opengl.h"
 #include "renderer.h"
 #include "renderTarget/systems/sprites/renderSprites.h"
+#include "renderTarget/systems/lines/renderLines.h"
 
 #include <iostream> // TODO: Debug
 
@@ -95,6 +96,12 @@ void myr::Renderer::createDefaultShaders()
 		this));
 
 	shaders[RENDER_SYSTEM_RENDER_TARGETS] = shaders[RENDER_SYSTEM_SPRITES];
+
+	shaders[RENDER_SYSTEM_LINES].reset(new Shader(
+		RenderLines::getShaderVertex(),
+		RenderLines::getShaderFragment(),
+		RenderLines::getShaderUniforms(),
+		this));
 }
 
 void myr::Renderer::initializeUbo()

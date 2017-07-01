@@ -23,8 +23,13 @@ namespace myr
 		const void *getBufferData() const override;
 
 	private:
-		static const char *UNIFORM_ATLAS;
+		void configureLineAttribs() const;
+		void configureLineInstanceAttribs() const;
+		static const std::vector<float> getLine();
 
+		GLuint line;
 		LineAttributes *instances;
+		size_t instanceCount;
+		size_t instanceCapacity;
 	};
 }

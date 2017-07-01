@@ -21,6 +21,7 @@ namespace myr
 		friend class Renderer;
 		friend class Sprite;
 		friend class RenderTarget;
+		friend class Lines;
 
 	public:
 		DefaultRenderTarget(

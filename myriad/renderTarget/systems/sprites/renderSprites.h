@@ -30,15 +30,13 @@ namespace myr
 	private:
 		void configureQuadAttribs() const;
 		void configureSpriteAttribs() const;
+		static const std::vector<Vector> getQuad();
 
-		static const size_t INSTANCE_CAPACITY_INITIAL = 8;
 		static const char *UNIFORM_ATLAS;
 
 		GLuint quad;
 		SpriteAttributes *instances;
 		size_t instanceCount;
 		size_t instanceCapacity;
-
-		static const std::vector<Vector> getQuad();
 	};
 }

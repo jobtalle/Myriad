@@ -24,6 +24,8 @@ namespace myr
 		void vaoRelease() const;
 		void bindBuffer() const;
 
+		static const size_t INSTANCE_CAPACITY_INITIAL = 8;
+
 	private:
 		static const size_t BUFFER_CAPACITY_INITIAL = 1;
 
