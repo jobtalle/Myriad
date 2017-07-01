@@ -11,25 +11,28 @@ namespace myr
 		friend class RenderRenderTargets;
 
 	public:
-		RenderSystem();
+		RenderSystem(const size_t instance_size);
 		virtual ~RenderSystem();
 		virtual void render(Shader *shader);
-		virtual void push(const void *element) = 0;
+		virtual void push(const void *element);
 
 	protected:
-		virtual size_t getBufferIndex() const = 0;
-		virtual size_t getBufferSizeof() const = 0;
-		virtual const void *getBufferData() const = 0;
 		void vaoBind() const;
 		void vaoRelease() const;
 		void bindBuffer() const;
 
-		static const size_t INSTANCE_CAPACITY_INITIAL = 8;
+		bool ensureCapacity();
+
+		static const size_t INSTANCE_CAPACITY_INITIAL = 1;
+		void *instances;
+		size_t instanceCount;
+		size_t instanceCapacity;
 
 	private:
 		static const size_t BUFFER_CAPACITY_INITIAL = 1;
 
-		size_t bufferCapacity = 0;
+		size_t instanceSize;
+		size_t bufferCapacity;
 		GLuint vao;
 		GLuint buffer;
 

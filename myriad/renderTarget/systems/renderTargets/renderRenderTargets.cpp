@@ -4,7 +4,7 @@
 #include <iostream> // TODO: Debug
 
 myr::RenderRenderTargets::RenderRenderTargets(const RenderSprites *renderSprites)
-:RenderSystem(), instanceCapacity(INSTANCE_CAPACITY_INITIAL), instanceCount(0)
+:RenderSystem(0), quads(nullptr), textures(nullptr)
 {
 	vaoBind();
 
@@ -15,14 +15,11 @@ myr::RenderRenderTargets::RenderRenderTargets(const RenderSprites *renderSprites
 	renderSprites->configureInstanceAttribs();
 
 	vaoRelease();
-
-	instances = (SpriteAttributes*)malloc(sizeof(SpriteAttributes)* instanceCapacity);
-	textures = (GLuint*)malloc(sizeof(GLuint)* instanceCapacity);
 }
 
 myr::RenderRenderTargets::~RenderRenderTargets()
 {
-	free(instances);
+	free(quads);
 	free(textures);
 }
 
@@ -53,7 +50,7 @@ void myr::RenderRenderTargets::render(Shader *shader)
 			glBufferData(GL_ARRAY_BUFFER, sizeof(SpriteAttributes) * bufferCapacity, NULL, GL_DYNAMIC_DRAW);
 		}
 
-		glBufferSubData(GL_ARRAY_BUFFER, sizeof(SpriteAttributes)* first, sizeof(SpriteAttributes) * batchSize, instances + first);
+		glBufferSubData(GL_ARRAY_BUFFER, sizeof(SpriteAttributes)* first, sizeof(SpriteAttributes)* batchSize, quads + first);
 		glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, GLsizei(batchSize));
 	}
 
@@ -64,29 +61,12 @@ void myr::RenderRenderTargets::render(Shader *shader)
 
 void myr::RenderRenderTargets::push(const void *element)
 {
-	if(instanceCount == instanceCapacity)
+	if(ensureCapacity())
 	{
-		instanceCapacity <<= 1;
-
-		instances = (SpriteAttributes*)realloc(instances, instanceCapacity * sizeof(SpriteAttributes));
+		quads = (SpriteAttributes*)realloc(quads, instanceCapacity * sizeof(SpriteAttributes));
 		textures = (GLuint*)realloc(textures, instanceCapacity * sizeof(GLuint));
 	}
 
 	textures[instanceCount] = ((RenderTargetAttributes*)element)->texture;
-	instances[instanceCount++] = ((RenderTargetAttributes*)element)->spriteAttributes;
-}
-
-size_t myr::RenderRenderTargets::getBufferIndex() const
-{
-	return 0;
-}
-
-size_t myr::RenderRenderTargets::getBufferSizeof() const
-{
-	return 0;
-}
-
-const void *myr::RenderRenderTargets::getBufferData() const
-{
-	return 0;
+	quads[instanceCount++] = ((RenderTargetAttributes*)element)->spriteAttributes;
 }

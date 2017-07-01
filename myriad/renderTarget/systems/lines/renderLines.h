@@ -11,18 +11,11 @@ namespace myr
 
 	public:
 		RenderLines();
-		~RenderLines();
 		void render(Shader *shader) override;
-		void push(const void *element) override;
 
 		static const char *getShaderVertex();
 		static const char *getShaderFragment();
 		static const std::vector<std::string> getShaderUniforms();
-
-	protected:
-		size_t getBufferIndex() const override;
-		size_t getBufferSizeof() const override;
-		const void *getBufferData() const override;
 
 	private:
 
@@ -33,9 +26,5 @@ namespace myr
 		static const std::vector<float> getLine();
 		static void createBuffer();
 		static void freeBuffer();
-
-		LineAttributes *instances;
-		size_t instanceCount;
-		size_t instanceCapacity;
 	};
 }

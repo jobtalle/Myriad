@@ -4,7 +4,7 @@
 #include <iostream>
 
 myr::RenderSprites::RenderSprites()
-:RenderSystem(), instanceCapacity(INSTANCE_CAPACITY_INITIAL), instanceCount(0)
+:RenderSystem(sizeof(SpriteAttributes))
 {
 	vaoBind();
 
@@ -15,13 +15,6 @@ myr::RenderSprites::RenderSprites()
 	configureInstanceAttribs();
 
 	vaoRelease();
-	
-	instances = (myr::SpriteAttributes*)malloc(sizeof(SpriteAttributes)* instanceCapacity);
-}
-
-myr::RenderSprites::~RenderSprites()
-{
-	free(instances);
 }
 
 void myr::RenderSprites::render(Shader *shader)
@@ -35,33 +28,6 @@ void myr::RenderSprites::render(Shader *shader)
 	vaoRelease();	
 
 	instanceCount = 0;
-}
-
-void myr::RenderSprites::push(const void *element)
-{
-	if(instanceCount == instanceCapacity)
-	{
-		instanceCapacity <<= 1;
-
-		instances = (SpriteAttributes*)realloc(instances, instanceCapacity * sizeof(SpriteAttributes));
-	}
-
-	instances[instanceCount++] = *((SpriteAttributes*)element);
-}
-
-size_t myr::RenderSprites::getBufferIndex() const
-{
-	return instanceCount;
-}
-
-size_t myr::RenderSprites::getBufferSizeof() const
-{
-	return sizeof(SpriteAttributes);
-}
-
-const void *myr::RenderSprites::getBufferData() const
-{
-	return instances;
 }
 
 void myr::RenderSprites::configureBufferAttribs() const

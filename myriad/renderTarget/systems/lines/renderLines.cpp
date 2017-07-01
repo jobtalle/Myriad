@@ -1,7 +1,7 @@
 #include "renderLines.h"
 
 myr::RenderLines::RenderLines()
-:RenderSystem(), instanceCapacity(INSTANCE_CAPACITY_INITIAL), instanceCount(0)
+:RenderSystem(sizeof(LineAttributes))
 {
 	vaoBind();
 
@@ -12,13 +12,6 @@ myr::RenderLines::RenderLines()
 	configureInstanceAttribs();
 
 	vaoRelease();
-
-	instances = (myr::LineAttributes*)malloc(sizeof(LineAttributes)* instanceCapacity);
-}
-
-myr::RenderLines::~RenderLines()
-{
-	free(instances);
 }
 
 void myr::RenderLines::render(Shader *shader)
@@ -30,33 +23,6 @@ void myr::RenderLines::render(Shader *shader)
 	vaoRelease();
 
 	instanceCount = 0;
-}
-
-void myr::RenderLines::push(const void *element)
-{
-	if(instanceCount == instanceCapacity)
-	{
-		instanceCapacity <<= 1;
-
-		instances = (LineAttributes*)realloc(instances, instanceCapacity * sizeof(LineAttributes));
-	}
-
-	instances[instanceCount++] = *((LineAttributes*)element);
-}
-
-size_t myr::RenderLines::getBufferIndex() const
-{
-	return instanceCount;
-}
-
-size_t myr::RenderLines::getBufferSizeof() const
-{
-	return sizeof(LineAttributes);
-}
-
-const void *myr::RenderLines::getBufferData() const
-{
-	return instances;
 }
 
 void myr::RenderLines::configureBufferAttribs() const
