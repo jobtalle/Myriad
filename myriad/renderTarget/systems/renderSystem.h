@@ -19,7 +19,7 @@ namespace myr
 	protected:
 		void vaoBind() const;
 		void vaoRelease() const;
-		void bindBuffer() const;
+		void bufferBind() const;
 
 		bool ensureCapacity();
 

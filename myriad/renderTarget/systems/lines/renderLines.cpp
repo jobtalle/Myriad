@@ -7,7 +7,7 @@ myr::RenderLines::RenderLines()
 
 	configureBufferAttribs();
 
-	bindBuffer();
+	bufferBind();
 
 	configureInstanceAttribs();
 

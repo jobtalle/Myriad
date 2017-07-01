@@ -10,7 +10,7 @@ myr::RenderRenderTargets::RenderRenderTargets(const RenderSprites *renderSprites
 
 	renderSprites->configureBufferAttribs();
 
-	bindBuffer();
+	bufferBind();
 
 	renderSprites->configureInstanceAttribs();
 
@@ -40,7 +40,7 @@ void myr::RenderRenderTargets::render(Shader *shader)
 		while(i + 1 < instanceCount && textures[i + 1] == textures[first])
 			++i;
 		
-		bindBuffer();
+		bufferBind();
 
 		const size_t batchSize = i - first + 1;
 		if(batchSize > bufferCapacity)

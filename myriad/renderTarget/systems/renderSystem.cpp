@@ -42,7 +42,7 @@ void myr::RenderSystem::vaoRelease() const
 	glBindVertexArray(0);
 }
 
-void myr::RenderSystem::bindBuffer() const
+void myr::RenderSystem::bufferBind() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
 }
@@ -64,7 +64,7 @@ bool myr::RenderSystem::ensureCapacity()
 
 void myr::RenderSystem::upload()
 {
-	bindBuffer();
+	bufferBind();
 	
 	if(instanceCount > bufferCapacity)
 	{

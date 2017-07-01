@@ -10,7 +10,7 @@ myr::RenderSprites::RenderSprites()
 
 	configureBufferAttribs();
 
-	bindBuffer();
+	bufferBind();
 
 	configureInstanceAttribs();
 
