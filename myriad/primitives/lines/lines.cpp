@@ -10,6 +10,7 @@ void myr::Lines::drawLine(
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_LINES, &LineAttributes(
 		start,
 		end,
+		color,
 		color));
 }
 
