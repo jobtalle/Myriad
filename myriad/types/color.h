@@ -27,5 +27,15 @@ namespace myr
 		float getBlue() const;
 		float getAlpha() const;
 		float *getArray();
+
+		static const Color
+			WHITE,
+			BLACK,
+			RED,
+			GREEN,
+			BLUE,
+			YELLOW,
+			MAGENTA,
+			CYAN;
 	};
 }

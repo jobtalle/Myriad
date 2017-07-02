@@ -168,6 +168,7 @@
     <ClCompile Include="myriad\renderTarget\systems\sprites\renderSprites.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\sprites\spriteBuffer.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\sprites\spriteShaders.cpp" />
+    <ClCompile Include="myriad\types\colorCodes.cpp" />
     <ClCompile Include="myriad\types\rect.cpp" />
     <ClCompile Include="myriad\shader\shader.cpp" />
     <ClCompile Include="myriad\sprite\sprite.cpp" />
