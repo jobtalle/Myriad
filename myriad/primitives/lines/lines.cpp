@@ -26,3 +26,14 @@ void myr::Lines::drawLine(
 		colorStart,
 		colorEnd));
 }
+
+void myr::Lines::drawRectangle(
+	const myr::Vector &start,
+	const myr::Vector &end,
+	const myr::Color &color)
+{
+	drawLine(start, Vector(end.x, start.y), color);
+	drawLine(start, Vector(start.x, end.y), color);
+	drawLine(end, Vector(end.x, start.y), color);
+	drawLine(end, Vector(start.x, end.y), color);
+}

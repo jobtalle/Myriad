@@ -18,5 +18,10 @@ namespace myr
 			const myr::Vector &end,
 			const myr::Color &colorStart,
 			const myr::Color &colorEnd);
+
+		static void drawRectangle(
+			const myr::Vector &start,
+			const myr::Vector &end,
+			const myr::Color &color);
 	};
 }
