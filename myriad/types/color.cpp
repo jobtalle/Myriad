@@ -3,7 +3,7 @@
 #include "color.h"
 
 myr::Color::Color(const float r, const float g, const float b)
-	:r(r), g(g), b(b), a(1) {}
+	:Color(r, g, b, 1) {}
 
 myr::Color::Color(const float r, const float g, const float b, const float a)
 	:r(r), g(g), b(b), a(a) {}
