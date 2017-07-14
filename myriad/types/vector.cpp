@@ -5,6 +5,9 @@
 myr::Vector::Vector()
 	:x(0), y(0) {}
 
+myr::Vector::Vector(const Vector &other)
+	:x(other.x), y(other.y) {}
+
 myr::Vector::Vector(const float both)
 	:x(both), y(both) {}
 
@@ -37,9 +40,7 @@ myr::Vector myr::Vector::normalized()
 {
 	const float scale = 1.0f / length();
 
-	return Vector(
-		x * scale,
-		y * scale);
+	return Vector(*this) * scale;
 }
 
 myr::Vector &myr::Vector::normalize()
@@ -52,44 +53,90 @@ myr::Vector &myr::Vector::normalize()
 	return *this;
 }
 
-myr::Vector myr::Vector::operator+(const Vector &other)
+myr::Vector &myr::Vector::operator+=(const Vector &vector)
 {
-	return Vector(
-		x + other.x,
-		y + other.y);
+	x += vector.x;
+	y += vector.y;
+
+	return *this;
 }
 
-myr::Vector myr::Vector::operator-(const Vector &other)
+myr::Vector &myr::Vector::operator-=(const Vector &vector)
 {
-	return Vector(
-		x - other.x,
-		y - other.y);
+	x -= vector.x;
+	y -= vector.y;
+
+	return *this;
 }
 
-myr::Vector myr::Vector::operator*(const Vector &other)
+myr::Vector &myr::Vector::operator*=(const Vector &vector)
 {
-	return Vector(
-		x * other.x,
-		y * other.y);
+	x *= vector.x;
+	y *= vector.y;
+
+	return *this;
 }
 
-myr::Vector myr::Vector::operator*(const float factor)
+myr::Vector &myr::Vector::operator/=(const Vector &vector)
 {
-	return Vector(
-		x * factor,
-		y * factor);
+	x /= vector.x;
+	y /= vector.y;
+
+	return *this;
 }
 
-myr::Vector myr::Vector::operator/(const Vector &other)
+myr::Vector &myr::Vector::operator*=(const float f)
 {
-	return Vector(
-		x / other.x,
-		y / other.y);
+	x *= f;
+	y *= f;
+
+	return *this;
 }
 
-myr::Vector myr::Vector::operator/(const float factor)
+myr::Vector &myr::Vector::operator/=(const float f)
 {
-	return Vector(
-		x / factor,
-		y / factor);
+	x /= f;
+	y /= f;
+
+	return *this;
+}
+
+myr::Vector myr::Vector::operator+(const Vector &vector) const
+{
+	return Vector(*this) += vector;
+}
+
+myr::Vector myr::Vector::operator-(const Vector &vector) const
+{
+	return Vector(*this) -= vector;
+}
+
+myr::Vector myr::Vector::operator*(const Vector &vector) const
+{
+	return Vector(*this) *= vector;
+}
+
+myr::Vector myr::Vector::operator/(const Vector &vector) const
+{
+	return Vector(*this) /= vector;
+}
+
+myr::Vector myr::Vector::operator*(const float f) const
+{
+	return Vector(*this) *= f;
+}
+
+myr::Vector myr::Vector::operator/(const float f) const
+{
+	return Vector(*this) /= f;
+}
+
+bool myr::Vector::operator==(const Vector &vector) const
+{
+	return x == vector.x && y == vector.y;
+}
+
+bool myr::Vector::operator!=(const Vector &vector) const
+{
+	return !(*this == vector);
 }

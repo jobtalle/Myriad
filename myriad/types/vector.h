@@ -9,6 +9,7 @@ namespace myr
 		float y;
 
 		Vector();
+		Vector(const Vector &vector);
 		Vector(const float both);
 		Vector(const float x, const float y);
 		Vector(const int both);
@@ -21,11 +22,21 @@ namespace myr
 		Vector normalized();
 		Vector &normalize();
 
-		Vector operator+(const Vector &other);
-		Vector operator-(const Vector &other);
-		Vector operator*(const Vector &other);
-		Vector operator*(const float factor);
-		Vector operator/(const Vector &other);
-		Vector operator/(const float factor);
+		Vector &operator+=(const Vector &vector);
+		Vector &operator-=(const Vector &vector);
+		Vector &operator*=(const Vector &vector);
+		Vector &operator/=(const Vector &vector);
+		Vector &operator*=(const float f);
+		Vector &operator/=(const float f);
+
+		Vector operator+(const Vector &vector) const;
+		Vector operator-(const Vector &vector) const;
+		Vector operator*(const Vector &vector) const;
+		Vector operator/(const Vector &vector) const;
+		Vector operator*(const float f) const;
+		Vector operator/(const float f) const;
+
+		bool operator==(const Vector &vector) const;
+		bool operator!=(const Vector &vector) const;
 	};
 }
