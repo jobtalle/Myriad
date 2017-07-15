@@ -11,6 +11,7 @@ namespace myr
 
 	public:
 		Transform();
+		Transform(const Transform &transform);
 
 		Transform &identity();
 

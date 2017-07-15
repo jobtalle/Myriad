@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="myriad\primitives\lines\lines.h" />
+    <ClInclude Include="myriad\primitives\points\points.h" />
     <ClInclude Include="myriad\primitives\primitives.h" />
     <ClInclude Include="myriad\renderer\atlas.h" />
     <ClInclude Include="myriad\renderer\sharedUniforms.h" />
@@ -157,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="myriad\primitives\lines\lines.cpp" />
+    <ClCompile Include="myriad\primitives\points\points.cpp" />
     <ClCompile Include="myriad\quad\quad.cpp" />
     <ClCompile Include="myriad\renderer\atlas.cpp" />
     <ClCompile Include="myriad\renderTarget\defaultRenderTarget.cpp" />

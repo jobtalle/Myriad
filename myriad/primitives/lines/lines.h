@@ -7,7 +7,7 @@ namespace myr
 {
 	class Lines
 	{
-	public:
+	protected:
 		static void drawLine(
 			const myr::Vector &start,
 			const myr::Vector &end,

@@ -1,10 +1,17 @@
 #include <cmath> // TODO: Redundant when lookup table exists
+#include <memory>
 
 #include "transform.h"
 
 myr::Transform::Transform()
 {
 	identity();
+}
+
+myr::Transform::Transform(const Transform &transform)
+{
+	memcpy(values[0], transform.values[0], sizeof(float)* 3);
+	memcpy(values[1], transform.values[1], sizeof(float)* 3);
 }
 
 myr::Transform::Transform(
