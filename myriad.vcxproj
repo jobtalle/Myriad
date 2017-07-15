@@ -136,6 +136,7 @@
     <ClInclude Include="myriad\renderTarget\defaultRenderTarget.h" />
     <ClInclude Include="myriad\renderTarget\systems\lines\lineAttributes.h" />
     <ClInclude Include="myriad\renderTarget\systems\lines\renderLines.h" />
+    <ClInclude Include="myriad\renderTarget\systems\points\pointAttributes.h" />
     <ClInclude Include="myriad\renderTarget\systems\renderSystem.h" />
     <ClInclude Include="myriad\renderTarget\systems\renderSystems.h" />
     <ClInclude Include="myriad\renderTarget\systems\renderTargets\renderRenderTargets.h" />
