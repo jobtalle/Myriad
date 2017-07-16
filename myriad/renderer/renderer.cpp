@@ -2,6 +2,7 @@
 #include "renderer.h"
 #include "renderTarget/systems/sprites/renderSprites.h"
 #include "renderTarget/systems/lines/renderLines.h"
+#include "renderTarget/systems/points/renderPoints.h"
 
 #include <iostream> // TODO: Debug
 
@@ -116,6 +117,12 @@ void myr::Renderer::createDefaultShaders()
 		RenderLines::getShaderVertex(),
 		RenderLines::getShaderFragment(),
 		RenderLines::getShaderUniforms(),
+		this));
+
+	shaders[RENDER_SYSTEM_POINTS].reset(new Shader(
+		RenderPoints::getShaderVertex(),
+		RenderPoints::getShaderFragment(),
+		RenderPoints::getShaderUniforms(),
 		this));
 }
 

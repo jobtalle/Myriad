@@ -137,6 +137,7 @@
     <ClInclude Include="myriad\renderTarget\systems\lines\lineAttributes.h" />
     <ClInclude Include="myriad\renderTarget\systems\lines\renderLines.h" />
     <ClInclude Include="myriad\renderTarget\systems\points\pointAttributes.h" />
+    <ClInclude Include="myriad\renderTarget\systems\points\renderPoints.h" />
     <ClInclude Include="myriad\renderTarget\systems\renderSystem.h" />
     <ClInclude Include="myriad\renderTarget\systems\renderSystems.h" />
     <ClInclude Include="myriad\renderTarget\systems\renderTargets\renderRenderTargets.h" />
@@ -166,6 +167,8 @@
     <ClCompile Include="myriad\renderTarget\systems\lines\lineBuffer.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\lines\lineShaders.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\lines\renderLines.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\points\pointShaders.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\points\renderPoints.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\renderSystem.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\renderTargets\renderRenderTargets.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\sprites\renderSprites.cpp" />

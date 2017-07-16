@@ -22,6 +22,7 @@ namespace myr
 		friend class Sprite;
 		friend class RenderTarget;
 		friend class Lines;
+		friend class Points;
 
 	public:
 		DefaultRenderTarget(

@@ -3,6 +3,7 @@
 #include "systems/sprites/renderSprites.h"
 #include "systems/renderTargets/renderRenderTargets.h"
 #include "systems/lines/renderLines.h"
+#include "systems/points/renderPoints.h"
 
 #include <cassert>
 
@@ -91,6 +92,7 @@ void myr::DefaultRenderTarget::createRenderSystems()
 	systems[RENDER_SYSTEM_SPRITES].reset(new RenderSprites());
 	systems[RENDER_SYSTEM_RENDER_TARGETS].reset(new RenderRenderTargets((RenderSprites*)systems[RENDER_SYSTEM_SPRITES].get()));
 	systems[RENDER_SYSTEM_LINES].reset(new RenderLines());
+	systems[RENDER_SYSTEM_POINTS].reset(new RenderPoints());
 
 	for(size_t i = 0; i < RENDER_SYSTEM_COUNT; ++i)
 		shaders[i] = getRenderer()->getDefaultShader(static_cast<RenderSystems>(i));

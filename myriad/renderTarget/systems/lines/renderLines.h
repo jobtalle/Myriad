@@ -18,7 +18,6 @@ namespace myr
 		static const std::vector<std::string> getShaderUniforms();
 
 	private:
-
 		void configureBufferAttribs() const;
 		void configureInstanceAttribs() const;
 
