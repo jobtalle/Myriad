@@ -23,6 +23,7 @@ namespace myr
 		friend class RenderTarget;
 		friend class Lines;
 		friend class Points;
+		friend class Triangles;
 
 	public:
 		DefaultRenderTarget(

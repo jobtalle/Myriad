@@ -131,6 +131,7 @@
     <ClInclude Include="myriad\primitives\lines\lines.h" />
     <ClInclude Include="myriad\primitives\points\points.h" />
     <ClInclude Include="myriad\primitives\primitives.h" />
+    <ClInclude Include="myriad\primitives\triangles\triangles.h" />
     <ClInclude Include="myriad\renderer\atlas.h" />
     <ClInclude Include="myriad\renderer\sharedUniforms.h" />
     <ClInclude Include="myriad\renderTarget\defaultRenderTarget.h" />
@@ -145,6 +146,8 @@
     <ClInclude Include="myriad\quad\quad.h" />
     <ClInclude Include="myriad\renderTarget\systems\sprites\renderSprites.h" />
     <ClInclude Include="myriad\renderTarget\systems\sprites\spriteAttributes.h" />
+    <ClInclude Include="myriad\renderTarget\systems\triangles\renderTriangles.h" />
+    <ClInclude Include="myriad\renderTarget\systems\triangles\triangleAttributes.h" />
     <ClInclude Include="myriad\sprite\spriteDecoder.h" />
     <ClInclude Include="myriad\types\rect.h" />
     <ClInclude Include="myriad\shader\shader.h" />
@@ -161,6 +164,7 @@
   <ItemGroup>
     <ClCompile Include="myriad\primitives\lines\lines.cpp" />
     <ClCompile Include="myriad\primitives\points\points.cpp" />
+    <ClCompile Include="myriad\primitives\triangles\triangles.cpp" />
     <ClCompile Include="myriad\quad\quad.cpp" />
     <ClCompile Include="myriad\renderer\atlas.cpp" />
     <ClCompile Include="myriad\renderTarget\defaultRenderTarget.cpp" />
@@ -174,6 +178,9 @@
     <ClCompile Include="myriad\renderTarget\systems\sprites\renderSprites.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\sprites\spriteBuffer.cpp" />
     <ClCompile Include="myriad\renderTarget\systems\sprites\spriteShaders.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\triangles\renderTriangles.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\triangles\triangleBuffer.cpp" />
+    <ClCompile Include="myriad\renderTarget\systems\triangles\triangleShaders.cpp" />
     <ClCompile Include="myriad\types\colorCodes.cpp" />
     <ClCompile Include="myriad\types\rect.cpp" />
     <ClCompile Include="myriad\shader\shader.cpp" />

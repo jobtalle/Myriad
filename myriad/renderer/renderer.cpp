@@ -3,6 +3,7 @@
 #include "renderTarget/systems/sprites/renderSprites.h"
 #include "renderTarget/systems/lines/renderLines.h"
 #include "renderTarget/systems/points/renderPoints.h"
+#include "renderTarget/systems/triangles/renderTriangles.h"
 
 #include <iostream> // TODO: Debug
 
@@ -95,12 +96,14 @@ void myr::Renderer::createBuffers() const
 {
 	RenderSprites::createBuffer();
 	RenderLines::createBuffer();
+	RenderTriangles::createBuffer();
 }
 
 void myr::Renderer::freeBuffers() const
 {
 	RenderSprites::freeBuffer();
 	RenderLines::freeBuffer();
+	RenderTriangles::freeBuffer();
 }
 
 void myr::Renderer::createDefaultShaders()
@@ -123,6 +126,12 @@ void myr::Renderer::createDefaultShaders()
 		RenderPoints::getShaderVertex(),
 		RenderPoints::getShaderFragment(),
 		RenderPoints::getShaderUniforms(),
+		this));
+
+	shaders[RENDER_SYSTEM_TRIANGLES].reset(new Shader(
+		RenderTriangles::getShaderVertex(),
+		RenderTriangles::getShaderFragment(),
+		RenderTriangles::getShaderUniforms(),
 		this));
 }
 
