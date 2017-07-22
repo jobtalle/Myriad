@@ -11,18 +11,16 @@ const char *myr::RenderLines::getShaderVertex()
 			"vec4 heightRow1;"
 		"};"
 
-		"layout (location = 0) in float vertex;"
-		"layout (location = 1) in vec4 points;"
-		"layout (location = 2) in vec4 color1;"
-		"layout (location = 3) in vec4 color2;"
+		"layout (location = 0) in vec4 color;"
+		"layout (location = 1) in vec2 point;"
 
 		"out vec4 lineColor;"
 
 		"void main() {"
 		  "mat3 matGlobal = mat3(widthRow0.yzw, heightRow1.yzw, vec3(0, 0, 1));"
-		  "vec2 point = (vec3(mix(points.xy, points.zw, vertex), 1) * matGlobal).xy / vec2(widthRow0.x, heightRow1.x) * 2;"
+		  "vec2 point = (vec3(point, 1) * matGlobal).xy / vec2(widthRow0.x, heightRow1.x) * 2;"
 
-		  "lineColor = mix(color1, color2, vertex);"
+		  "lineColor = color;"
 
 		  "gl_Position = vec4(vec2(point.x, -point.y) + vec2(-1, 1), 0, 1);"
 		"}";

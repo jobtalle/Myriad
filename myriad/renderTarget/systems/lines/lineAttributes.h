@@ -8,35 +8,24 @@ namespace myr
 	struct LineAttributes
 	{
 		LineAttributes(
-			const Vector &start,
-			const Vector &end,
-			const Color &color1,
-			const Color &color2)
-			:start(start), end(end), color1(color1), color2(color2) {}
+			const Vector &point,
+			const Color &color)
+			:point(point), color(color) {}
 
 		union {
 			struct {
-				Vector start;
-				Vector end;
+				Color color;
 			};
 
-			float attributePoints[4];
+			float attributeColor[4];
 		};
 
 		union {
 			struct {
-				Color color1;
+				Vector point;
 			};
 
-			float attributeColor1[4];
-		};
-
-		union {
-			struct {
-				Color color2;
-			};
-
-			float attributeColor2[4];
+			float attributePoint[2];
 		};
 	};
 }

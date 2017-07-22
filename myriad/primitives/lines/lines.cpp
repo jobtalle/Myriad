@@ -9,8 +9,9 @@ void myr::Lines::drawLine(
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_LINES, &LineAttributes(
 		start,
+		color));
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_LINES, &LineAttributes(
 		end,
-		color,
 		color));
 }
 
@@ -22,8 +23,9 @@ void myr::Lines::drawLine(
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_LINES, &LineAttributes(
 		start,
+		colorStart));
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_LINES, &LineAttributes(
 		end,
-		colorStart,
 		colorEnd));
 }
 
