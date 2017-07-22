@@ -11,19 +11,14 @@ const char *myr::RenderTriangles::getShaderVertex()
 			"vec4 heightRow1;"
 		"};"
 
-		"layout (location = 0) in float vertex;"
-		"layout (location = 1) in vec4 colorA;"
-		"layout (location = 2) in vec4 colorB;"
-		"layout (location = 3) in vec4 colorC;"
-		"layout (location = 4) in vec4 pointAB;"
-		"layout (location = 5) in vec2 pointC;"
+		"layout (location = 0) in vec4 color;"
+		"layout (location = 1) in vec2 point;"
 
 		"out vec4 triangleColor;"
 
 		"void main() {"
 		  "mat3 matGlobal = mat3(widthRow0.yzw, heightRow1.yzw, vec3(0, 0, 1));"
-		  "vec2 point = mix(mix(pointAB.xy, pointAB.zw, min(1, vertex)), pointC, max(0, vertex - 1));"
-		  "triangleColor = mix(mix(colorA, colorB, min(1, vertex)), colorC, max(0, vertex - 1));"
+		  "triangleColor = color;"
 
 		  "vec2 currentPoint = (vec3(point, 1) * matGlobal).xy / vec2(widthRow0.x, heightRow1.x) * 2;"
 

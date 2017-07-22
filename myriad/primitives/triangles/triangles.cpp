@@ -11,12 +11,14 @@ void myr::Triangles::drawTriangle(
 	const myr::Color &colorC)
 {
 	RenderTarget::getCurrent()->render(RENDER_SYSTEM_TRIANGLES, &TriangleAttributes(
-		pointA,
-		pointB,
-		pointC,
 		colorA,
+		pointA));
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_TRIANGLES, &TriangleAttributes(
 		colorB,
-		colorC));
+		pointB));
+	RenderTarget::getCurrent()->render(RENDER_SYSTEM_TRIANGLES, &TriangleAttributes(
+		colorC,
+		pointC));
 }
 
 void myr::Triangles::drawTriangle(

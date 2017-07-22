@@ -95,13 +95,11 @@ myr::Shader *myr::Renderer::getDefaultShader(const enum RenderSystems system) co
 void myr::Renderer::createBuffers() const
 {
 	RenderSprites::createBuffer();
-	RenderTriangles::createBuffer();
 }
 
 void myr::Renderer::freeBuffers() const
 {
 	RenderSprites::freeBuffer();
-	RenderTriangles::freeBuffer();
 }
 
 void myr::Renderer::createDefaultShaders()

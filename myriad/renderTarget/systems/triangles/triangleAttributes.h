@@ -8,53 +8,24 @@ namespace myr
 	struct TriangleAttributes
 	{
 		TriangleAttributes(
-		const Vector &pointA,
-		const Vector &pointB,
-		const Vector &pointC,
-		const Color &colorA,
-		const Color &colorB,
-		const Color &colorC)
-		:pointA(pointA), pointB(pointB), pointC(pointC), colorA(colorA), colorB(colorB), colorC(colorC) {}
+		const Color &color,
+		const Vector &point)
+		:color(color), point(point) {}
 
 		union {
 			struct {
-				Color colorA;
+				Color color;
 			};
 
-			float attributeColorA[4];
+			float attributeColor[4];
 		};
 
 		union {
 			struct {
-				Color colorB;
+				Vector point;
 			};
 
-			float attributeColorB[4];
-		};
-
-		union {
-			struct {
-				Color colorC;
-			};
-
-			float attributeColorC[4];
-		};
-
-		union {
-			struct {
-				Vector pointA;
-				Vector pointB;
-			};
-
-			float attributePointAB[4];
-		};
-
-		union {
-			struct {
-				Vector pointC;
-			};
-
-			float attributePointC[2];
+			float attributePoint[2];
 		};
 	};
 }

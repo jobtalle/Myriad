@@ -18,12 +18,6 @@ namespace myr
 		static const std::vector<std::string> getShaderUniforms();
 
 	private:
-		void configureBufferAttribs() const;
 		void configureInstanceAttribs() const;
-
-		static GLuint buffer;
-		static const std::vector<float> getTriangle();
-		static void createBuffer();
-		static void freeBuffer();
 	};
 }
