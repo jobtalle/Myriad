@@ -14,6 +14,7 @@ namespace myr
 
 		using Points::drawPoint;
 
-		using Triangles::drawTriangle;
+		using Triangles::fillTriangle;
+		using Triangles::fillRectangle;
 	};
 }
