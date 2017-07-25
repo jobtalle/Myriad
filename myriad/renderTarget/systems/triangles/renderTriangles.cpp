@@ -27,9 +27,9 @@ void myr::RenderTriangles::configureInstanceAttribs() const
 {
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(TriangleAttributes),
-		(GLvoid*)offsetof(TriangleAttributes, color));
+		(GLvoid*)offsetof(TriangleAttributes, attributeColor));
 
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(TriangleAttributes),
-		(GLvoid*)offsetof(TriangleAttributes, point));
+		(GLvoid*)offsetof(TriangleAttributes, attributePoint));
 }
