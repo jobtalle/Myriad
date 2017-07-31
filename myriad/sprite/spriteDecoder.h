@@ -4,7 +4,7 @@
 
 namespace myr
 {
-	class SpriteDecoder
+	class SpriteDecoder abstract
 	{
 	public:
 		virtual ~SpriteDecoder() {};
