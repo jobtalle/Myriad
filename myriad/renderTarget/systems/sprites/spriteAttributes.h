@@ -54,8 +54,6 @@ namespace myr
 			position(position),
 			origin(origin)
 		{
-			// Todo: Use LUT
-
 			const float s = sin(angle);
 			const float c = cos(angle);
 
@@ -63,6 +61,19 @@ namespace myr
 			row0[1] = size.x * s;
 			row1[0] = size.y * -s;
 			row1[1] = size.y * c;
+		}
+
+		SpriteAttributes(
+			const SpriteAttributes &other)
+		{
+			atlasPosition = other.atlasPosition;
+			atlasSize = other.atlasSize;
+
+			memcpy(row0, other.row0, sizeof(row0));
+			memcpy(row1, other.row1, sizeof(row1));
+
+			origin = other.origin;
+			position = other.position;
 		}
 
 		union {
