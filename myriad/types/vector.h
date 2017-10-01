@@ -35,6 +35,7 @@ namespace myr
 		Vector operator/(const Vector &vector) const;
 		Vector operator*(const float f) const;
 		Vector operator/(const float f) const;
+		Vector operator-() const;
 
 		bool operator==(const Vector &vector) const;
 		bool operator!=(const Vector &vector) const;

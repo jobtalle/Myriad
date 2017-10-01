@@ -131,6 +131,11 @@ myr::Vector myr::Vector::operator/(const float f) const
 	return Vector(*this) /= f;
 }
 
+myr::Vector myr::Vector::operator-() const
+{
+	return Vector(-this->x, -this->y);
+}
+
 bool myr::Vector::operator==(const Vector &vector) const
 {
 	return x == vector.x && y == vector.y;
