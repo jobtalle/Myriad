@@ -5,7 +5,9 @@
 #include "renderTarget/systems/points/renderPoints.h"
 #include "renderTarget/systems/triangles/renderTriangles.h"
 
-#include <iostream> // TODO: Debug
+#ifdef _DEBUG
+#include <iostream>
+#endif
 
 namespace {
 	myr::Renderer *current = nullptr;
@@ -166,4 +168,9 @@ void myr::Renderer::setSharedUniforms(const Rect &rect, const Transform &transfo
 		sizeof(sharedUniforms.data),
 		&sharedUniforms.data);
 	glBindBuffer(GL_UNIFORM_BUFFER, sharedUniforms.index);
+}
+
+myr::Renderer *myr::Renderer::getCurrent()
+{
+	return current;
 }

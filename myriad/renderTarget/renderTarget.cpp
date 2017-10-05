@@ -2,14 +2,18 @@
 #include "../renderer/renderer.h"
 #include "systems/renderTargets/renderTargetAttributes.h"
 
-#include <iostream> // TODO: Debug
-
 myr::RenderTarget::RenderTarget(const Color &clearColor, const Rect &rect, Renderer *renderer)
 	:DefaultRenderTarget(clearColor, rect, renderer), Quad(rect, Vector(0, 0))
 {
 	createRenderSystems();
 
 	generateFBO();
+}
+
+myr::RenderTarget::RenderTarget(const Color &clearColor, const Rect &rect)
+	:RenderTarget(clearColor, rect, myr::Renderer::getCurrent())
+{
+
 }
 
 myr::RenderTarget::~RenderTarget()

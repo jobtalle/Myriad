@@ -60,6 +60,7 @@ namespace myr
 		void initializeUbo();
 		void freeUbo();
 		void setSharedUniforms(const Rect &rect, const Transform &transform);
+		static Renderer *getCurrent();
 	};
 
 	void initialize();

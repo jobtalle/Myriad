@@ -9,6 +9,7 @@ namespace myr
 	{
 	public:
 		RenderTarget(const Color &clearColor, const Rect &rect, Renderer *renderer);
+		RenderTarget(const Color &clearColor, const Rect &rect);
 		~RenderTarget() override;
 		void draw(
 			const Transform &transform) const override;
