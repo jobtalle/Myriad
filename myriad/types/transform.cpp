@@ -1,7 +1,9 @@
-#include <cmath> // TODO: Redundant when lookup table exists
+#include <cmath>
 #include <memory>
 
 #include "transform.h"
+
+const myr::Transform myr::Transform::IDENTITY = Transform();
 
 myr::Transform::Transform()
 {

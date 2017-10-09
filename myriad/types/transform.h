@@ -27,6 +27,8 @@ namespace myr
 
 		Vector operator*(const Vector &vector) const;
 
+		static const Transform IDENTITY;
+
 	private:
 		Transform(
 			const float row00,
