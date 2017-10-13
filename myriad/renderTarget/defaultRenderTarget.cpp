@@ -27,7 +27,8 @@ myr::DefaultRenderTarget::DefaultRenderTarget(
 
 myr::DefaultRenderTarget::~DefaultRenderTarget()
 {
-	
+	if(current == this)
+		current = nullptr;
 }
 
 myr::Transform myr::DefaultRenderTarget::getTransform() const
