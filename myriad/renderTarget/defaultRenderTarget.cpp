@@ -46,6 +46,11 @@ void myr::DefaultRenderTarget::setTransform(const Transform &transform)
 	}
 }
 
+void myr::DefaultRenderTarget::setClearColor(const Color &color)
+{
+	clearColor = color;
+}
+
 void myr::DefaultRenderTarget::bind()
 {
 	if(current)

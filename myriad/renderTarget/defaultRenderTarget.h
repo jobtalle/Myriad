@@ -33,6 +33,7 @@ namespace myr
 		virtual ~DefaultRenderTarget();
 		Transform getTransform() const;
 		void setTransform(const Transform &transform);
+		void setClearColor(const Color &color);
 		void bind();
 		void clear() const;
 
