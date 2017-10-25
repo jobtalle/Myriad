@@ -2,8 +2,17 @@
 
 #include "color.h"
 
+#include <iostream>
+
 myr::Color::Color(const Color &color)
 	:Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()) {}
+
+myr::Color::Color(const unsigned int hex)
+	: Color(
+		((hex >> 24) & 0x000000FF) / 255.f,
+		((hex >> 16) & 0x000000FF) / 255.f,
+		((hex >> 8) & 0x000000FF) / 255.f,
+		(hex & 0x000000FF) / 255.f) {}
 
 myr::Color::Color(const float r, const float g, const float b)
 	:Color(r, g, b, 1) {}

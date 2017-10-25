@@ -16,6 +16,7 @@ namespace myr
 
 	public:
 		Color(const Color &color);
+		Color(const unsigned int hex);
 		Color(const float r, const float g, const float b);
 		Color(const float r, const float g, const float b, const float a);
 
