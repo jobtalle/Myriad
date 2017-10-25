@@ -1,7 +1,5 @@
 #include "renderSystem.h"
 
-#include <iostream> // TODO: Debug
-
 myr::RenderSystem::RenderSystem(const size_t instanceSize)
 :instanceCapacity(0), instanceCount(0), instanceSize(instanceSize), instances(nullptr)
 {

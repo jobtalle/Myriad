@@ -1,6 +1,5 @@
 #include "atlas.h"
 
-#include <iostream>
 #include <algorithm>
 #include <cmath>
 

@@ -8,8 +8,6 @@
 
 #include <cassert>
 
-#include <iostream> // TOOD: Debug
-
 namespace {
 	myr::DefaultRenderTarget *current = nullptr;
 }

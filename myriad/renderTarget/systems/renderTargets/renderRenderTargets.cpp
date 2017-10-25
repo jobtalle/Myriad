@@ -1,8 +1,6 @@
 #include "renderRenderTargets.h"
 #include "renderer/renderer.h"
 
-#include <iostream> // TODO: Debug
-
 myr::RenderRenderTargets::RenderRenderTargets(const RenderSprites *renderSprites)
 :RenderSystem(0), quads(nullptr), textures(nullptr)
 {

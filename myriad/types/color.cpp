@@ -2,8 +2,6 @@
 
 #include "color.h"
 
-#include <iostream>
-
 myr::Color::Color(const Color &color)
 	:Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()) {}
 

@@ -1,8 +1,6 @@
 #include "renderSprites.h"
 #include "renderer/renderer.h"
 
-#include <iostream>
-
 myr::RenderSprites::RenderSprites()
 :RenderSystem(sizeof(SpriteAttributes))
 {
